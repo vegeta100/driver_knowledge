@@ -1,0 +1,165 @@
+make -j4后需要这么执行，少了system.*** 就需要make -j4
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ . zjsc/cp.sh 
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvconfig.img' -> `out/target/product/bennet/tvconfig.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcustomer.img' -> `out/target/product/bennet/tvcustomer.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvdatabase.img' -> `out/target/product/bennet/tvdatabase.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvservice.img' -> `out/target/product/bennet/tvservice.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcertificate.img' -> `out/target/product/bennet/tvcertificate.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tee.aes' -> `out/target/product/bennet/tee.aes'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/bl31.aes' -> `out/target/product/bennet/bl31.aes'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvconfig.img' -> `../images/marshmallow/bennet/tvconfig.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcustomer.img' -> `../images/marshmallow/bennet/tvcustomer.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvdatabase.img' -> `../images/marshmallow/bennet/tvdatabase.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvservice.img' -> `../images/marshmallow/bennet/tvservice.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcertificate.img' -> `../images/marshmallow/bennet/tvcertificate.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tee.aes' -> `../images/marshmallow/bennet/tee.aes'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/bl31.aes' -> `../images/marshmallow/bennet/bl31.aes'
+`vendor/mstar/mboot/MBoot/sboot/out/mboot.bin' -> `../images/marshmallow/bennet/mboot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/mboot.bin' -> `device/mstar/bennet/images/prebuilts/mboot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/mboot.bin' -> `device/mstar/yangmei/images/prebuilts/mboot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/rom_emmc_boot.bin' -> `../images/marshmallow/bennet/rom_emmc_boot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/rom_emmc_boot.bin' -> `device/mstar/bennet/images/prebuilts/rom_emmc_boot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/rom_emmc_boot.bin' -> `device/mstar/yangmei/images/prebuilts/rom_emmc_boot.bin'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/Image' -> `device/mstar/bennet/kernel'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/Image' -> `device/mstar/yangmei/kernel'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/dts/mainz_an.dtb' -> `device/mstar/bennet/images/prebuilts/dtb.bin'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/dts/mainz_an.dtb' -> `device/mstar/yangmei/images/prebuilts/dtb.bin'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/dts/mainz_an.dtb' -> `../images/marshmallow/bennet/dtb.bin'
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ releaseimage.sh 
+including device/generic/mini-emulator-arm64/vendorsetup.sh
+including device/generic/mini-emulator-armv7-a-neon/vendorsetup.sh
+including device/generic/mini-emulator-mips/vendorsetup.sh
+including device/generic/mini-emulator-x86_64/vendorsetup.sh
+including device/generic/mini-emulator-x86/vendorsetup.sh
+including device/mstar/bennet/vendorsetup.sh
+including device/mstar/mstaraddon/vendorsetup.sh
+including device/mstar/yangmei/vendorsetup.sh
+including sdk/bash_completion/adb.bash
+
+Target product: aosp_bennet_dvb
+Target device: bennet
+Product brand: mstar
+Release raw recovery/boot partition...
+Gernerate raw optee script...
+Gernerate raw armfw script...
+Gernerate RTPM script...
+Gernerate dtb script...
+Split fs system partition...
+Release fs userdata partition...
+Release fs cache partition...
+Release fs tvservice partition...
+Release fs tvconfig partition...
+Release fs tvdatabase partition...
+Release fs tvcustomer partition...
+Release fs tvcertificate partition...
+Copy other images form device directory...
+Release images to /work/whp/M358_OP102S/SDK1102/../images/marshmallow/bennet
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ . zjsc/cp.sh 
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvconfig.img' -> `out/target/product/bennet/tvconfig.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcustomer.img' -> `out/target/product/bennet/tvcustomer.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvdatabase.img' -> `out/target/product/bennet/tvdatabase.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvservice.img' -> `out/target/product/bennet/tvservice.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcertificate.img' -> `out/target/product/bennet/tvcertificate.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tee.aes' -> `out/target/product/bennet/tee.aes'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/bl31.aes' -> `out/target/product/bennet/bl31.aes'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvconfig.img' -> `../images/marshmallow/bennet/tvconfig.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcustomer.img' -> `../images/marshmallow/bennet/tvcustomer.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvdatabase.img' -> `../images/marshmallow/bennet/tvdatabase.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvservice.img' -> `../images/marshmallow/bennet/tvservice.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcertificate.img' -> `../images/marshmallow/bennet/tvcertificate.img'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tee.aes' -> `../images/marshmallow/bennet/tee.aes'
+`vendor/mstar/supernova/target/dvb.mainz/images/ext4/bl31.aes' -> `../images/marshmallow/bennet/bl31.aes'
+`vendor/mstar/mboot/MBoot/sboot/out/mboot.bin' -> `../images/marshmallow/bennet/mboot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/mboot.bin' -> `device/mstar/bennet/images/prebuilts/mboot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/mboot.bin' -> `device/mstar/yangmei/images/prebuilts/mboot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/rom_emmc_boot.bin' -> `../images/marshmallow/bennet/rom_emmc_boot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/rom_emmc_boot.bin' -> `device/mstar/bennet/images/prebuilts/rom_emmc_boot.bin'
+`vendor/mstar/mboot/MBoot/sboot/out/rom_emmc_boot.bin' -> `device/mstar/yangmei/images/prebuilts/rom_emmc_boot.bin'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/Image' -> `device/mstar/bennet/kernel'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/Image' -> `device/mstar/yangmei/kernel'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/dts/mainz_an.dtb' -> `device/mstar/bennet/images/prebuilts/dtb.bin'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/dts/mainz_an.dtb' -> `device/mstar/yangmei/images/prebuilts/dtb.bin'
+`vendor/mstar/kernel/linaro/arch/arm64/boot/dts/mainz_an.dtb' -> `../images/marshmallow/bennet/dtb.bin'
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ make_usb_upgrade.sh 
+including device/generic/mini-emulator-arm64/vendorsetup.sh
+including device/generic/mini-emulator-armv7-a-neon/vendorsetup.sh
+including device/generic/mini-emulator-mips/vendorsetup.sh
+including device/generic/mini-emulator-x86_64/vendorsetup.sh
+including device/generic/mini-emulator-x86/vendorsetup.sh
+including device/mstar/bennet/vendorsetup.sh
+including device/mstar/mstaraddon/vendorsetup.sh
+including device/mstar/yangmei/vendorsetup.sh
+including sdk/bash_completion/adb.bash
+
+============================================
+PLATFORM_VERSION_CODENAME=REL
+PLATFORM_VERSION=6.0
+TARGET_PRODUCT=aosp_bennet
+TARGET_BUILD_VARIANT=userdebug
+TARGET_BUILD_TYPE=release
+TARGET_BUILD_APPS=
+TARGET_ARCH=arm64
+TARGET_ARCH_VARIANT=armv8-a
+TARGET_CPU_VARIANT=generic
+TARGET_2ND_ARCH=arm
+TARGET_2ND_ARCH_VARIANT=armv7-a-neon
+TARGET_2ND_CPU_VARIANT=cortex-a7
+HOST_ARCH=x86_64
+HOST_OS=linux
+HOST_OS_EXTRA=Linux-3.11.0-15-generic-x86_64-with-Ubuntu-12.04-precise
+HOST_BUILD_TYPE=release
+BUILD_ID=MRA58K
+OUT_DIR=out
+============================================
+
+Full Upgrade? (Y/n)n
+Upgrade [[mboot? (y/N)
+Upgrade [[recovery? (y/N)
+Upgrade [[boot? (y/N)
+Upgrade [[optee? (y/N)
+Upgrade [[armfw? (y/N)
+Upgrade [[RT_PM? (y/N)
+Upgrade [[dtb? (y/N)
+Upgrade [[system? (y/N)y
+Upgrade [[userdata? (y/N)
+Upgrade [[cache? (y/N)
+Upgrade [[tvservice? (y/N)
+Upgrade [[tvconfig? (y/N)
+Upgrade [[tvdatabase? (y/N)
+Upgrade [[tvcustomer? (y/N)
+Upgrade [[tvcertificate? (y/N)
+UpgradeImage Generating.....
+
+
+
+
+script file crc 0x8FCAE6E3
+u32ImageSize = 0x1E91900C
+CRC32 = 0x86C11EAF
+1+0 records in
+1+0 records out
+16 bytes (16 B) copied, 2.7351e-05 s, 585 kB/s
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ history
+
+
+==================================================================
+. build/envsetup.sh 
+ 2002  . zjsc/zjsc_android_path.sh 
+ 2003  lunch
+ 2004  . zjsc/cp.sh 
+ 2005  releaseimage.sh 
+ 2006  . zjsc/cp.sh 
+ 2007  make_usb_upgrade.sh 
+ 2008  smbpasswd
+ 2009  make_usb_upgrade.sh 
+ 2010* 
+ 2011  make_usb_upgrade.sh 
+ 这几个命令不同与 build/env  zjsc/zjsc_android lunch他们执行哥一次就差不多了，这几个，在每次编译的时候，都需要执行的
+ 2012  . zjsc/cp.sh 
+ 2013  releaseimage.sh 
+ 2014  . zjsc/cp.sh 
+ 2015  make_usb_upgrade.sh

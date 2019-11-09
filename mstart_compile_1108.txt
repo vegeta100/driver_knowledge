@@ -1,0 +1,339 @@
+hp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ kgrep google
+./yangmei/device-common.mk:111:    frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml:system/etc/media_codecs_google_video_le.xml \
+./yangmei/device-common.mk:112:    frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+./yangmei/aosp_yangmei_isdb.mk:89:$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+./yangmei/preinstall/scheduler_customized/gts_setting.sh:5:APP_PROCESS_ON_BIG_CORE="com.google.android.youtube com.netflix.mediaclient"
+./yangmei/preinstall/scheduler_customized/rule6_app_launch.sh:8:PROCESS_ON_BIG_CORE="com.google.android.youtube com.netflix.mediaclient"
+./yangmei/aosp_yangmei_dvb.mk:89:$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+./yangmei/aosp_yangmei.mk:89:$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+./bennet/device-common.mk:89:#whp: add for google-market
+./bennet/device-common.mk:104:#google:end
+./bennet/aosp_bennet_dvb.mk:89:$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+./bennet/device.mk:86:##whp: google-market
+./bennet/device.mk:97:##whp: google-market
+./bennet/aosp_bennet.mk:89:$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+./bennet/aosp_bennet_atsc.mk:89:$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+./bennet/aosp_bennet_isdb.mk:89:$(call inherit-product-if-exists, vendor/google/products/gms.mk)
+./common/preinstall/preinstall.mk:93:ifneq ($(wildcard vendor/google),)
+./common/apps/googleplay/config/config_preinstall.mk:5:LOCAL_PATH := device/mstar/common/apps/googleplay/config
+./common/apps/googleplay/config/config_preinstall.mk:10:        $(LOCAL_PATH)/framework/com.google.android.pano.v1.jar:system/framework/com.google.android.pano.v1.jar \
+./common/apps/googleplay/config/config_preinstall.mk:11:        $(LOCAL_PATH)/framework/com.google.widevine.software.drm.jar:system/framework/com.google.widevine.software.drm.jar
+./common/apps/googleplay/config/config_preinstall.mk:17:        $(LOCAL_PATH)/etc/permissions/com.google.android.pano.v1.xml:system/etc/permissions/com.google.android.pano.v1.xml \
+./common/apps/googleplay/config/config_preinstall.mk:18:        $(LOCAL_PATH)/etc/permissions/com.google.android.tv.installed.xml:system/etc/permissions/com.google.android.tv.installed.xml \
+./common/apps/googleplay/config/config_preinstall.mk:19:        $(LOCAL_PATH)/etc/permissions/com.google.widevine.software.drm.xml:system/etc/permissions/com.google.widevine.software.drm.xml \
+./common/apps/googleplay/config/config_preinstall.mk:20:        $(LOCAL_PATH)/etc/sysconfig/google_build.xml:system/etc/sysconfig/google_build.xml \
+./common/apps/googleplay/config/config_preinstall.mk:21:        $(LOCAL_PATH)/etc/sysconfig/google.xml:system/etc/sysconfig/google.xml
+./common/apps/googleplay/priv-app/PrebuiltGmsCorePano/gms_preinstall.mk:4:LOCAL_PATH := device/mstar/common/apps/googleplay/priv-app/PrebuiltGmsCorePano
+./common/apps/MBrowser3/AndroidManifest.xml:235:             queries.  See http://code.google.com/p/rlz for more info.
+./common/apps/MBrowser3/AndroidManifest.xml:238:        <meta-data android:name="com.google.android.partnersetup.RLZ_ACCESS_POINT"
+./common/apps/MBrowser3/tools/get_search_engines.py:40:google_data = ["google", "Google", "google.com",
+./common/apps/MBrowser3/tools/get_search_engines.py:41:  "http://www.google.com/favicon.ico",
+./common/apps/MBrowser3/tools/get_search_engines.py:42:  "http://www.google.com/search?ie={inputEncoding}&amp;source=android-browser&amp;q={searchTerms}",
+./common/apps/MBrowser3/tools/get_search_engines.py:44:  "http://www.google.com/complete/search?client=android&amp;q={searchTerms}"]
+./common/apps/MBrowser3/tools/get_search_engines.py:101:    if name == "google":
+./common/apps/MBrowser3/tools/get_search_engines.py:102:      return google_data
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ kgrep whp
+./yangmei/device-common.mk:282:### whp:TvSettings
+./yangmei/BoardConfigCommon.mk:176:###whp:recovery
+./bennet/device-common.mk:89:#whp: add for google-market
+./bennet/preinstall/preinstall.mk:111:###zjsc whp
+./bennet/device.mk:86:##whp: google-market
+./bennet/device.mk:97:##whp: google-market
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ vi ./bennet/device-common.mk
+
+#<MStar Software>
+#******************************************************************************
+# MStar Software
+# Copyright (c) 2010 - 2015 MStar Semiconductor, Inc. All rights reserved.
+# All software, firmware and related documentation herein ("MStar Software") are
+# intellectual property of MStar Semiconductor, Inc. ("MStar") and protected by
+# law, including, but not limited to, copyright law and international treaties.
+# Any use, modification, reproduction, retransmission, or republication of all
+# or part of MStar Software is expressly prohibited, unless prior written
+# permission has been granted by MStar.
+#
+# By accessing, browsing and/or using MStar Software, you acknowledge that you
+# have read, understood, and agree, to be bound by below terms ("Terms") and to
+# comply with all applicable laws and regulations:
+#
+# 1. MStar shall retain any and all right, ownership and interest to MStar
+#    Software and any modification/derivatives thereof.
+#    No right, ownership, or interest to MStar Software and any
+#    modification/derivatives thereof is transferred to you under Terms.
+#
+# 2. You understand that MStar Software might include, incorporate or be
+#    supplied together with third party's software and the use of MStar
+#    Software may require additional licenses from third parties.
+#    Therefore, you hereby agree it is your sole responsibility to separately
+#    obtain any and all third party right and license necessary for your use of
+#    such third party's software.
+#
+# 3. MStar Software and any modification/derivatives thereof shall be deemed as
+#    MStar's confidential information and you agree to keep MStar's
+#    confidential information in strictest confidence and not disclose to any
+#    third party.
+#
+# 4. MStar Software is provided on an "AS IS" basis without warranties of any
+#    kind. Any warranties are hereby expressly disclaimed by MStar, including
+#    without limitation, any warranties of merchantability, non-infringement of
+#    intellectual property rights, fitness for a particular purpose, error free
+#    and in conformity with any international standard.  You agree to waive any
+#    claim against MStar for any loss, damage, cost or expense that you may
+#    incur related to your use of MStar Software.
+#    In no event shall MStar be liable for any direct, indirect, incidental or
+#    consequential damages, including without limitation, lost of profit or
+#    revenues, lost or damage of data, and unauthorized system use.
+#    You agree that this Section 4 shall still apply without being affected
+#    even if MStar Software has been modified by MStar in accordance with your
+#    request or instruction for your use, except otherwise agreed by both
+#    parties in writing.
+#
+# 5. If requested, MStar may from time to time provide technical supports or
+#    services in relation with MStar Software to you for your use of
+#    MStar Software in conjunction with your or your customer's product
+#    ("Services").
+#    You understand and agree that, except otherwise agreed by both parties in
+#    writing, Services are provided on an "AS IS" basis and the warranty
+#    disclaimer set forth in Section 4 above shall apply.
+"./bennet/device-common.mk" 116L, 5676C
+#    (c) conferring any license or right under any intellectual property right.
+#
+# 7. These terms shall be governed by and construed in accordance with the laws
+#    of Taiwan, R.O.C., excluding its conflict of law rules.
+#    Any and all dispute arising out hereof or related hereto shall be finally
+#    settled by arbitration referred to the Chinese Arbitration Association,
+#    Taipei in accordance with the ROC Arbitration Law and the Arbitration
+#    Rules of the Association by three (3) arbitrators appointed in accordance
+#    with the said Rules.
+#    The place of arbitration shall be in Taipei, Taiwan and the language shall
+#    be English.
+#    The arbitration award shall be final and binding to both parties.
+#
+#******************************************************************************
+#<MStar Software>
+
+DEVICE_SOURCES := device/mstar/bennet
+LOCAL_KERNEL := $(DEVICE_SOURCES)/kernel
+#PRODUCT_PACKAGE_OVERLAYS := $(DEVICE_SOURCES)/overlay
+
+# dummy definitions to use += in later parts
+PRODUCT_COPY_FILES :=
+PRODUCT_PROPERTY_OVERRIDES :=
+PRODUCT_PACKAGES :=
+
+
+#whp: add for google-market
+#PRODUCT_PACKAGES += \
+        GoogleBackupTransport \
+        ConfigUpdater \
+        GoogleServicesFramework \
+        PhoneskyKamikazeCanvas \
+        PrebuiltGmsCorePano \
+        BugReportSender \
+        GoogleContactsSyncAdapter \
+        GoogleFeedback \
+        GoogleLoginService \
+        GoogleOneTimeInitializer \
+        GooglePartnerSetup \
+        GoogleTTS \
+        Velvet
+#google:end
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_KERNEL):kernel \
+    $(DEVICE_SOURCES)/init.mainz.rc:root/init.mainz.rc \
+    $(DEVICE_SOURCES)/ueventd.mainz.rc:root/ueventd.mainz.rc
+
+# -----------------------------------------------------------------------
+# Change on this file should go above this line
+
+$(call inherit-product-if-exists, $(DEVICE_SOURCES)/preinstall/preinstall.mk)
+$(call inherit-product-if-exists, $(DEVICE_SOURCES)/images/prebuilts/prebuilts.mk)
+$(call inherit-product, device/mstar/yangmei/device-common.mk)
+"./bennet/device-common.mk" 116L, 5677C written
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ vi ./bennet/device.mk
+
+#<MStar Software>
+#******************************************************************************
+# MStar Software
+# Copyright (c) 2010 - 2016 MStar Semiconductor, Inc. All rights reserved.
+# All software, firmware and related documentation herein ("MStar Software") are
+# intellectual property of MStar Semiconductor, Inc. ("MStar") and protected by
+# law, including, but not limited to, copyright law and international treaties.
+# Any use, modification, reproduction, retransmission, or republication of all
+# or part of MStar Software is expressly prohibited, unless prior written
+# permission has been granted by MStar.
+#
+# By accessing, browsing and/or using MStar Software, you acknowledge that you
+# have read, understood, and agree, to be bound by below terms ("Terms") and to
+# comply with all applicable laws and regulations:
+#
+# 1. MStar shall retain any and all right, ownership and interest to MStar
+#    Software and any modification/derivatives thereof.
+#    No right, ownership, or interest to MStar Software and any
+#    modification/derivatives thereof is transferred to you under Terms.
+#
+# 2. You understand that MStar Software might include, incorporate or be
+#    supplied together with third party's software and the use of MStar
+#    Software may require additional licenses from third parties.
+#    Therefore, you hereby agree it is your sole responsibility to separately
+#    obtain any and all third party right and license necessary for your use of
+#    such third party's software.
+#
+# 3. MStar Software and any modification/derivatives thereof shall be deemed as
+#    MStar's confidential information and you agree to keep MStar's
+#    confidential information in strictest confidence and not disclose to any
+#    third party.
+#
+# 4. MStar Software is provided on an "AS IS" basis without warranties of any
+#    kind. Any warranties are hereby expressly disclaimed by MStar, including
+#    without limitation, any warranties of merchantability, non-infringement of
+#    intellectual property rights, fitness for a particular purpose, error free
+#    and in conformity with any international standard.  You agree to waive any
+#    claim against MStar for any loss, damage, cost or expense that you may
+#    incur related to your use of MStar Software.
+#    In no event shall MStar be liable for any direct, indirect, incidental or
+#    consequential damages, including without limitation, lost of profit or
+#    revenues, lost or damage of data, and unauthorized system use.
+#    You agree that this Section 4 shall still apply without being affected
+#    even if MStar Software has been modified by MStar in accordance with your
+#    request or instruction for your use, except otherwise agreed by both
+#    parties in writing.
+#
+# 5. If requested, MStar may from time to time provide technical supports or
+#    services in relation with MStar Software to you for your use of
+#    MStar Software in conjunction with your or your customer's product
+#    ("Services").
+#    You understand and agree that, except otherwise agreed by both parties in
+#    writing, Services are provided on an "AS IS" basis and the warranty
+#    disclaimer set forth in Section 4 above shall apply.
+"./bennet/device.mk" 171L, 6853C
+#    (b) obligating MStar or any of its affiliates to furnish any person,
+#        including without limitation, you and your customers, any assistance
+#        of any kind whatsoever, or any information; or
+#    (c) conferring any license or right under any intellectual property right.
+#
+# 7. These terms shall be governed by and construed in accordance with the laws
+#    of Taiwan, R.O.C., excluding its conflict of law rules.
+#    Any and all dispute arising out hereof or related hereto shall be finally
+#    settled by arbitration referred to the Chinese Arbitration Association,
+#    Taipei in accordance with the ROC Arbitration Law and the Arbitration
+#    Rules of the Association by three (3) arbitrators appointed in accordance
+#    with the said Rules.
+#    The place of arbitration shall be in Taipei, Taiwan and the language shall
+#    be English.
+#    The arbitration award shall be final and binding to both parties.
+#
+#******************************************************************************
+#<MStar Software>
+
+# This file includes all definitions that apply to all
+# bennet devices, include inherit-devices.
+#
+# This cleanly combines a set of device-specific configuration.
+
+DEVICE_SOURCES := device/mstar/bennet
+
+##whp: google-market
+PRODUCT_LOCALES := zh_CN
+#PRODUCT_LOCALES := en_US
+
+#PRODUCT_DEFAULT_DEV_CERTIFICATE := $(DEVICE_SOURCES)/security/testkey
+
+# dummy definitions to use += in later parts
+PRODUCT_COPY_FILES :=
+PRODUCT_PROPERTY_OVERRIDES :=
+PRODUCT_PACKAGES :=
+
+##whp: google-market
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.language=zh \
+    persist.sys.country=CN \
+    persist.sys.timezone=Asia/Shanghai
+#PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.language=en \
+    persist.sys.country=US \
+    persist.sys.timezone=America/New_York 
+
+PRODUCT_PROPERTY_OVERRIDES += ro.hdmi.device_type=0
+
+#For CHINA DRM
+PRODUCT_PROPERTY_OVERRIDES += drm.service.enabled=1
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+"./bennet/device.mk" 171L, 6853C written
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar$ cd ../
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device$ cd ..
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ find -name build.prop
+./out/target/product/bennet/obj/PACKAGING/target_files_intermediates/aosp_bennet_dvb-target_files-01.00.000.00.00/SYSTEM/build.prop
+./out/target/product/bennet/obj/ETC/system_build_prop_intermediates/build.prop
+./out/target/product/bennet/syst__em/build.prop
+./out/target/product/bennet/system/build.prop
+C^C
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ rm ./out/target/product/bennet/system/build.prop
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ rm ./out/target/product/bennet/syst__em/build.prop
+rm: remove write-protected regular file `./out/target/product/bennet/syst__em/build.prop'? y
+rm: cannot remove `./out/target/product/bennet/syst__em/build.prop': Permission denied
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ rm ./out/target/product/bennet/obj/ETC/system_build_prop_intermediates/build.prop
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ rm ./out/target/product/bennet/obj/PACKAGING/target_files_intermediates/aosp_bennet_dvb-target_files-01.00.000.00.00/SYSTEM/build.prop
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ rm out/target/product/bennet/syst
+system/           system.imgaa.lzo  system.imgac.lzo  system.imgae.lzo  system.imgag.lzo  system.imgai.lzo  system.imgak.lzo  system.imgam.lzo  
+syst__em/         system.imgab      system.imgad      system.imgaf      system.imgah      system.imgaj      system.imgal      system.imgan      
+system.img        system.imgab.lzo  system.imgad.lzo  system.imgaf.lzo  system.imgah.lzo  system.imgaj.lzo  system.imgal.lzo  system.imgan.lzo  
+system.imgaa      system.imgac      system.imgae      system.imgag      system.imgai      system.imgak      system.imgam      
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ rm out/target/product/bennet/system
+system/           system.imgab      system.imgad      system.imgaf      system.imgah      system.imgaj      system.imgal      system.imgan      
+system.img        system.imgab.lzo  system.imgad.lzo  system.imgaf.lzo  system.imgah.lzo  system.imgaj.lzo  system.imgal.lzo  system.imgan.lzo  
+system.imgaa      system.imgac      system.imgae      system.imgag      system.imgai      system.imgak      system.imgam      
+system.imgaa.lzo  system.imgac.lzo  system.imgae.lzo  system.imgag.lzo  system.imgai.lzo  system.imgak.lzo  system.imgam.lzo  
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ rm out/target/product/bennet/system.img*
+
+
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ . zjsc/zjsc_android_path.sh 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ cd ../user
+user2/      user_op102/ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ cd ../user_op102/
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/user_op102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/user_op102$ 
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/user_op102$ ./cp.sh 
+`/home/whp/work/M358_OP102S/user_op102/bootanimation.zip' -> `/home/whp/work/M358_OP102S/SDK1102/out/target/product/bennet/system/media/./bootanimation.zip'
+cp: cannot stat `/home/whp/work/M358_OP102S/user_op102/priv-app/*': No such file or directory
+`/home/whp/work/M358_OP102S/user_op102/102.prop' -> `/home/whp/work/M358_OP102S/SDK1102/out/target/product/bennet/system/build.prop'
+`/home/whp/work/M358_OP102S/user_op102/boot0.jpg' -> `/home/whp/work/M358_OP102S/SDK1102/vendor/mstar/supernova/projects/board/INI/misc/boot0.jpg'
+`/home/whp/work/M358_OP102S/user_op102/boot0.jpg' -> `/home/whp/work/M358_OP102S/SDK1102/vendor/mstar/supernova/target/dvb.mainz/tmp_image/tvconfig/boot0.jpg'
+`/home/whp/work/M358_OP102S/user_op102/boot0.jpg' -> `/home/whp/work/M358_OP102S/SDK1102/vendor/mstar/mboot/MBoot/MstarCustomer/MSTAR/sboot/bin/logo/boot0.jpg'
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/user_op102$ cd ..
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S$ ls
+backup  Bak  images  SDK1102  user2  user_op102
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S$ cd SDK1102
+
+
+从外面拷贝备份好的中文和英文apk进来，看需要删除的apk名单，吧多的apk删掉。
+chown whp * -R 有时候需要用这个命令
+
+
+rm system.img* 这个也是有时候会用到的

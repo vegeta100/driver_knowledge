@@ -1,0 +1,432 @@
+keil注册的时候，既要弄c51的，也要弄arm的密钥。
+
+
+C:\Keil_v5\ARM\Flash
+这里存放下载程序的flash尺寸
+不同的机器，有专配的flash，它是看成硬盘嘛？
+
+
+
+sp07 rockchip 即 sp07R
+rockchip 就是瑞芯微。而sp07，似乎是mStar的
+-----
+
+sp07R第二个接口才是升级的，不像往常一样是第一个接口，毕竟涉及哪个接口，随硬件工程师高兴
+根据试验，升级口和adb口在同一个位置。为什么这两个会在同一个位置呢？升级口会和电脑传输数据，adb口也带有这个性质
+
+还有有线投屏要做
+先移植Eshare*** 再有线投屏
+正好可以试试需不需要权限，Eshare罗工弄的那个权限
+还要验证要不要.so
+-------------
+发现不了iosmain服务，有可能是移植拷贝出问题了。
+不，可能也是单纯还没加权限的原因，我想，权限好了。就等于可以用投屏了
+之前的话，用iosmain & 也只是出来了iosmian而已。没出来就说明了，需要权限
+
+
+
+frameworks/base/packages/systemui
+在这里做了隐藏顶部栏、底部栏的操作
+
+make kernel要怎么弄呢？
+本以为zjsc_sp07r.img字段是在makefile里面的，结果是看kernel/arch/arm/boot/dts下面的dts文件名
+arch/arm arch/arm arch/arm arch/arm arch/arm arch/arm arch/arm arch/arm
+
+没out目录，就和make distclean是一样的，重新来一次编译要很久的
+试验没错，编译重新来一次需要近60分钟
+有时候试验需要的是等待，先做别的事
+试验可以等待，让他自己去验证我想要的东西，很省力啊
+又验证了一个想法，当编译不通过的时候，第二次编译，是接着上一步编译到一半的情况往下编译。对，没错，像.c .o这些时间匹配上了，就不会再编译的
+
+build/core/Makefile 还有vendor/***/cp.sh里面也要改路径名
+里面就放着cp.sh，妈的没总结啊。
+kgrep就能搜mk或makefile里面的东西。
+
+build.prop
+在这个里面改语言、型号等等
+
+
+
+
+改分辨率，修改这三处，可以参考sp07r
+./drivers/video/modedb.c
+这个可能是改的外围分辨率，所以统一1280* ……
+./drivers/video/rockchip/screen/rk_screen.c
+这个似乎是一定要改的，改内为分辨率1280？
+./drivers/video/rockchip/lcdc/rk312x_lcdc.c
+这个改为864??
+-------------------------
+build.prop里，lcd_density也可能影响到屏幕显示效果
+果然，杨虎的需要改成864才行。而涂工的要改成1280才行
+而1280反而纤小，是因为
+
+logcat下查到的cmp属性，理解为 com package 吧
+
+aapt dump badging
+
+
+apk一般放app下，因为priv-app下是网吧模式，我不太确定网吧模式
+
+
+./mkimage.sh就足以使新放进去的apk打包到system.img里面
+
+
+zjsc的apk，都放到一个文件夹里，文件夹命名为z***
+**.apk，有时候需要解压一下，把里面的lib包拿出来。还有，放在app或priv-app下面就行， android会自己去找对应包名的apk
+
+有些权限等级较高的apk需要系统签名，这和应用里的数字签名不一样。
+
+问问看怎么用示波器，某个晶振没焊好
+
+蓝牙和wifi在一个芯片上 
+P2-A:/ $ logcat | grep WIFI
+01-01 08:00:12.078   484   484 W PackageParser: Ignoring duplicate uses-permissions/uses-permissions-sdk-m: android.permission.CONFIGURE_WIFI_DISPLAY in package: com.android.systemui at: Binary XML file line #123
+01-01 08:00:12.611   484   484 W PackageParser: Ignoring duplicate uses-permissions/uses-permissions-sdk-m: android.permission.ACCESS_WIFI_STATE in package: com.example.zjsc.myapplication1 at: Binary XML file line #18
+01-01 08:00:17.914   484   543 D ConnectivityService: Got NetworkFactory Messenger for WIFI
+01-01 08:00:17.914   484   543 D ConnectivityService: Got NetworkFactory Messenger for WIFI_UT
+01-01 08:00:28.609   484   597 D ConnectivityService: listenForNetwork for uid/pid:1000/580 NetworkRequest [ LISTEN id=5, [ Transports: WIFI] ]
+^C
+130|P2-A:/ $ logcat | grep wifi                                                
+01-01 08:00:14.972   484   484 I SystemServiceManager: Starting com.android.server.wifi.p2p.WifiP2pService
+01-01 08:00:15.065   484   484 I SystemServiceManager: Starting com.android.server.wifi.WifiService
+01-01 08:00:15.364   484   484 I SystemServiceManager: Starting com.android.server.wifi.scanner.WifiScanningService
+01-01 08:00:15.375   484   484 I SystemServiceManager: Starting com.android.server.wifi.RttService
+01-01 08:00:15.405   484   484 D ConnectivityService: wifiOnly=true
+01-01 08:00:15.406   484   484 D ConnectivityService: naString=wifi,1,1,2,-1,true config=android.net.NetworkConfig@de977c7
+01-01 08:00:15.406   484   484 D ConnectivityService: networkAttributes - ignoring mobile as this dev is wifiOnly 0
+01-01 08:00:15.406   484   484 D ConnectivityService: networkAttributes - ignoring mobile as this dev is wifiOnly 2
+01-01 08:00:15.406   484   484 D ConnectivityService: networkAttributes - ignoring mobile as this dev is wifiOnly 3
+01-01 08:00:15.406   484   484 D ConnectivityService: networkAttributes - ignoring mobile as this dev is wifiOnly 4
+01-01 08:00:15.406   484   484 D ConnectivityService: networkAttributes - ignoring mobile as this dev is wifiOnly 5
+01-01 08:00:15.407   484   484 D ConnectivityService: networkAttributes - ignoring mobile as this dev is wifiOnly 10
+01-01 08:00:15.407   484   484 D ConnectivityService: networkAttributes - ignoring mobile as this dev is wifiOnly 11
+01-01 08:00:15.407   484   484 D ConnectivityService: networkAttributes - ignoring mobile as this dev is wifiOnly 12
+01-01 08:00:40.641  1194  1315 E APPUUID : we can not open wifi.
+01-01 08:00:40.641  1194  1315 D APPUUID : try get wifi-mac, mMac=00:11:22:33:44:55
+01-01 08:00:40.642  1194  1315 D APPUUID : can not get wifi-mac, try get eth0 mac
+01-01 08:00:43.357  1194  1472 E APPUUID : we can not open wifi.
+01-01 08:00:43.358  1194  1472 D APPUUID : try get wifi-mac, mMac=00:11:22:33:44:55
+01-01 08:00:43.358  1194  1472 D APPUUID : can not get wifi-mac, try get eth0 mac
+^C
+130|P2-A:/ $ logcat | grep 6330                                                
+^C
+grep wifi的信息，查找wifi型号
+修改wifi实在arch里面的dts改，改wifi的类型
+sp07R的蓝牙可能是sp07R的其他代码有关，和mysettings无关
+
+
+
+某些app，如虎牙直播运行异常
+错误提示表明和腾讯的so有关，也就是说问题在lib里面，所以可能只需修改lib下的名字，改为arm就行
+
+
+隐藏状态栏 底部栏，从某一本书里是查不到的。需要对android框架有足够的熟悉，或者从网上查找。
+
+
+
+安兔兔显示，sp07r的分辨率是1280*720
+
+
+setTVTime未必用得上，mstar芯片里有两个系统，tv有别到系统。这里有SetTvTime可能只是为了同步而已
+而rk没有多余到系统，所以，不必想mstar一样这么做，删了即可
+删了那两个后，就能打开拉。果然rk里不需要那一套\
+看看两边到打开有什么异同，是不适注释多拉
+
+WifiSettings.java 458行哪里是wifi到开关
+
+out/target/product/rk3128_box/system/usr/keylayout/
+这里和按键有关，Generic.kl qwerty.kl者两个是再没制订某个vendor***.kl到时候，用到的。
+这两个是转义的，把linux的按键转成android的
+key ** MOVE_HOME 这个是移动到第一个图标，注释掉它或者改成home应该能用
+kl文件，可以把power键转义成home键，linux和android两者之间转义
+
+
+三种情况系统会进入出错模式（黑屏）：电压过低，温度过高，风扇不转。
+
+#define EN_WDT      
+#define EN_DEBUG_LED  
+调试时，要注释掉者两个。98到不要用超级用户干别的是，用超级用户来切换用户就行
+
+比较一下sp07，我才知道sp07r有哪些没改好
+
+home到改动并没有起到作用。或许可以直接adb push，或者可以vi修改，remount修改是什么？
+可能remount system/usr 然后push进去
+
+P2-A:/sys/bus/i2c/devices # cd 0-
+0-001b/  0-001c/  0-0026/  0-0028/  0-0051/
+这个是各个节点，因为mstar的i2c是模拟的，没这些节点。这些节点里有真正的i2c，就用这些节点了。
+001b是光机节点，可能是bright的意思
+
+mount -o rw,remount
+这个是常用命令 但是什么意思
+
+192.168.1.5服务器
+开机后大概等个35秒，然后按i键忽略进入
+
+
+OP98 欧瑞麦
+----------------------
+98那个，我要改什么呢？
+v53那个，等王总改完吧。
+
+-----------
+en_y下， rmall.sh执行，删除掉out下面的多余软件。因为本来是英文版本的，所以需要删除掉生成的，在渠道98_ch下面
+可能还得改分辨率，照着上次的那个文字图像分辨率 分别修改，那个是在哪个工程下面的？
+
+chqh@wanghp:~/work/R3128_OP98/SD171205/device/rockchip$ kgrep MARKET
+./common/BoardConfig.mk:211:BUILD_BOX_WITH_GOOGLE_MARKET ?= true
+./common/BoardConfig.mk:212:BUILD_WITH_GOOGLE_MARKET ?= false
+./common/BoardConfig.mk:213:BUILD_WITH_GOOGLE_MARKET_ALL ?= false
+./common/device.mk:547:ifeq ($(strip $(BUILD_BOX_WITH_GOOGLE_MARKET)), true)
+./common/device.mk:552:ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET)), true)
+./common/device.mk:553:ifeq ($(strip $(BUILD_WITH_GOOGLE_MARKET_ALL)), true)
+这样可以删去google keystore的作用，不对，删去google market的才对
+
+LatinImeGoogle这是google键盘相关的，
+
+bootanimation.zip大小一样，并不等于就是同一个。因为bmp是不压缩的。
+这个解释不合理啊，明明是两张图和一张图的分别。开机动画，是在resource.img里面的，不是在system.img里面的
+-----------------------
+
+设置偏大，估计是分辨率的问题
+
+
+make -j4才会执行cp.sh
+而mkimage.sh不会
+但mkimage.sh会吧cp.sh富只过去的文件合成到img里面
+
+power键 短按一下黑屏。微信小程序的javascript，可以了解一下
+这个应该是在，frameworks/base/services/core/java/com/android/server/policy/PhoneWindowManager.java
+里面的powerPress方法里
+通过设置新的变量作为标志，设置短按时为这个标志，然后判断到它时，设置相应代码
+
+我在想，package/apps下面的和frameworks的不同，framework的可能不需要mmm
+
+梯形校正，不一样。参考另外的看看，settings里面的，然后数字调焦去掉
+梯形校正，自动的。上下的，左右的，这些都要有，先看MySettings里面，它是有自动的。
+
+
+
+
+
+
+
+
+在线更新apk，导出后集成到img里面。语音助手字启动，奇异果呢？ 语音助手字启动是它自己的事，
+关于：系统版本时间修改
+影视、音乐、语音助手在线升级 开机字启动语音助手，后台服务开启
+android ios同屏，
+android :wifi dispaly 
+ios : eshare收费版
+
+
+
+现在升级好麻烦，得换根线。
+
+设置升级引脚不输出，才能够。改成adb就行了吗？好像还不行
+也可以先adb 打开，在插上先，在关adb，再开
+
+可以先逐个截图，在批量发到电脑上。不，以电脑的视角，android机是远程终端。
+
+
+luancher升级后要同时升misc.img和systme.img
+
+如果插上调试线关机，那就先刷misc.img，开启usb调试，。我是这么试出来的
+
+用了weight，那图片宽高就限定好了，高了或宽了就会有被戒掉的感觉
+
+
+
+/work/R3128_OP98/SD171205/kernel/drivers/input/remotectl$ vim rockchip_pwm_remotectl.c
+dts里面更改用户->ir_key*
+
+adb install 用不到读写权限，所以不需要remount。remount的话，就可以使用pull push命令了
+
+wifi_display
+它的型号获取不在build.prop里面，而是在jgerp搜索得到的
+
+
+Prjkeystone可能也要获取值 getdu这样的
+不，按带代码看到的，自动就有了
+
+import android.prj.*;投影仪相关类的源码在frameworks里面，所以在android studio上面是跑不起来的
+PrjKeystone
+当然了，把足够多的代码库拷贝出来，
+
+恢复出厂会把内核也回复出厂吗？这可不好说
+
+来回验证 是哪的问题。resource的还是kernel的
+
+adc检测，是kernel需要升级还是resource
+
+
+ehsare激活码，搜索ecloud.user.sn，然后复制到out目录下的ecloud文件夹里面
+
+
+device、framework下的升级system，这个用排除法
+wifi-display的获取设备名 和build.prop没关
+设备名和jgrep有关，是android程序，还是和java近一点
+应该和jgrep 的 x2有关，我把cgrep的X2改回来。这个嘛，是从程序里读的，所以不存在写入到哪里需要回复出厂的问题。所以嘛，也和回复出厂没关
+需要回复出产的，等于是写入到硬件里面的，而从程序里读的，等于是内存里的。区别好
+ota升级过后，它里面的boot.img很大，需要再升格小的boot.img
+
+adc检测，一开机充电或者电池状态是知道的。但拔掉电线插上电线，有时候不知道的。
+
+
+有线投屏要怎么描述呢？升级resource之后，
+短按息屏
+搜到的是eshare***的名字，而不是P8
+
+"./services/core/java/com/android/server/policy/PhoneWindowManager.java
+标有whp的附近，可以更改短按息屏的
+
+eairplay apk这种如果升级，是需要回复出厂的，因为apk确实变了，但要回复出厂，才会在安装新的
+mmm -b
+or mmm -B 接近于make clean在编译
+mmm -B强制的编译，就算检测不到代码变动
+
+ios有线，是查看有没有iosdi和另外的一个进程，查看android有线，是查看有没有E开头的几个进程。就是这样，这样才能排查问题所在
+
+
+./out/target/product/rk3128_box/obj/PACKAGING/target_files_intermediates/rk3128_box-target_files-eng.chqh/SYSTEM/app
+有可能不能投屏是何这个路径有关，因为这个路径我昨天删了2个apk了，现在居然又出现了一个eairplay.apk
+
+配置服务
+需要在rc文件或别的什么文件里写好目录指到哪里，然后在system/bin下面有同名的可执行文件，才能用。inputflinger就是这样的
+
+
+[ 4077.966627] healthd: battery l=56 v=3983 t=0.0 h=2 st=2 chg=au
+[ 4079.367307] healthd: battery l=56 v=3981 t=0.0 h=2 st=2 chg=au
+这个v是曲线图里面的值吗？
+
+
+make clean之后，连上手机。不会出现之前的iosmain等信息打印了，说明确实是清理了
+也有可能是写了两处service，重复了的缘故
+
+跟王总提议说，就是在硬件上设计，比如长按某两个按键可以进入短接升级模式，和手机差不多。这样板子出了问题，就不用特意寄回来了。
+
+android有线投屏，第一次需要连上网，然后才能判断注册某个手机，elinePlay才可以用。最新的不能用6.0，因为兼容性不好，所以直接不让用。所以，这个嘛，不用改了
+
+
+一打开电脑，办完正事就关机，这算是一个制约吧。
+
+码值错误，修改dpad_center
+
+在system里改一下键值，重启就行了。enter改成center，同时，还得确保本来的那个遥控可以用
+out/target/product/rk3128_box/system/usr/keylayout$ vi Generic.kl
+qwerty.kl也是常用的
+在Generic.kl里面改动dpad_center
+
+整个out目录先移出来，再压缩备份。
+OP98的
+
+
+四格点的问题，看看会不会建成三个点。开机的语音助手问题
+电池曲线，我感觉98上面的电池曲线是需要调的。OEM已经解决，apk已经解决。
+
+
+可能10几%到100%都是100%，10%几以下都是0%了。0%放宽是为了，不让它电量全部用光，那样电池会废的。100%放宽是因为那样才能充到100%。
+打印出值来，在kernel里面，
+
+改makefile cp.sh比切换分支快得多
+
+eclk 地 这是maskrom升级
+emmc相当于硬盘，所以需要全部升
+第一次升级，就是换了硬盘之后的那种升级，一直按住开机键就行，不用短接
+
+在一知半解的前提下想要了解某些事，那要花数不尽的力气。那还不如先打好基础再说
+
+
+
+SD171205/system/core/healthd
+这个是打印电池信息的，但其他地方也会打印的吧。
+
+3353 3416 3494 3575 3626 3659 3691 3743 3811 3899 3998          ///for yanghu
+3530 3678 3781 3851 3916 3956 3986 4020 4059 4103 4156
+小于3353，就是0%，大于4156，就是100%？？一共又4个角落，到底取哪个值，我可说不准。
+这个电池曲线的在dts里面
+
+
+电池曲线图：电流- 放电，电流+ 充电
+电压3.4，可以算为0了，保险一点。防止电池电量真正耗尽，电池就容易坏了。以3.4作为封底，以开始放电作为封顶，在封底处设个100，然后全部均分直到封顶为0。吧0、10、20 …… 90、100都作为曲线的值。2.5A充电，0.8A充电是那时候电流快充满了的。然后以2.5A放电，以此作为统计
+
+
+whp2:capacity =25
+[  899.272949] wUSERCODE=0xfe01
+[  899.299553] RMC_GETDATA=b2
+[  899.299581] POWER22
+[  899.299591] vkey:116
+[  899.661375] whp1:ADC,604,3775
+[  899.661401] whp5:capacity =18
+[  899.661413] whp:real_voltage_to_
+
+
+收尾工作，原生设置去掉，串口打印去掉
+
+新的apk在/data里面搜索
+
+100	4166
+
+[ 1365.281289] whp5:capacity =99
+1.这个值差不多每15秒都是大于上个值，就加一
+2.这个值等于100，且次数多余10多词，那充电图标就会变为电池图标。这符合原则1
+等于100则需要比较长的时间
+充电满了，指示灯也会由红色变成无色
+
+所以，whp5的值不能作为真正的判断。因为它，0和100才都有较宽的范围
+whp5的值是充电格数的判断标准
+
+而主界面显示电量多少，是用的whp5
+29] whp:real_voltage_to_capacity =3906,90
+[ 3372.739741] whp:capacity3 =90
+[ 3373.723719] whp1:ADC,628,3925
+[ 3373.723754] whp5:capacity =87
+[ 3373.723767] whp:real_voltage_to_capacity =3915,91
+[ 3373.723777] whp:capacity3 =91
+[ 3374.717320] whp1:ADC,622,3887
+[ 3374.717892] whp5:capacity =87
+[ 3374.717972] whp:real_voltage_to_capacity =3906,90
+[ 3374.717988] whp:capacity3 =90
+
+
+ whp:capacity3 =89
+[ 3396.375352] whp1:ADC,632,3950
+[ 3396.375395] whp5:capacity =86
+[ 3396.375409] whp:real_voltage_to_capacity =3903,90
+[ 3396.375421] whp:capacity3 =90
+[ 3397.359341] whp1:ADC,624,3900
+[ 3397.359374] whp5:capacity =86
+[ 3397.359387] whp:real_voltage_to_capacity =3900,90
+[ 3397.359397] whp:capacity3 =90
+[ 3398.343361] whp1:ADC,621,3881
+[ 3398.343395] whp5:capacity =86
+[ 3398.343409] whp:real_voltage_to_c
+
+boot.img只是相当于一个开关，并不是要升了它，才会升级resource成功。升级resource本来就是ok的，只是升了它，才让resource发挥了作用。
+
+
+判断杨虎的机型，然后写死成8G 这样有问题吧？？这个嘛，改吧，不，问下王总
+所以亚，确定得用分支 用git分支来切换不同的工程，这样才方便，不然，每次得该来改去，cp.sh也得用
+发现bootanimation.zip没复制成功，差异下makefile和cp.sh吧
+
+遥控的码值也是要改的
+我只是屏蔽了原生settings，所以嘛，肯定要回复屏蔽，会cp apk是不同的
+
+build.prop也要改过来的，gpo决定了梯形
+resource.img里面，还有system/media都有开机动画
+kernel里面的logo.bmp不出来，后面的出不来的。等于开机动画分两个阶段
+
+骑马要改遥控、屏幕分辨率
+build.prop cp.sh就无关git 了
+问王总要git的账户密码
+
+kernel需要有分支，其他的迟点在总结
+还有build，但是它改的东西很少，只有cp.sh的路径，所以
+boot有可能只是升级kernel resource的时候才游泳，不，一致游泳的
+
+PAN1020_LD_IAP_8KB.FLM，这个是loader
+flash用PAN1020_AP_IAP_256KB.FLM
+
+小心用git reset，必须得把他们提交了才能git reset
+别用reset了，这样会出问题的，没有远程服务器，reset就没了的
+

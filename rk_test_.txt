@@ -1,0 +1,1119 @@
+R3128_OP95R
+编译平台rk3128_box-userdebug
+
+
+下载完会重启，里面有新的差分包，也就升记号了？
+恢复出厂，遥控按一下就会有反应的，不用按那么多下。
+
+
+make -j4，-j8也未尝不可
+make是编译，mkimage.sh是执行文件操作的shell脚本文件，build.sh会清了全编，比mkimage.sh要慢。要理解这个过程，我需要进去里面看看
+有时候kernel没编译好，make -j4执行会有问题，那么build.sh也可能有问题，可以试试看
+
+
+编译错误的话，可以用用make -clean
+比如提示哪里没权限，除了更改权限外，可能用 make clean 也OK
+
+
+一般，miniloader不用动的，为什么呢？
+
+
+1       cat init.box.rc | grep ios
+2       ps | grep id
+3       ps | grep idis
+4       iosmain &
+iosmain & 表示后台启动吗？
+ps查不到ios相关的，在开机后切换成超级用户，再运行iosmain &
+开机时间久了，执行这个命令也是不行的
+
+ 
+ 
+system/priv_app
+是网吧模式，可以选择安装下面的apk，但重启过后就没了。
+这个似乎是恢复出厂才没了，那得改叫U盘升级模式了。对，试了一下settingsProvider也是这样，说明的确是U盘升级模式
+装上去的，是不用恢复出产的，一般也不需要重启
+ 
+
+ 
+\\192.168.1.9\chqh\work\R3128_OP95R\SDK171205\device\rockchip\common\sepolicy
+te文件的目录
+
+
+vi /home/wanghp/work/R3128_OP95R/SDK171205/u-boot/.config
+uboot也要选菜单项的
+
+
+升级misc.img，相当于刷机，刷机也等于遥控恢复出厂设置
+
+
+build/core/Makefile
+可以指定哪种型号的cp.sh
+
+vendor/zjsc/cp.sh
+此脚本里，有将op95r.prop复制到out/system/***/build.prop的命令
+这个prop是设置语法什么的
+
+out下面有个最终输出的build.prop，写下了系统语言之类的东西
+
+R3128_OP95R/将日志信息收集起来吧，应该会有用的
+
+
+更改了build.prop的默认语言项后升级，也需要恢复出厂设置，才知道有没有修改好。因为这是写到某个地方的数据，不是说升级一下就可以变的，要恢复出厂，或将那个地方的数据再写入。
+有时候鼠标没用，是因为某些地方没有很好地兼容鼠标操作，这时需要遥控。
+
+
+
+没连上网，还是可以访问局域网。检测不到网线，则连局域网都访问不了。
+
+
+之前生成到out目录下的，会一直在。即便你换了个cp.sh，也需要在out目录下删除。试过了，确实如此。
+但是apk只是安装程序，out下的多余apk未必预安装了，实际上并没有安装过那个多余的Launcher。验证过，才知道那个多的Launcher是Home Screen，而不是多的apk
+--------------------
+但凡生成多余的文件，除了取消源头的android.mk，还得手动地删除它。生成的不会平白无故自动删掉的，最多被替换。
+
+vi build/target/product/core_base.mk 
+删去此文件中带有Home的那一行，就去除了Home Screen的Launcher
+
+
+
+work/R3128_OP95R/SDK171205/build$ kgrep Home
+在这之前先这么查询
+定制应用，这个试过了，是不需要恢复出厂设置的。只是。我之前搞错了，似乎得吧out目录下的也删除掉，在执行./mkimage.sh语句。光是删除zjsc下面的还不够。同时删除zjsc下面的app和out目录下的，再升级system.img。？？需不需要删除掉out下面的，感觉上需要。但我还没有完全验证。
+mkimage是合成文件，make -j4才是编译
+make -j4 再mkimage后，那个system.img才可以用
+
+
+
+
+out\target\product\rk3128_box\system\priv-app\SetupWizard
+开机向导apk，可以吧这个备份后删掉。设置了打开google market，就会有这个的
+-----------------------------------------
+chqh@wanghp:~/work/R3128_OP98/SD171205$ find ./ -name SetupWizard.apk
+./vendor/OP98_en_y/SetupWizard/SetupWizard.apk
+110的，应该是在这里复制apk的过去的，说明cp.sh什么的也是用这里的。
+------------------------------
+看不出shell脚本是怎么复制setupWizard.apk的，先删掉吧
+vendor/partner_gms/apps/SetupWizard下的Android.mk更名为Android.mk_，就不会生成了
+没遥控先用input
+更改了system，比如删减了某个apk，是不需要misc升级的。
+
+build.prop里 product属性对应系统设置里的哪个，百度百科也有些不靠谱。
+prop的意思就是属性，更改设备名型号，需要改动它也很合理。
+像init.rc，就是合理的运行配置文件。run config，
+
+
+java代码的打印信息，可以通过logcat查看。
+logcat -c
+
+升级system后，第一次开机时间多了1小时。好像要第二次开机才会恢复到格林尼治时间
+
+
+kernel$ vi arch/arm/boot/dts/zjsc_op95r.dts
+这说明内核里面的东西有点问题
+
+
+drivers/input/sensors/accel/
+梯形校正错了，可以看看此文件夹下的msa_core.c msa_cust.c
+
+
+out\target\product\rk3128_box
+这个目录下，不带后缀的kernel可以删除掉
+
+开机的时候，先有声音，再有投影。因为风扇是硬件，而投影还需要执行一段代码。所以慢了点。
+
+为什么12v 2.5A的起不来，12V 3A的可以起来
+
+
+单片机死了，reboot后也一样无法关机。reboot内核会重新加载，也就是代码会重新启动，但是单片机死了。reboot也没用了。需要复位。
+也这说明，重启和关机后启动时有区别的？？
+复位键在中间孔的上部，上部就有个按钮。关机会卡住，所以需要用复位键
+
+
+内核配置，使得梯形校正正常了。
+
+
+reboot bootloader 这个才对
+还是root bootloader
+以上命令中的一个
+
+短接关机，是不好的。较好的是，先关了系统再掉电。短接关机，相当于直接掉电。
+
+
+Defined at init/***
+指的是kernel目录下的init/***
+这是内核配置菜单项啊，指kernel目录下再正常不过了
+
+
+串口打印更改过后，要升级boot.img，加了ota的话，可能会不一样。除了升级resource.img，还需要升级boot
+一般更改串口打印，只需要升级resouce.img.果然需要升级boot.img，哎这么麻烦
+确实只需要resource.img，没错。但resource不是资源，所以这个资源应该不是指图片哪些。而是只串口啊等硬件资源
+不对，OTA升级过后，每次都要boot.img
+难道说loader程序里面有boot.img,所以才顺利升级成串口打印成功
+
+蓝屏是因为接了串口调试，就是这么个原因。反复重启，因为串口的原因。那么我再接一次，搞不好也会重启
+
+去到一个较细的目录，如果有git，就可以通过git status查看当前情况的。
+当然可以提交版本，每个模块有自己的版本才对吧。看了日志，确实如此。
+即便提交的所谓提示信息一直，也是每个模块分开提交的
+
+
+开启内核的时候，无论如何都会有串口打印信息。因为这时还没初始化sdmmc
+
+
+设置wifi自动开启
+frameworks/base/packages/SettingsProvider/res/values/defaults.xml 
+<bool name="def_wifi_on">true</bool>
+	 
+	 
+
+
+如果有电池，就可能需要拔掉某个口子关机，再升级
+
+
+.gitignore 添加一些png jpg?和王总讨论下。还有git 的版本也没怎么提交
+
+试了一下，似乎中文的注释也会是编译报错。
+
+make失败了，下次编译就是在上一次编译到一半的基础上开始再编译的。
+
+打开logcat，通过查cmp可以知道当前打开文件的包名，这倒是很方便
+
+requestWindowFeature(Window.FEATURE_NO_TITLE);
+隐藏状态栏
+
+
+Settings/res/layout/browse_item.xml
+tvsettings下，的文件，有字体大小，设置它应该就能改正设置项的大小了。但是，怎么没效果？？
+
+确实能自动更新时间，但必须得连上wifi在重启过后才能。所以，这也算是个bug了。小bug
+不，是个不小的bug,在第二次重启的时候，也更新时间错误。自动更新时间，就是个bug。
+改了内核的东西，要合成工具升级才行，否则不行
+
+我猜的没错，在framewrok目录下，找到了setPreferencesFromResource的定义
+
+
+drivers/prj prj就是投影仪
+
+果然，Android.mk改成Android.mk_就可以减少编译了。开机向导就是这么去除的
+
+先编译内核的话，在make -j4会多几个编译项的
+
+
+priv-app可以一次性安装，应该是
+
+光机有问题，颜色才变暗
+
+改了内核打印没效果，可能是需要boot也生一下，ota会吧kernel打包
+
+x的意思是啥都行，而不是通配………… 所以，8x76端口是绝对不行的
+改jack server要改两个地方
+一个是.java-settings，还有另一个地方，我的看看
+端口别人用了，自己后面用，可能会用不了。
+工具类的卸载需要谨慎，先和同事说
+端口一般没什么严格要求，和别的端口不同就行了。
+jack-settings,jack-server/config**
+在这两个地方都要改端口，相当于钥匙配对
+很多地方都要锁钥匙的配对吧
+jack server是最先的。
+
+airplay那个应用，不是我们弄的。我们做的，只是插上去就自动投屏？？
+设置界面的字体和launcher有关，还是和settings有关？对啊，有可能和launcher有关
+
+./mkimage.sh似乎是多余的。对system来说，用make -j4就行了。mkimage.sh反而会有问题？？
+
+编译了一下luancher2，就一下在有了Home Screen，还是说，是两个重复的Launcher？结果，多的那个Launcher不可用
+岂不是再说，修改桌面不能改Launcher2了
+我编译了一下launcher，连底部栏都变了，为什么
+
+
+---------------------------------------
+更改设置界面的字体大小。可以变更preference的layout属性，而layout已经默认指定了，在framework里面
+frameworks\base\core\res\res\layout
+字体大小要选择这里的layout。不，不是framework哪里的，而是别处的，在子目录下
+更改子目录下的preference_reversed_widget，可能就改了字体了
+framewroks目录下
+./support/v17/preference-leanback/res/values/dimens.xml:31:    <dimen name="lb_preference_item_primary_text_size">14sp</dimen>
+这个是编译生成的，所以，不是修改这里就可以的。
+
+android:textSize="@dimen/lb_preference_item_primary_text_size"
+android:textSize="@dimen/lb_preference_item_secondary_text_size"
+
+绝不是改一处地方就行，需要的textsize是个变量，需要他哪里也编译了 ，才行。都要变成二进制了，才可以。
+猜想应该先编译framework的，在编译settings才会有效果，可以试试
+估计settings也会识别framework下的改动而编译出新的apk来，嗯，没错，果然是这样
+确定了，lb_preference_item_primary_text_size这个控制字体大小
+
+改对地方了，这个的好好记记。
+
+--------------
+
+24小时制有问题，显示的不对，wifi要等一段时间，10多秒吧，才会连上。在连上之前，时间一直是错的。没有电池存储时间吧。而且会差个几秒，应该也是没电池所致，未必，如果是开关机所致的时差，怎么可能就几秒呢？
+没电池吧，这是个硬伤
+电池曲线，得接上个电池，才能看出来
+应该是I2C读取单片机，读到高于某个电压，就显示正在充电。读单片机，这个要看看。
+
+--------------------
+时间看起来有误，但那是北美东部夏令时间，就是会比较低慢。慢了12个小时。所以会有24小时制错误的错觉。
+
+假设这些东西，都封装好了。那显示个5G出来就行吧，先显示出来再说。
+
+vim ./src/com/android/settings/wifi/WifiApDialog.java
+修改5g频段显示
+在xml的< />里面，不能用注释，而即便到了外面，注释也不能是中文的才对。对，在外面的时候，注释不能使中文的，估计只能用英文
+显示5g成功了。但未必能用5G啊，只能说可以选择而已。
+packages\apps\TvSettings\Settings\res\layout\wifi_ap_dialog_my.xml
+就是该这个，但只是显示出来了，应该还不能用5G的。对，我想的没错。毕竟，显示一个5G出来， 和真的能用上5G，差很多啊。
+通用的方法是，搜索一下2.4G。其实搜2.4 G才是对的
+搜出来后，一步步跟踪索引在哪，我就是这么搞的啊，这个不用记吧
+一般就是在同一个应用里，设置字体大小也是，5G频段也是
+--------------------
+修改Launcher主界面
+
+应该在主界面能找到充电这一块的。先看看launcher吧，
+
+还是可以给所做的提交日志的。吧之前那些杂乱的全部提交。再提交我自己修改的。
+
+
+装了电池充电，就不能开机。这也是个bug吧
+
+
+删了Luancher2.apk，再升级当然不会有。我得试试
+Launcher_95r 在这个目录下编译apk。这是一个，还有Tvsettings，无法集成道system.img里面。的修改makefile文件吗？
+恢复出产设置，才能更改设备名，。那U盘升级呢，也要恢复出产。那量产工具呢，似乎就是可以不用恢复出产设置的。那上次量产升级似乎名字也没改啊。所以，还是不确定。
+
+还有多余的launcher
+
+
+就是没集成，而且重启后还是原来那样的设置，字体还是一样大
+集成了，只是需要回复出产。试了一下，果然是这个样子。
+adb push这个操作比较好，吧修改的东西直接push进去，省时间。
+那么pri-app下面的可能不是网吧模式，而是要恢复出产才行了？？
+
+ 
+在超级终端里安装：pm install -r
+130|M1:/ $ 
+130|M1:/ $ 
+130|M1:/ $ pm install -r /system/priv-app/Tv                                   
+TvProvider/  TvSettings/
+130|M1:/ $ pm install -r /system/priv-app/TvSettings/                          
+TvSettings.apk  lib/
+130|M1:/ $ pm install -r /system/priv-app/TvSettings/                          
+TvSettings.apk  lib/
+install -r /system/priv-app/TvSettings/TvSettings.apk                         <
+用这个命令估计的下push一下， 需要验证。验证过了，果然需要先push一下
+adb push 和 adb install 一样，不需要进入adb shell 
+
+M1:/ $ //用到了管道 的知识
+M1:/ $ logcat | grep 1[  537.943425] healthd: battery l=50 v=3 t=2.6 h=2 st=3 fc=100 chg=au
+23
+06-14 08:57:15.225   618   618 I System.out: enter onCreatePreferences1234
+06-14 08:57:15.225   618   618 V MainFragment: onCreatePreferences1234----->
+
+
+[  543.871037] whp===========rk312x_codec_p:wer_up
+06-14 08:05:35.756  2443  2443 I System.out: enter onCreatePreferences1235
+06-14 08:05:35.756  2443  2443 V MainFragment: onCreatePreferences1235----->
+[  546.958502] whp===========rk312x_codec_power_down
+
+
+运行的是data/data下面的，所以需要恢复出厂，或者先删掉一点东西 /data/data下面的，重启后会吧system.img的拷贝过来，Tvsettings就会没问题。
+
+
+
+testpower，调试能量，这样就能显示不充电了。取消勾选test power，充电才能显示正常
+找杜工插上苹果手机，是不是也是100%？
+
+比较op95好op98的打印信息，怎么会充电100%了
+
+meici 都com5，应该是按次序来生成com的名字的。所以才这样。
+
+chown -R chqh .
+复制过来的项目，似乎要执行这一行
+
+短接升级，A1A2  op98的
+op98第一第二个引脚，就是开机相对应的
+短接就是短路接的意思，所以直接用手按住两根导线是ok的
+whp==================vbus = 1,recovery = 1
+rockusb key pressed.
+短接maskrom状态升级有这么个语句
+boot.img也要跟着是新的，升一个旧boot，包含了以前的kernel什么的，所以应该也有问题。
+正常boot是很小的，1兆多
+运行./mkimage.sh重新生成boot.img。make -j4是系统性的东西，如framework改了才需要执行的。
+帮运过来的第一次编译都要很久
+
+op98的idisplay比较小，可能他的才是对的。
+可能在iosmain那里多加了这行代码
+
+
+make -j4必须用sudo，恐怕是因为之前拷贝了什么文件需要用到root权限
+这样是不行的，要在某个地方改过来才好。
+
+
+110升级前之所以要拔掉光机模块，是因为屏幕亮度过高，又没散热片，会使光机烧掉的。需要代码设置调低亮度
+drivers/prj/drv_dpp2607_pad1000.c 在这里改亮度，不至被烧坏
+-------------------------------------------------
+插上光机，因检测到电量为0，导致110都在不停地重启
+先去掉电池检测，回过头再改检测电量错误的bug。
+去到rk30那里，Device Drivers/Power **/rk30*
+[   16.491342] func:rk30_adc_battery_poweron_capacity_check; line:1418; old_capacity = -1; new_capacity = 0; g_uboot_incre = 0
+[   16.492459] healthd: battery l=0 v=3343 t=0.0 h=2 st=4 chg=
+[   16.492954] healthd: battery l=0 v=3343 t=0.0 h=2 st=4 chg=
+[   17.136887] healthd: battery l=0 v=3343 t=0.0 h=2 st=4 chg=
+110上面有两个芯片有DTZX的字样
+EMMC ROM
+DDR RAM
+drivers/power menuconfig和内核目录也是差不多的。
+这是个小bug，先屏蔽掉这个后，以后再改回来
+安装向导，谷歌市场，就会有这个。去掉这个后，home键就不能用了，因为它是不允许退出的。除了home，还有别的键也用不了。去掉，系统会判断它还没运行完，所以home键还不能用。
+这个也得用在op95上面
+
+
+安兔兔，指安兔兔评测apk。按王总的说法，不会因为它测试太多次评分就降的。
+这个apk来测试是对的，用户也很可能会下载来判断机器的性能。
+
+
+文件浏览器apk退出有渲染动画，屏幕才会闪的
+rk3128_box:/ # busybox vi /system/build.prop  #，说明了需要超级权限
+sys.hwc.compose_policy=6           
+sys.hwc.enable=1   
+把两个hwc的值都设置为0 果然可以了，这是为什么
+
+
+
+"arch/arm/boot/dts/zjsc_op95r.dts" 523L, 11543C written
+更改电量显示
+		//3409 3505 3553 3580 3602 3628 3662 3707 3761 3882 3904
+		//3858 3903 3944 3966 3981 3998 4019 4045 4076 4110 4148
+		3309 3405 3453 3480 3502 3528 3562 3607 3661 3782 3804
+		3758 3803 3844 3866 3881 3898 3919 3945 3976 4010 4048
+减少100，单位是毫安，bat_table这是电量表格吧。这是伏特书吧。伏特数低一些，
+这样改就对了。还要升级boot.img 电流太小了，电源不行，才导致了这个问题
+一排电池电压，一排充电电压
+电池电压比充电电压低，让它们之间的距离更小，充满电后开机才不显示
+这是打印0% 10% 20% ………… 100%电压对应的值
+
+keil程序，先看单片机部分，用于和微信连接的。先看单片机部分，也就是还有非单片机部分。
+
+充满了电却显示70%的电，这个问题不在于电流过小吧。而又可能是，70%就显示充满了
+
+
+adb remount 过一次，就可以关掉cmd，打开后直接adb shell ，还有，不需要adb root。remount应该会自动root
+在adb shell里面，也可以input keyevent
+
+
+chqh@wanghp:~/work/R3128_OP95R/SDK171205/vendor/rockchip$ find -name *.apk
+system/app下面
+drwxr-xr-x 2 root root    4096 2019-06-24 11:07 RKTvLauncher
+
+
+M1:/system/app
+在这个目录下查看安装的apk,如果有几成进去的话，不然智能去新的地方找了
+----
+可以在恢复出产设置后，进去/system/app /system/priv-app/下面找，找到了说明有编译吧，估计是这样的
+
+恢复出厂设置，擦除并不久，重新编译apk什么的才耗时间
+
+Upan升级需要命名为 update.zip，量产不需要。U盘升级是自己去找文件来升级，量产是人为选好的。
+
+chqh@wanghp:~/work/R3128_OP95R/SDK171205/frameworks/base$ vi ./core/java/android/content/res/Configuration.java
+这里的某处改成1.5，字体就变了
+真的吗？感觉没变呐
+
+打开logcat，然后点击某处，就知道是什么地方需要修改了。
+
+还要确定有没编译到，1.5编译报错了，就说明编译到了。
+
+某个文件时间没对上，还是旧的时间，那说明没生成文件成功，还是之前的旧版本。
+erasing，说明正在恢复出厂。一些知识要确定下来，编程是件很不确定的事，不确定的东西越来越多，那就很乱了。
+试试就知道了。一定要很确定的知晓可通过原理推导出来的知识，而一些操作什么的，则是不确定的。
+
+会不会是，有些人基础知识掌握的牢固，养成了ocpd呢
+
+
+
+TVSetting.apk一装上就能验证效果的，不用恢复出厂的。有时候会出现system.img升级的apk没复现手动安装的那个效果，可能是从vendor又复制了一个过来，把它替换了。鉴定是否被复制了，最好的判断标准是占用字节数，其次是时间。
+
+
+priv-app里面，一般重启就会没了。这么假的？还是一般安装后重启就没了？
+我试过安装一会媒体中心，重启后会提示已关闭。why？
+-----------------
+make -j4不会生成新的TvSetting.apk，还是需要mmm命令。 ./mkimage.sh就编进去system.img了。
+---------------
+
+
+命令行ctrl+c用着用着用不了，可能是某个码值错误，导致进入某个模式里了，需要重启机器。
+
+环境变量是针对用户的，用户退出了，就得再初始化环境变量才能用mmm等命令
+
+.config不建议手动改，一运行make menuconfig就生成新的.config覆盖掉了
+
+在~目录下vim .vimrc
+设计上vim需要根据每个人的不同习惯来，而它涉及每个可编辑文件。所以放到用户的根目录下比较合理。
+
+
+门禁的遥控，用的2.4G，不用对准。如果是红外的，则需要对准。
+
+
+fs/proc/meminfo.c
+更改内核里面的运行内存
+改total
+只需要把
+108                 ,
+109                 K(i.totalram)+1024*1024,
+110                 K(i.freeram),
+
+生成boot似乎不需要make -j8，而是直接./image.sh
+似乎要先升级boot.img，resource。img才能升级成功。否则，先升resource，再升boot，也是不行的。
+太出乎意料了，没想到升级boot的同时，也要升级kernel，否则屏幕分辨率会变。太惊人了
+我想是，boot里面包含了kernel的缘故。我们升了小boot后，kernel已经没了。是这么个道理
+
+
+
+
+原来，投屏对应的是软件，而不是设备名，mediacenter最好吗
+
+scp复制不同机器上面的
+
+op95r里面，airpaly是干嘛的，要么去掉，要么加上那个apk。目前点击报错，主要是因为那个apk不存在
+
+
+dts下面看看，看看IO口 拉没拉高，还是定义错了。可以看看prj
+打开A1A2
+
+A1A2，相当于软件升级，u-boot parameter要对，才能升级。而maskrom，那个是擦除不掉的，
+parameter里面有一行是讲a1a2升级的
+真的蛮复杂的
+
+maskrom 短接eclk和地
+
+uboot make编译，在编译之前先menuconfig选型号
+有些是定义的少了，
+在头文件里声明，定义一些新的型号，而不是单纯地改.c文件里面的东西。
+
+
+vbus recovery都为1，才可以短接A1、A2，通过loader升级
+./board/rockchip/common/rkboot/fastboot.c uboot目录下改这个文件里的vbus
+直接用op98的cp.sh
+
+cp.sh主要是为了拷贝apk和build.prop，仅此而已。不一定需要它的
+它是放在最后的，这个时候添加一些apk或删除掉，也不会在生成了。所以，这个是看似没啥用的，就只是定制的作用。
+
+同屏、电池、遥控等等，各项都测一下。
+
+system目录下不能有任何中文或空格的东西，最主要是不能有空格，其次是，不能含中文。
+
+lib包用不着专门解压的，系统里就已经有的了,应该说，在编译的时候会生成。
+
+
+j-link标志的东西，名叫烧录器，升级程序用得是它
+keil5里面，debug->settings->debug->SW Device，在这里需要显示有设备型号
+地和电源一般是在两端的引脚
+4个引脚的为sw接口
+
+z_ir.c里面，ir_send函数，吧单片机里面的码值发送给kernel 在rk下面打印一下码值怎么样，哇这要怎么打印？
+prj_do_work这个函数调的发送函数
+
+#define CUST_1  0x77
+#define CUST_2  0x88
+#define IRCMD_MUTE          0x18
+#define IRCMD_UP            0x10
+#define IRCMD_DOWN          0x14
+#define IRCMD_LEFT          0x11
+#define IRCMD_RIGHT         0x13
+#define IRCMD_ENTER         0x12
+#define IRCMD_MENU          0x0E
+#define IRCMD_HOME          0x16
+#define IRCMD_BACK          0x17
+#define IRCMD_FOCUSDEC      0x1E
+#define IRCMD_FOCUSINC      0x1F
+#define IRCMD_VOLINC        0x1C
+#define IRCMD_VOLDEC        0x1D
+#define IRCMD_3D            0x0D
+#define IRCMD_POWER         0x0C
+#define IRCMD_NTCERR        1
+#define IRCMD_FOCUSPIC      0x21
+#define IRCMD_F9            0x51
+#endif
+果然1-20的key值只是代号,这些才是真正发给rk的
+prj_op110.h里面的这些才是真的值，rk里面根据这些来改
+
+
+864_480 and yangHu_control
+这个是欧瑞麦和杨虎都有的提交，且都是第一次提交
+update boot这个是杨虎的第二次提交 ，fit_scrren是欧瑞麦的第二次提交
+
+我应该把补丁打下来，需要时查看，这个才是正确答案。
+储备足够多的补丁文件，才是正确答案。
+
+升级了boot后，就可以了？就可以用最新的升级进度条了。升级没进度条，是当前系统的问题。而不是这个升级包的问题
+不是当前系统，而是升级包本身的问题
+果然，是开机动画的问题
+logo.bmp logo_kernel.bmp都改成有内容，黑屏的话，别人会以为开机很慢
+kernel的开机动画要和另外别的地方的bmp配对上，才没有问题 错，并非如此，是开机动画的尺寸不对
+不是，是开机动画的尺寸问题 尺寸对上了就好，就是分辨率不是860*480，不知道文件大小有没有关系
+而且开机动画的logo.bmp太大了，还会导致起不来界面
+但凡文件相比之前明显小了，肯定有什么问题的，小几个字节很正常，小了几十kb就该有困惑了个
+
+mysettings、直接给gettotal加4G看看
+
+默认用enter键，ok默认指定为enter
+
+
+硬件不同，则软件需要有所更改
+中间的图标 连上微信遥控，就中间变绿，断开就原样
+逻辑判断不只是这样，断开之后，还要判断，现在已连接的数量
+
+再弹出toast提示后，时间就更新准确了。这个时间是，要准确了才显示的吗？
+我的这个提示要开机后一分半众才有
+lunch，这个操作有时候需要用
+想不到system.img不需要恢复出厂，就可以替换Launcher
+也想不到重启后，还是连着微信遥控
+单片机设置i2c命令，通过这样来监听微信遥控
+毕竟，合上皮套关机后还能再开，和单片机也肯定有关
+显示设备型号再中间，并不可取，这是什么用户需求阿？显示再中间的是时间就行了，而且是一开始就显示
+
+kernel/drivers/prj$ vim drv_dpp2607_pad1000.c
+kernel里关于投影仪的，在哪一行呢
+搜prj把
+改一下sp07的分辨率，同时设置也要改
+
+phonewindow那里，可以改成短按关机，现在是长按关机：
+记录一下编译MySettings的步骤，history的几个命令，在lisp的文件夹下编译
+zjsc@zjsc-PowerEdge-T110-II:/home/whp/work/M358_OP106S/SDK1102$
+zjsc@zjsc-PowerEdge-T110-II:/home/whp/work/M358_OP106S/SDK1102$ . zjsc/zjsc_android_path.sh
+zjsc@zjsc-PowerEdge-T110-II:/home/whp/work/M358_OP106S/SDK1102$ . build/envsetup.sh
+including device/generic/mini-emulator-arm64/vendorsetup.sh
+including device/generic/mini-emulator-armv7-a-neon/vendorsetup.sh
+including device/generic/mini-emulator-mips/vendorsetup.sh
+including device/generic/mini-emulator-x86_64/vendorsetup.sh
+including device/generic/mini-emulator-x86/vendorsetup.sh
+including device/mstar/bennet/vendorsetup.sh
+including device/mstar/mstaraddon/vendorsetup.sh
+including device/mstar/yangmei/vendorsetup.sh
+including sdk/bash_completion/adb.bash
+zjsc@zjsc-PowerEdge-T110-II:/home/whp/work/M358_OP106S/SDK1102$ lunch
+
+You're building on Linux
+
+Lunch menu... pick a combo:
+     1. aosp_arm-eng
+     2. aosp_arm64-eng
+     3. aosp_mips-eng
+     4. aosp_mips64-eng
+     5. aosp_x86-eng
+     6. aosp_x86_64-eng
+     7. mini_emulator_arm64-userdebug
+     8. m_e_arm-userdebug
+     9. mini_emulator_mips-userdebug
+     10. mini_emulator_x86_64-userdebug
+     11. mini_emulator_x86-userdebug
+     12. aosp_bennet-userdebug
+     13. aosp_bennet_atsc-userdebug
+     14. aosp_bennet_dvb-userdebug
+     15. aosp_bennet_isdb-userdebug
+     16. mstaraddon-eng
+     17. aosp_yangmei-userdebug
+     18. aosp_yangmei_dvb-userdebug
+     19. aosp_yangmei_isdb-userdebug
+
+Which would you like? [aosp_arm-eng] 14
+
+============================================
+PLATFORM_VERSION_CODENAME=REL
+PLATFORM_VERSION=6.0
+TARGET_PRODUCT=aosp_bennet_dvb
+TARGET_BUILD_VARIANT=userdebug
+TARGET_BUILD_TYPE=release
+TARGET_BUILD_APPS=
+TARGET_ARCH=arm64
+TARGET_ARCH_VARIANT=armv8-a
+TARGET_CPU_VARIANT=generic
+TARGET_2ND_ARCH=arm
+TARGET_2ND_ARCH_VARIANT=armv7-a-neon
+TARGET_2ND_CPU_VARIANT=cortex-a7
+HOST_ARCH=x86_64
+HOST_OS=linux
+HOST_OS_EXTRA=Linux-3.11.0-15-generic-x86_64-with-Ubuntu-12.04-precise
+HOST_BUILD_TYPE=release
+BUILD_ID=MRA58K
+OUT_DIR=out
+============================================
+
+zjsc@zjsc-PowerEdge-T110-II:/home/whp/work/M358_OP106S/SDK1102$
+在这个目录下，找到MySettings，可以在其下面编译
+
+链接的时候，设个密码。在皮套设置下，用户设置密码？在连上设备之前，设置密码。这个只需要微信小程序才要把
+
+小程序能当遥控，也得单片机里面的key键匹配商了。还有dts的键值匹配商
+
+测试的问题：接入过投影仪一次，退出后，小程序就很难在搜到投影仪了。但是切换手机网络后，就能搜到了，但是进去还是得点挺多次的。
+
+zjsc-5就是5G，zjsc24就是2到4G
+zjsc-24没装相应的天线，所以不能用24
+所以，天线是用来扩充信号的
+弄好eshare和MySettings,eshare要弄密钥
+
+
+build.prop里面的hwc需要设成0，这样才能用t型校正，如果t型用不了，那么浏览器似乎会闪
+需要相关的hwc的两个值都设成0才ok
+rk3128_box:/sys/bus/i2c/devices/0-001b $
+rk3128_box:/sys/bus/i2c/devices/0-001b $ ls
+driver   power          prj_colortemp prj_rotate prj_volinit
+modalias prj_angle      prj_name      prj_source subsystem
+name     prj_brightness prj_pwm       prj_vkey   uevent
+rk3128_box:/sys/bus/i2c/devices/0-001b $
+rk3128_box:/sys/bus/i2c/devices/0-001b $
+at prj_angle                                                                  <
+0[  488.268766] type=1400 audit(495.910:r90)k3: avc:128 den_bioxed :{/s read } for pid=19y0 comm="sh" nsame="prj_an/bugls"i 2cd/deevicves=/0"-sy0s0f1s" bi $n o=12201 scontext=u:r:shell:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[  488.269065] type=1400 audit(495.910:91): avc: denied { open } for pid=190 comm="sh" path="/sys/devices/20072000.i2c/i2c-0/0-001b/prj_angle" dev="sysfs" ino=12201 scontext=u:r:shell:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $
+rk3128_box:/sys/bus/i2c/devices/0-001b $ cat prj_angle
+0rk3128_box:/sys/bus/i2c/devices/0-001b $
+rk3128_box:/sys/bus/i2c/devices/0-001b $ cat prj_angle
+0rk3128_box:/sys/bus/i2c/devices/0-001b $
+rk3128_box:/sys/bus/i2c/devices/0-001b $
+rk3128_box:/sys/bus/i2c/devices/0-001b $
+没看到角度变化，角度佑变化了，再根据4个象限来弄
+keystone梯形没用，
+
+139         public static void init()
+140         {
+141                 set_val(get_0_x(),get_0_y(),get_1_x(),get_1_y(),get_2_x(),get_2_y(),get_3_x(),get_3_y());
+142                 start_thread();
+143         }
+144 
+在frameworks下搜keystone ,找到prj keystone_soft，在init里面打开start_thread();这个就是梯形了
+
+设置皮套功能，合上关机、合上息屏，翻开开机
+数字调焦去掉，
+梯形校正里面，加上下校正、左右校正、高级（就是4个点的那个）
+sp07是mstar的，还是rk的
+如果是rk的，那上次给涂工改的mysettings就能用了，甚至可以加加条件判断，判断sp07就显示这样
+就算不是rk的，也有很多东西可以借鉴，不一定照搬
+就是sp07r
+
+合上开机，合上关机皮套功能，
+init这个提示去掉 以上两个功能挺麻烦的把
+
+
+130|P2-A:/ $ logcat -c
+P2-A:/ $ logcat
+[  538.789248] USERCODE=0x8877
+[  538.815151] RMC_GETDATA=f3
+--------- beginning of main
+09-23 16:33:59.111   492   532 W TelecomManager: Telecom Service not found.
+09-23 16:33:59.195   492   532 I System.out: jump into intercept
+09-23 16:33:59.195   492   532 I System.out: jump into powerPress
+09-23 16:33:59.195   492   532 I System.out: jump into interactive
+09-23 16:34:01.436  2184  2228 I kiwitv  : [call] mUpdateWifiInfoTask lastrssi = rssi(-73)(P:2184)(T:215)(C:)at (YCMedia.java:1197)(P:2184)(T:[HY]YCMedia-2301)(C:HyMediaSdk)
+09-23 16:34:06.032  1992  2006 W art     : Suspending all threads took: 7.656ms
+09-23 16:34:14.544  2184  2266 D HySignalUserHeartBeat: errType = 0  errCode = 0
+09-23 16:34:16.946  1949  3366 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:16.970  1949  3483 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:17.007  1949  3368 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:17.036  1949  3366 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:17.051  1949  3483 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:17.106  1949  3445 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:17.186  1949  3302 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:17.257  1949  3484 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:17.308  1949  3368 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:17.382  1949  3484 W trieveRemoteDescriptors: Device descriptor retrieval failed, no response: http://192.168.1.118:38388/deviceDescription/MediaRenderer
+09-23 16:34:22.175  2723  2782 I XulMessageCenter: Auto cleanup finished
+09-23 16:34:22.194  2723  2784 I XulMessageCenter: Auto cleanup finished
+09-23 16:34:22.395  2723  2786 I XulMessageCenter: Auto cleanup finished
+09-23 16:34:22.399   492   542 D WifiStateMachine: updateCapabilities for config:ZJSC24false,false
+--------- beginning of system
+09-23 16:34:22.400   492   547 D ConnectivityService: notifyType CAP_CHANGED for NetworkAgentInfo [WIFI () - 102]
+09-23 16:34:22.400   492   547 D ConnectivityService:  sending notification for NetworkRequest [ REQUEST id=1, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+09-23 16:34:22.400   492   547 D ConnectivityService:  sending notification for NetworkRequest [ LISTEN id=3, [] ]
+这是长按时发了一个短按的码值，长按一下关机，而不是说长按15秒才能关机 让f3这个码值可以关机
+是短按关机，不是短按重启
+关机屏幕会闪，改一下时间就好，改成50，即0.5秒。跟罗工要一下原理图
+
+一般红色的是电源，黑色的是地。
+这是公司的规定，还是市面上的规定？？
+sp07r的单片机程序一样吗？应该一样，但flash可能不一样
+这个是mz频率的缘故
+升单片机，要关掉机器
+z_key.c，配置按键的参数，多少时间等于长按
+
+sp07仿照rtc
+啥也没改阿，就可以时间同步网络最新的了？
+P2-A:/ $ [  452.377704] rk312x-lcdc lcdc0: win0:new_addr:0x10708000 cur_addr:0x10384000--1
+[  454.162632] init: Untracked pid 3197 killed by signal 9
+[  454.272364] init: Untracked pid 3960 killed by signal 9
+1073741824
+130321
+出现过连接过但又不显示wifi连接的例子
+
+连接上了，也确实能上网下载东西，但就是不更新时间？？但未必能搜索的到
+猜想是，连着连着就断了，或者进入当被市场，不能用遥控
+不一定进入当贝市场，按几下后也可能失效了
+但是进了当贝市场后，是一定不能用能的
+为何昨天能更新时间，今天却不能呢？
+input 不能用，看看这个遥控码值，
+界面不刷新就不变，刷以下toast
+快乐一分钟10秒，时间比网络时间快这么多
+
+kernle里rtc要对上才行
+访问这个地址可以下载***，用于给用户更好的提示。放在电脑投屏里面
+升级system.img出错，一般是system吧别的东西给冲掉了，找磁盘也找不到了。
+param.txt是决定了system.img最左边的偏移地址的
+恢复出厂默认设置，是一定要升的
+再这种情况下
+/sys/devices/platform/prj/prj_name
+
+修改显示屏的关机，长按两秒就关机。再phonewindow里面改。
+dts下面，看4.0的linux内核
+prj@1b {//这里查看投影仪的相关：亮度设置等
+		compatible = "prj,dpp3435";
+		reg = <0x1b>;
+从这里看出奇所在的文件
+重启的东西，不论是luancher下发的、还是kernel的，都要记，记了之后传给下面。这样重启才会保持记下的东西
+这一局，也是针对亮度的，重启后亮度才会变为更改后的
+
+[  131.085598] USERCODE=0x8877
+[  131.111504] RMC_GETDATA=ed
+[  131.199440] type=1400 audit(1569724661.244:144): avc: denied { write } for pid=3196 comm="roid.MySettings" name="prj_brightness" dev="sysfs" ino=11958 scontext=u:r:system_app:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[  131.200642] whp===========rk312x_codec_power_up
+[  131.212768] set_bri
+[  131.212793] 111111,deb12e00
+[  131.213594] 22222
+[  131.223454] brightness:51,0,204,1023
+[  134.277144] whp===========rk312x_codec_power_down
+
+[ 1351.933641] USERCODE=0x8877
+[ 1351.959546] RMC_GETDATA=ed
+[ 1352.047257] type=1400 audit(1569725901.944:148): avc: denied { write } for pid=3196 comm="roid.MySettings" name="prj_brightness" dev="sysfs" ino=11958 scontext=u:r:system_app:s0 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[ 1352.083803] set_bri
+[ 1352.083846] 111111,deb12e00
+[ 1352.084660] 22222
+[ 1352.094524] brightness:100,0,204,1023
+[ 1355.115420] whp===========rk312x_codec_power_downk
+
+问题：
+时间显示的问题，联网更新后，如果断网了，获取不到rtc的时间。
+我的机器还没设置内核，还没法显示绿色
+设置也坐上，还少功能
+电视家、云试听，sp07s上面的设置，一样的功能。主要是皮套，还有BLE
+再当贝市场里面，很难连接，再电视家里面，也有类似情况
+但是，云视听里面是正常的
+
+皮套 ble
+这个看sp07s，还是吧sp07r的功能改成和07s一样？
+我试了一下，合上息屏差不多等于合上重启或者合上关机，试过了是这样的，
+
+
+mstar的复制到rockchip下面，是需要改动的吧，不能直接照搬
+zDown 需要运行lunch
+zDown这个是升级单片机的，它放在哪里都可以的，它的功能是独立的，不耦合其他的东西
+显示和mstar相关的东西，需要去除相关的import
+
+再当贝市场里，按返回键出来很慢，而且按返回键还会导致遥控失去链接
+返回返不出去，也不是一返回就一定会失去遥控链接，但可能性很大
+
+关于声音出不来这个，需要再dts里面设一下，单片机再设一下，应该就可以了
+和喇叭有关的原理图是功放的，
+
+[  300.859197] vcodec_service: vpu_combo.12: power on
+[  300.865331] whp===========rk312x_codec_power_up
+[  305.720678] whp===========rk312x_codec_power_down
+[  305.779715] vcodec_service: vpu_combo.12: power off...
+[  305.779782] vcodec_service: done
+[  314.916541] vcodec_service: vpu_combo.12: power on
+[  314.923738] whp===========rk312x_codec_power_up
+[  320.716827] whp===========rk312x_codec_power_down
+[  320.834909] vcodec_service: vpu_combo.12: power off...
+[  320.834975] vcodec_service: done
+播放和暂定视频的打印信息
+
+充电状态下，开机被中断了。是电压过大的问题吗？
+设置更高的亮度，有风扇就可以这么设置
+插上tf卡后，就花屏了
+
+misc.img清除数据很久，都不见开机。一半是清除数据后就重启，再开机时比较慢的
+测了一下，这个清除数据，确实出了问题。
+刚刚有提示我，更新安兔兔6.*
+如果花屏了，hwc的两个属性都要改成0，才不会花屏
+第一个hwc的属性似乎是硬鼠标，6是硬鼠，0是软	鼠
+第二次清除数据，又一次很久
+
+电脑供电500ma，很有可能带不动，所以花屏
+110的按键，adc哪个对哪个 按键需要用到模数转换？？
+查看单片机显示画面不变的打印信息，就是开机开不起来那里
+按键，用到adc，很可能就是要给出一定电压，按键才起效果
+
+
+进入debug，打开watch1,直接复制粘贴key，就可以查看到值
+23456 p110.c
+原来106的按键是p31 110的按键是p30
+106是23457，110是23456
+
+短按关机、enter和right键颠倒过来。
+其次，再是sp07r的字段显示，绿色图标
+gpio power没reset吗？
+
+一个一个键按下去，再看值多少，再改
+#define KEYVMIN_LEFT        (784-50)
+#define KEYVMAX_LEFT        (784+50)
+#define KEYVMIN_UP          0           ///0.4---2.4
+#define KEYVMAX_UP          (400+50)
+#define KEYVMIN_FOCUSINC    (774-200)
+#define KEYVMAX_FOCUSINC    (774+200)
+#define KEYVMIN_ENTER       (1420-200)
+#define KEYVMAX_ENTER       (1420+200)
+#define KEYVMIN_DOWN        (1970-200)
+#define KEYVMAX_DOWN        (1970+200)
+
+#define KEYVMIN_LEFT        (784-50)
+#define KEYVMAX_LEFT        (784+50)
+#define KEYVMIN_RIGHT       (790-200)
+#define KEYVMAX_RIGHT       (790+200)
+#define KEYVMIN_FOCUSDEC    (1420-200)
+#define KEYVMAX_FOCUSDEC    (1420+200)
+#define KEYVMIN_BACK        (1950-200)
+#define KEYVMAX_BACK        (1950+200)
+
+unsigned int prj_get_key0()
+这里比较值的大小
+一直按着，然后才按暂停
+运行调试模式，然后开机。没错，开机。先F5运行，就是让它的代码跑完，等下才好跑你的按键。
+按键按下就得再按X，它才会反馈按键结果。然后再F5,X是为了停止代码执行，代码不停止，怎么显示结果？
+这个需要打开watch1
+stop debug，再start，就会关机，因为它要重新下载单片机程序到flash里面
+void ble_stack_process()
+{
+    unsigned int cou_ms;
+    cou_ms = 0;
+
+    prj_sw_work(WMOD_STOP);
+	while(1) 
+	{   
+        if(sys_timer>=5) ///1ms
+        {
+            sys_timer = 0;
+            switch(cou_ms)
+            {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+                adc_loop(cou_ms);
+                cou_ms++;
+                break;
+            case 9:
+                prj_loop();                
+                cou_ms = 0;
+                break;
+            }
+        }
+每10ms一次，大概是中断
+gpio_poweroff {
+ 14                 compatible = "gpio-poweroff";
+ 15                 gpios = <&gpio0 GPIO_D1 GPIO_ACTIVE_LOW>;
+ 16         };
+ 这个对比查看原理图,这个对应PWR_HOLD
+ 0_D1，说的是gpio-bank0 gpioD1
+
+ 直接用scp，比sz命令好，不单是快慢的原因。有些地方每scp
+
+调亮度，调高一些
+tf卡打开
+0 
+ 251 //whp###
+ 252         set_r = set_g = set_b = 0x200;
+ 253 
+ 254         printk("Pad1000_WriteCurrent0:%d,%d,%d\n",set_r,set_g,set_b);
+ 255         //if(bak_r==set_r && bak_g==set_g && bak_b==set_b) return;
+ 256         //printk("Pad1000_WriteCurrent1:%d,%d,%d\n",set_r,set_g,set_b);
+ 257         bak_r=set_r;
+ 258         bak_g=set_g;
+ 259         bak_b=set_b;
+ 260         #if 1
+ 261         //////R 
+ 262         IPC_Write_PAD1000_Reg(0x03);
+ 263         IPC_Write_PAD1000_Val((set_r&0xff00)>>8);
+ 264         IPC_Write_PAD1000_Reg(0x04);
+ 265         IPC_Write_PAD1000_Val(set_r&0x00ff);
+ 266         //mdelay(50);
+ 267         //////G
+ 268         IPC_Write_PAD1000_Reg(0x05);
+ 269         IPC_Write_PAD1000_Val((set_g&0xff00)>>8);
+ 270         IPC_Write_PAD1000_Reg(0x06);
+ 271         IPC_Write_PAD1000_Val(set_g&0x00ff);
+ 272         //mdelay(50);
+ 273         //////B
+ 274         IPC_Write_PAD1000_Reg(0x07);
+ 275         IPC_Write_PAD1000_Val((set_b&0xff00)>>8);
+ 276         IPC_Write_PAD1000_Reg(0x08);
+ 277         IPC_Write_PAD1000_Val(set_b&0x00ff);
+ 278         //mdelay(50);
+ 279         #else
+ 280         write_2607(R_DRIVE_CURRENT,set_r);
+ 281         write_2607(R_DRIVE_CURRENT,set_g);
+ 282         write_2607(R_DRIVE_CURRENT,set_b);
+ 283         #endif
+ 284 }
+ 285 
+ 286 void Pad1000_WriteCurrent(unsigned short c_r,unsigned short c_g,unsigned short c_b,int f)
+"drv_dpp2607_pad1000.c" [converted] 1604L, 41056C written
+在drv/prj/drv_dpp2607_pad1000.c下更改亮度
+
+
+主界面顶部型号要显示，连接时图标要变绿
+主界面是虎牙和电视直播，没有HDMI，
+在设置里面关于里，读取最新的设备型号
+在投影里，把皮套和微信遥控加进来。
+
+开不了机，优美可能是图片太大的缘故。
+按不同的键，有时候按不了。是每充电，电压值变了吗
+很有这个可能，所以，范围要扩大到200，而不是50
+
+直播、变绿、sp07在mysetting里面的名字
+似乎重新run一次，就不会发送0x14了，导致时间看不到，盐正果了。确实如此
+mysettings里面放的是sp07-xxxx的完整型号名，这样可以方便用户查看。
+
+文件名上把md5值写上去，找个md5工具。
+
+op98，默认转圈的，aua黑色的。
+开机动画，不用删，用
+杨虎的需要电池曲线，还有分辨率修正
+还有遥控的
+做2个程序，开机动画不同的
+遥控的话可以通过小程序来测，毕竟它也可以测的
+还有设置，这和欧瑞买是不同的
+
+prj_vkey
+prj_blestatus
+仿照98，先做个prj_vkey，再做prj_blestatus
+这些是节点，仿照着做一些节点
+先确定自己用得是哪个drv_pad***，再仿照别的drv_pad修改
+rk3128_box:/sys/bus/i2c/devices/0-001b $ ls
+driver   name  prj_angle      prj_name prj_rotate prj_vkey    subsystem 
+modalias power prj_brightness prj_pwm  prj_source prj_volinit uevent 
+果然是创建了prj_vkey节点
+除了vkey，还有hwc需要设置，才能梯形调控
+
+自己记忆閜，sp07r用几v几A的电源，op98用甚么样的，都记一记
+sp07r，这是12V 4000ma的
+不，sp07r，是12v 3A的才对
+
+M358_OP106S_V20/images/marshmallow/bennet
+这个文件夹下有几个bin是重要的，108下面的
+
+问题在于，杨虎的哪个是864*480的，如果设置，1280，相当于把画布放大，显示的图像就相对笑了。
+欧瑞买哪个是1280的，改成864，相当于画布变小，显示的图像就相对大了
+
+颜色的座子导致了ubeamer变黄，
+
+略微明白了单片机的用处，在android里有个单片机，可以定制一些和别的机器不一样的功能。而且，它不用开机什么的，可以自己改名字什么的
+
+0-001b，1b就是i2c的地址
+rk3128_box:/sys/bus/i2c/devices/0-001b
+./drivers/prj/drv_dpp3435_pad2005.c
+prj_vkey prj_ble都在这个文件下面改
+0-001b下面，是硬件实现的，而sys/device/prj这些，是软件实现的把。这两个可以做个对比
+这是rk和mstar的区别，rk有硬件，mstar是模拟的
+
+我试过了，. build/envsetup.sh是针对~目录的，所以在一个文件夹下改了，是不需要再build/envsetup.sh的
+
+未必不行，只要我比较两个以上的，如vkey和另一个prj_***，就可以归纳出来的
+在dpp3435_pad里面，直接/搜索，就可以找到4出修改。不管是prj_pwm，还是prj_vkey
+
+获取设备型号是在电池里面的，因为电池也是时时刻刻度的，所以，获取设备型号也就放一起了
+
+是因为不止要放到0-001b里，单片机里面也要存放吗
+
+setproperty 设置亮度是在kernel里面的，在设置里面，监听到boot启动，就setpro，还是getPro
+或者在launcher里面设置
+
+
+欧瑞麦那个，要具体预装哪几个应用？？
+
+有没有可能连不上是单纯地因为netflilx的版权限制？
+吊装后冲开机就没了，这和bootloader有关吗？
+
+预装应用  Youtube   google市场  Netflix   E-Share  然后加个你们常用的浏览器就好
+浏览器用google  加个wps
+
+去掉中文的apk 最上面一次是youtube netflix google市场
+装google市场的话，还得装很多google相关的东西吧，98的需要google商店，也就需要几个google相关的东西
+
+98上的netflix看看能不能用
+
+scp ，先压缩mstar的那个bin，再scp拷贝，直接拷贝，今天都拷不玩的。
+切换到同一个用户下，就可以用history查找命令了。
+reboot后，一直按enter，就可以进uboot模式，然后升级。reset后可以推出，然后在不停enter就可以进入uboot
+在通过cu升级，cu 就是custom 可以通过custom?来查
+
+. build/envsetup.sh zjsc_android_path.sh 这第二个sh还需要source吧，印象中
+还有lunch这几个命令是需要先调的
+1951  cd M358_OP102S/SDK1102/
+1952  . build/envsetup.sh 
+1953  lunch //这个会选择是否全省，一般不全省。
+1954  . zjsc/zjsc_android_path.sh 
+1955  releaseimage.sh //打包，还没有合并 打包之前，还需要删除out/target/product/bennet 下的system*文件吧
+1956  . zjsc/cp.sh //打包后需要cp
+1957  make_usb_upgrade.sh //然后是可以升级的，记得需要先删除system的
+1958  cd work/R3128_OP99/
+1959  cd SDK171205/
+1960  . build/envsetup.sh 
+1961  lunch
+1962  ./mkimage.sh ota
+1963  cd kernel/
+1964  vi arch/arm/boot/dts/zjsc_op99.dts 
+1965  make zjsc_op99.img
+1966  cd ..
+1967  ./mkimage.sh ota
+1968  make otapackage
+
+mboot.bin不同的芯片是不一样的，102和106是不同的
+M358_OP102S/user_op102$ allapp等apk在这个下面，不再sdk里面
+
+mstar的没法用rockchip的那种差分包升级，
+
+如果删除了system.**，就需要make -j4重新生成
+M358_OP102S\images\marshmallow\bennet
+这个是mstar***.bin
+
+涂工的用youtube netflix用就的就行，不用新的，eshare不用激活码的。这几个要测一下
+加个谷歌浏览器给他，
+
+
+this is compile supernova
+现在102的，选择2的时候会变成1，选择1的时候会变成2
+还有，102可能还要设置build.prop
+
+. zjsc/zjsc_sn_path.sh
+之后. smc_build_358AXG_DTMB_Supernova.sh 
+supernova起作用，需要勾选tv相关的4项，主要是tvconfig
+supernova get use,need select about 4 item,main is tvconfig
+
+SDK1102/vendor/mstar/supernova 
+zero is cd vendor/mstar/supernova/projects/ , first find ./ -name boot0.img ,second replace this two png
+third compile supernova ,this moment need to enter vendor/mstar/supernova/projects/
+first make clean,after make,in boot below .
+you need kill git Pid ,this step is before make.
+make clean at which dir?
+
+make clean is used at compile Mboot ,and make clean after,you need kill git,after make
+this is compile mboot step. is different with compile supernova
+
+./smc_build_358AXG_DTMB_Supernova.sh
+this operation,trim the space in . / middle,is right.
+
+Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
+package inside of
+this is at line 1943
+
+
+linux command:jgrep 'Settings.Secure' | grep LOCATION
+
+            Settings.Secure.putInt(getContentResolver(), Settings.Secure.LOCATION_MODE,
+                    Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);

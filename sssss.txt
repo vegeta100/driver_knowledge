@@ -1,0 +1,488 @@
+1521  . zjsc/cp.sh 
+ 1522  make_usb_upgrade.sh 
+ 1523  lunch
+ 1524  . build/envsetup.sh 
+ 1525  . zjsc/zjsc_android_path.sh 
+ 1526  make_usb_upgrade.sh 
+ 1527  cd vendor/mstar/mboot/
+ 1528  find -name zjsc*
+ 1529  vi MBoot/MstarCore/src/drivers/panel/drvopt/zjsc.c
+ 1530  find -name Panel*
+ 1531  find -name panel*
+ 1532  find -name panel.c
+ 1533  vi ./MBoot/MstarCore/src/drivers/panel/panel.c
+ 1534  cgrep OPT_CMD_SET_LEVEL
+ 1535  cgrep zjsc3435_set_level
+ 1536  vi ./MBoot/MstarCore/src/drivers/panel/drvopt/opt_zjsc3435.c
+ 1537  cd MBoot/
+ 1538  make -j4
+ 1539  make
+ 1540  make clean
+ 1541  ls -al
+ 1542  cd sboot/
+ 1543  make clean
+ 1544  make
+ 1545  cd ../../..
+ 1546  cd ../..
+ 1547  . zjsc/cp.sh 
+ 1548  releaseimage.sh 
+ 1549  . zjsc/cp.sh 
+ 1550  make_usb_upgrade.sh 
+ 1551  cd vendor/mstar/supernova/
+ 1552  find -name Panel*
+ 1553  find -name Optical*
+ 1554  cd ./projects/board/INI/panel/
+ 1555  vi Optical_1280_720.ini 
+ 1556  find -name *LVDS*
+ 1557  ls -al
+ 1558  vi SXGA_AU17_EN05.ini
+ 1559  vi Optical_1280_720.ini 
+ 1560  cd ../..
+ 1561  cd ..
+ 1562  . zjsc/zjsc_sn_path.sh 
+ 1563  ./smc_build_358AXG_DTMB_Supernova.sh 
+ 1564  cd ../..
+ 1565  ./smc_build_358AXG_DTMB_Supernova.sh 
+ 1566  cd ../..
+ 1567  . zjsc/zjsc_android_path.sh 
+ 1568  . zjsc/cp.sh 
+ 1569  releaseimage.sh 
+ 1570  . zjsc/cp.sh 
+ 1571  make_usb_upgrade.sh 
+ 1572  . zjsc/cp.sh 
+ 1573  releaseimage.sh 
+ 1574  . zjsc/cp.sh 
+ 1575  make_usb_upgrade.sh 
+ 1576  . zjsc/cp.sh 
+ 1577  releaseimage.sh 
+ 1578  . zjsc/cp.sh 
+ 1579  make_usb_upgrade.sh 
+ 1580  y
+ 1581  cd ../..
+ 1582  cd M358_OP106S_V20/SDK1102/
+ 1583  . build/envsetup.sh 
+ 1584  lunch
+ 1585  . zjsc/zjsc_android_path.sh 
+ 1586  . zjsc/cp.sh 
+ 1587  make_usb_upgrade.sh 
+ 1588  cd work
+ 1589  cd M358_SP07S_V40/SDK1102/
+ 1590  . build/envsetup.sh 
+ 1591  cd vendor/mstar/supernova/projects/
+ 1592  find -name Opti*
+ 1593  vi ./board/INI/panel/Optical_1280_720.ini
+ 1594  . zjsc/zjsc_sn_path.sh 
+ 1595  ./smc_build_358AXG_DTMB_Supernova.sh 
+ 1596  vi ./board/INI/panel/Optical_1280_720.ini
+ 1597  ./smc_build_358AXG_DTMB_Supernova.sh 
+ 1598  vi ./board/INI/panel/Optical_1280_720.ini
+ 1599  cd /home/lisc/
+ 1600  cd work
+ 1601  ls -al
+ 1602  find -name MSD6A358*
+ 1603  cd MSD6A358_AN6.0_1102/
+ 1604  ls -al
+ 1605  . build/envsetup.sh 
+ 1606  cd vendor/mstar/supernova/
+ 1607  cgrep OP81
+ 1608  find -name Optical*
+ 1609  cd projects/board/INI/panel/
+ 1610  ls -l
+ 1611  vi Optical_1280_720.ini 
+ 1612  cd /home/lisc/
+ 1613  ls
+ 1614  cd work
+ 1615  ls
+ 1616  cd MSD6A358_AN6.0_1102/
+ 1617  ls -al
+ 1618  cd vendor/mstar/kernel/linaro/
+ 1619  . ../../../../build/envsetup.sh 
+ 1620  cgrep OP81
+ 1621  cd ../..
+ 1622  cd ..
+ 1623  ls -al
+ 1624  cd work
+ 1625  cd M358_OP102S/SDK1102/
+ 1626  . build/envsetup.sh 
+ 1627  git status
+ 1628  cd vendor/mstar/kernel/linaro/
+ 1629  cd ../..
+ 1630  cd M358_SP07S_V40/SDK1102/
+ 1631  . build/envsetup.sh 
+ 1632  lunch
+ 1633  . zjsc/zjsc_android_path.sh 
+ 1634  cd vendor/mstar/supernova/projects/
+ 1635  find -name Optical*
+ 1636  vi ./board/INI/panel/Optical_1280_720.ini
+ 1637  ./smc_build_358AXG_DTMB_Supernova.sh 
+ 1638  . zjsc/zjsc_sn_path.sh 
+ 1639  ./smc_build_358AXG_DTMB_Supernova.sh 
+ 1640  cd ../..
+ 1641  git status
+ 1642  git log
+ 1643  git show 9200ccd6166a99c3b0d22da171213a16e4445ce9
+ 1644  cd bootable/recovery/
+ 1645  ls -al
+ 1646  cd ../../vendor/mstar/supernova/projects/board/INI/panel/
+ 1647  agrep m_ucSwap
+ 1648  cd work
+ 1649  cd R3128_OP99/SDK171205/
+ 1650  rm -R out/target/product/rk3128_box/system/app/Camera2/
+ 1651  cd work
+ 1652  cd M358_OP102S/SDK1102/
+ 1653  . build/envsetup.sh 
+ 1654  lunch
+ 1655  . zjsc/zjsc_android_path.sh 
+ 1656  releaseimage.sh 
+ 1657  . zjsc/cp.sh 
+ 1658  make_usb_upgrade.sh 
+ 1659  cd work/R3128_OP99/
+ 1660  cd SDK171205/
+ 1661  . build/envsetup.sh 
+ 1662  lunch
+ 1663  ./mkimage.sh ota
+ 1664  cd kernel/
+ 1665  vi arch/arm/boot/dts/zjsc_op99.dts 
+ 1666  make zjsc_op99.img
+ 1667  cd ..
+ 1668  ./mkimage.sh ota
+ 1669  make otapackage
+ 1670  cd work/M358_OP103S/SDK1102/
+ 1671  . build/envsetup.sh 
+ 1672  cd device/mstar/
+ 1673  kgrep google
+ 1674  kgrep op103-google
+ 1675  vi ./common/apps/MLatinIME/java/Android.mk
+ 1676  cd ../..
+ 1677  cd build/
+ 1678  kgrep op103-google
+ 1679  kgrep google
+ 1680  cd work/M358_OP103S/SDK1102/
+ 1681  . build/envsetup.sh 
+ 1682  cd device/mstar/
+ 1683  agrep op103
+ 1684  vi ./bennet/device-common.mk
+ 1685  vi ./bennet/device.mk
+ 1686  vi ./bennet/device-common.mk
+ 1687  agrep op103
+ 1688  vi ./bennet/device.mk
+ 1689  agrep op103
+ 1690  vi ./common/apps/MLatinIME/java/Android.mk
+ 1691  agrep op103
+ 1692  vi ./common/apps/MPinyinIME/Android.mk
+ 1693  agrep op103
+ 1694  vi ./common/apps/MSetupWizard/Android.mk
+ 1695  cd work
+ 1696  cd M358_OP102S/
+ 1697  df
+ 1698  ls
+ 1699  mv SDK1102/out/ .
+ 1700  tar cvzf OP102S_191102.tar.gz SDK1102/
+ 1701  passwd 
+ 1702  cd work
+ 1703  cd M358_OP106S_V20/
+ 1704  cd SDK1102/
+ 1705  . build/envsetup.sh 
+ 1706  lunch
+ 1707  . zjsc/zjsc_android_path.sh 
+ 1708  . build/envsetup.sh 
+ 1709  . zjsc/cp.sh 
+ 1710  make -j4
+ 1711  . zjsc/cp.sh 
+ 1712  releaseimage.sh 
+ 1713  . zjsc/cp.sh 
+ 1714  make_usb_upgrade.sh 
+ 1715  rm out/target/product/bennet/kernel 
+ 1716  rm out/target/product/bennet/boot.img 
+ 1717  . zjsc/cp.sh 
+ 1718  rm out/target/product/bennet/kernel 
+ 1719  . zjsc/cp.sh 
+ 1720  make -j4
+ 1721  . zjsc/cp.sh 
+ 1722  releaseimage.sh 
+ 1723  . zjsc/cp.sh 
+ 1724  make_usb_upgrade.sh 
+ 1725  rm out/target/product/bennet/boot.img 
+ 1726  rm out/target/product/bennet/kernel 
+ 1727  . zjsc/cp.sh 
+ 1728  make -j4
+ 1729  rm out/target/product/bennet/boot.img 
+ 1730  make -j4
+ 1731  rm out/target/product/bennet/boot.img 
+ 1732  rm out/target/product/bennet/kernel 
+ 1733  . zjsc/cp.sh 
+ 1734  make -j4
+ 1735  . zjsc/cp.sh 
+ 1736  releaseimage.sh 
+ 1737  . zjsc/cp.sh 
+ 1738  make_usb_upgrade.sh 
+ 1739  rm out/target/product/bennet/boot.img 
+ 1740  rm out/target/product/bennet/kernel 
+ 1741  . zjsc/cp.sh 
+ 1742  make -j4
+ 1743  . zjsc/cp.sh 
+ 1744  releaseimage.sh 
+ 1745  . zjsc/cp.sh 
+ 1746  make_usb_upgrade.sh 
+ 1747  rm out/target/product/bennet/kernel 
+ 1748  rm out/target/product/bennet/boot.img 
+ 1749  . zjsc/cp.sh 
+ 1750  make -j4
+ 1751  . zjsc/cp.sh 
+ 1752  releaseimage.sh 
+ 1753  . zjsc/cp.sh 
+ 1754  make_usb_upgrade.sh 
+ 1755  rm out/target/product/bennet/boot.img 
+ 1756  rm out/target/product/bennet/kernel 
+ 1757  . zjsc/cp.sh 
+ 1758  releaseimage.sh 
+ 1759  . zjsc/cp.sh 
+ 1760  make -j4
+ 1761  . zjsc/cp.sh 
+ 1762  releaseimage.sh 
+ 1763  . zjsc/cp.sh 
+ 1764  make_usb_upgrade.sh 
+ 1765  rm out/target/product/bennet/boot.img 
+ 1766  rm out/target/product/bennet/kernel 
+ 1767  . zjsc/cp.sh 
+ 1768  make -j4
+ 1769  . zjsc/cp.sh 
+ 1770  releaseimage.sh 
+ 1771  . zjsc/cp.sh 
+ 1772  make_usb_upgrade.sh 
+ 1773  cd work
+ 1774  cd M358_OP102S/
+ 1775  ls -al
+ 1776  rm OP102S_191102.tar.gz 
+ 1777  cd SDK1102/
+ 1778  mv ../out/ .
+ 1779  cd device/
+ 1780  git status
+ 1781  vi vi ./bennet/device-common.mk
+ 1782  vi ./bennet/device-common.mk
+ 1783  cd mstar/
+ 1784  vi ./bennet/device-common.mk
+ 1785  vi vi ./bennet/device.mk
+ 1786  vi ./bennet/device.mk
+ 1787  vi ./common/apps/MLatinIME/java/Android.mk
+ 1788  vi ./common/apps/MSetupWizard/Android.mk
+ 1789  cd ../..
+ 1790  ls
+ 1791  . build/envsetup.sh 
+ 1792  . zjsc/zjsc_android_path.sh 
+ 1793  lunch
+ 1794  rm out/target/product/bennet/system.img*
+ 1795  make -j4
+ 1796  . zjsc/cp.sh 
+ 1797  releaseimage.sh 
+ 1798  . zjsc/cp.sh 
+ 1799  make_usb_upgrade.sh 
+ 1800  cd ..
+ 1801  cd M358_OP106S_V20/
+ 1802  ls
+ 1803  cd SDK1102/
+ 1804  ls
+ 1805  . build/envsetup.sh 
+ 1806  lunch
+ 1807  cd vendor/mstar/kernel/linaro/
+ 1808  vi drivers/prj/prj_dpp3435.c 
+ 1809  cd ../..
+ 1810  cd mboot/
+ 1811  cd MBoot/
+ 1812  cgrep ongine
+ 1813  cgrep Ongine
+ 1814  cgrep OPD07
+ 1815  find -name zjsc*
+ 1816  vi ./MstarCore/src/drivers/panel/drvopt/zjsc.c
+ 1817  find -name *3435*
+ 1818  vi ./MstarCore/src/drivers/panel/drvopt/opt_zjsc3435.c
+ 1819  cd ../../
+ 1820  cd ../..
+ 1821  cd ../../M358_OP106S
+ 1822  cd SDK1102/
+ 1823  cd vendor/mstar/kernel/linaro/
+ 1824  cgrep Ongine
+ 1825  cgrep ngine
+ 1826  cgrep ongine
+ 1827  cd
+ 1828  cd work
+ 1829  cd M358_OP106S
+ 1830  cd SDK1102/
+ 1831  cd vendor/mstar/mboot/MBoot/
+ 1832  cgrep ngine
+ 1833  cgrep ongine
+ 1834  cgrep Ongine
+ 1835  cd ..
+ 1836  cgrep Ongine
+ 1837  cgrep ongine
+ 1838  find -name *3435*
+ 1839  vi ./MBoot/MstarCore/src/drivers/panel/drvopt/opt_zjsc3435.c
+ 1840  cd ../..
+ 1841  vi mstar/kernel/linaro/drivers/prj/prj_dpp3435.c 
+ 1842  cd mstar/mboot/
+ 1843  find -name *3435*
+ 1844  vi ./MBoot/MstarCore/src/drivers/panel/drvopt/opt_zjsc3435.c
+ 1845  cd ../..
+ 1846  cd ..
+ 1847  ls -al
+ 1848  cd M358_OP102S/
+ 1849  cd SDK1102/vendor/mstar/mboot/MBoot/
+ 1850  vi  ./MBoot/MstarCore/src/drivers/panel/drvopt/opt_zjsc3435.c
+ 1851  vi  ./MstarCore/src/drivers/panel/drvopt/opt_zjsc3435.c
+ 1852  cd ../..
+ 1853  cd ../../../../M358_OP103S/SDK1102/vendor/mstar/mboot/
+ 1854  vi ./MBoot/MstarCore/src/drivers/panel/drvopt/opt_zjsc3435.c
+ 1855  cd ..
+ 1856  vi kernel/linaro/drivers/prj/prj_dpp3435.c 
+ 1857  cd ../..
+ 1858  cd ..
+ 1859  cd ../M358_OP106S_V20/SDK1102/
+ 1860  cd vendor/mstar/mboot/
+ 1861  vi ./MBoot/MstarCore/src/drivers/panel/drvopt/opt_zjsc3435.c
+ 1862  cd ..
+ 1863  cd kernel/linaro/
+ 1864  vi drivers/prj/prj_dev.c 
+ 1865  vi drivers/prj/chip_pan1020.c 
+ 1866  cgrep prj_cfg
+ 1867  vi ./drivers/prj/chip_pan1020.c
+ 1868  cgrep get_prjtype
+ 1869  vi ./drivers/prj/prj_dpp3435.c
+ 1870  . zjsc/zjsc_kernel_path.sh 
+ 1871  make -j4
+ 1872  cd ../..
+ 1873  rm out/target/product/bennet/kernel 
+ 1874  rm out/target/product/bennet/boot.img 
+ 1875  cd vendor/mstar/kernel/linaro/
+ 1876  vi drivers/prj/prj_dpp3435.c 
+ 1877  vi drivers/prj/prj_dev.c 
+ 1878  vi drivers/prj/prj_dpp3435.c 
+ 1879  cgrep keystone_set_offset
+ 1880  vi ./drivers/prj/func_keystone.c
+ 1881  . zjsc/zjsc_kernel_path.sh 
+ 1882  make
+ 1883  vi drivers/prj/func_keystone.c
+ 1884  make -j4
+ 1885  cgrep flip_open
+ 1886  vi drivers/prj/func_keystone.c
+ 1887  make -j4
+ 1888  vi drivers/prj/func_keystone.c
+ 1889  make -j4
+ 1890  vi drivers/prj/func_keystone.c
+ 1891  make -j4
+ 1892  vi drivers/prj/func_keystone.c
+ 1893  make -j4
+ 1894  vi drivers/prj/func_keystone.c
+ 1895  make -j4
+ 1896  vi drivers/prj/func_keystone.c
+ 1897  make -j4
+ 1898  vi drivers/prj/func_keystone.c
+ 1899  make -j4
+ 1900  vi drivers/prj/func_keystone.c
+ 1901  make -j4
+ 1902  vi drivers/prj/func_keystone.c
+ 1903  make -j4
+ 1904  vi drivers/prj/func_keystone.c
+ 1905  vi drivers/prj/prj_dpp3435.c 
+ 1906  vi drivers/prj/prj_dev.c 
+ 1907  make -j4
+ 1908  vi drivers/prj/
+ 1909  vi drivers/prj/func_keystone.c
+ 1910  make -j4
+ 1911  vi drivers/prj/func_keystone.c 
+ 1912  vi drivers/prj/func_keystone.c
+ 1913  sync
+ 1914  vi drivers/prj/prj_dev.c 
+ 1915  jgrep prj_keystone_auto
+ 1916  kgrep prj_keystone_auto
+ 1917  cgrep prj_keystone_auto
+ 1918  vi drivers/prj/prj_dev.c 
+ 1919  make -j4
+ 1920  vi drivers/prj/func_keystone.c
+ 1921  make -j4
+ 1922  releaseimage.sh
+ 1923  ls
+ 1924  releaseimage.sh 
+ 1925  find ./ -name releaseimage.sh
+ 1926  . development/scripts/releaseimage.sh 
+ 1927  releaseimage.sh
+ 1928  ls
+ 1929  releaseimage.sh 
+ 1930  find ./ -name releaseimage.sh
+ 1931  . development/scripts/releaseimage.sh 
+ 1932  . build/envsetup.sh 
+ 1933  . zjsc/zjsc_android_path.sh 
+ 1934  lunch
+ 1935  . zjsc/cp.sh 
+ 1936  releaseimage.sh 
+ 1937  . zjsc/cp.sh 
+ 1938  make_usb_upgrade.sh 
+ 1939  smbpasswd
+ 1940  make_usb_upgrade.sh 
+ 1941  make_usb_upgrade.sh 
+ 1942  . zjsc/cp.sh 
+ 1943  releaseimage.sh 
+ 1944  . zjsc/cp.sh 
+ 1945  make_usb_upgrade.sh 
+ 1946  history
+ 1947  cd out/target/product/bennet/
+ 1948  ls
+ 1949  cd system/app
+ 1950  ls
+ 1951  cd ..
+ 1952  cd syst__em/
+ 1953  cd app/
+ 1954  ls
+ 1955  cd ../..
+ 1956  cd system/ls
+ 1957  cd system
+ 1958  ls
+ 1959  cd app/
+ 1960  cp ../../syst__em/app/zAllApp/
+ 1961  cp ../../syst__em/app/zAllApp/ ./
+ 1962  cp ../../syst__em/app/zAllApp/ ./ -r
+ 1963  ls
+ 1964  cp /home/whp/work/M358_OP102S/user_op102/app/zSettings/ ./ -r
+ 1965  ls 
+ 1966  cp /home/whp/work/M358_OP102S/user_op102/app/zxiaobai/ ./ -r
+ 1967  ls -l
+ 1968  ls
+ 1969  cd ../..
+ 1970  make -j4
+ 1971  . zjsc/cp.sh 
+ 1972  releaseimage.sh 
+ 1973  . zjsc/cp.sh 
+ 1974  make_usb_upgrade.sh 
+ 1975  cd whp/work
+ 1976  ls
+ 1977  cd M358_OP102S/
+ 1978  ls
+ 1979  cd user_op102/
+ 1980  ls
+ 1981  cd app
+ 1982  ls
+ 1983  pwd
+ 1984  ls
+ 1985  cd ../..
+ 1986  cd SDK1102/
+ 1987  cd out/target/product/bennet/
+ 1988  ls
+ 1989  cd system
+ 1990  grep -nr package com.example.launcher_p8_102;
+ 1991  grep -nr com.example.launcher_p8_102 ./
+ 1992  grep -nr com.example.launcher_p8 ./
+ 1993  cd ../..
+ 1994  cd ..
+ 1995  make -j4
+ 1996  cd out/target/product/bennet/
+ 1997  cd system
+ 1998  find ./ -name *aunch*
+ 1999  cd ../../../../..
+ 2000  . build/envsetup.sh 
+ 2001  . zjsc/zjsc_android_path.sh 
+ 2002  lunch
+ 2003  make -j4
+ 2004  . zjsc/cp.sh 
+ 2005  releaseimage.sh 
+ 2006  . zjsc/cp.sh 
+ 2007  make_usb_upgrade.sh 
+ 2008  history

@@ -1,0 +1,1136 @@
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ vi drivers/prj/
+built-in.mod.c              chips_mini51_2.c            drv_dpp2607_kernel.c        drv_dpp3438_pad3000.c       leddrv_m08888_2.c           prjdef_op61_key.inc
+.built-in.o.cmd             .chips_mini51_2.o.cmd       .drv_dpp2607_kernel.c.swp   .drv_dpp3438_pad3000.o.cmd  .leddrv_m08888_2.o.cmd      prj.h
+chip_pan1020.c              chips_mini51.c              .drv_dpp2607_kernel.o.cmd   func_keystone.c             leddrv_m08888.c             .prj.o.cmd
+.chip_pan1020.o.cmd         .chips_mini51.o.cmd         drv_dpp2607_pad1000.c       .func_keystone.o.cmd        .leddrv_m08888.o.cmd        prj_op83.c
+chip_pan1020_old.c          chips_mst.c                 .drv_dpp2607_pad1000.o.cmd  func_moto.c                 Makefile                    .prj_op83.o.cmd
+chips_bq25895.c             .chips_mst.o.cmd            drv_dpp3435_pad2005.c       .func_moto.o.cmd            modules.builtin             sub.c
+chips_bq25895_chen.c        drv_dpp2607_ext.c           .drv_dpp3435_pad2005.c.swp  func_tp_cp01.c              prj.c                       .sub.o.cmd
+.chips_bq25895.o.cmd        .drv_dpp2607_ext.o.cmd      .drv_dpp3435_pad2005.o.cmd  .func_tp_cp01.o.cmd         prj_def.h                   tags
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ vi drivers/prj/drv_dpp343
+drv_dpp3435_pad2005.c  drv_dpp3438_pad3000.c  
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ vi drivers/prj/drv_dpp2607_pad1000.c 
+
+   1 #include <linux/module.h>
+   2 #include <linux/init.h>
+   3 #include <linux/i2c.h>
+   4 #include <linux/slab.h>
+   5 #include <linux/delay.h>
+   6 #include <linux/gpio.h>
+   7 #include <linux/of_gpio.h>
+   8 #include <dt-bindings/pinctrl/rockchip-rk312x.h>
+   9 #include <linux/irq.h>
+  10 #include <linux/interrupt.h>
+  11 
+  12 #include "prj.h"
+  13 
+  14 #if (RPJ_DRV==PRJDRV_DPP2607_PAD1000)
+  15 
+  16 #define INPUT_RESOLUTION        0x0c
+  17 #define WVGA_800_LANDSCAPE      0xd//13
+  18 #define WVGA_854_LANDSCAPE      0x13
+  19 #define WVGA_864_LANDSCAPE      0x15//21
+  20 #define WVGA_720x480_LANDSCAPE          9
+  21 #define WVGA_640_LANDSCAPE      0x7
+  22 #define CURTAIN_CONTROL         0xa6
+  23 #define SEQ_CONTROL                     0x82
+  24 #define LONG_FLIP                       0x0f
+  25 #define SHORT_FLIP                      0x10
+  26 #define ACTGEN_CONTROL      0xAF
+  27 
+  28 
+  29 #define R_DRIVE_CURRENT           0x12
+  30 #define G_DRIVE_CURRENT           0x13
+  31 #define B_DRIVE_CURRENT           0x14
+  32 
+  33 static struct i2c_client *dpp2607_client=NULL;
+  34 
+  35 //struct work_struct timer_work;
+  36 struct work_struct work_setcurrent;
+  37 int i2c_master_reg8_send(const struct i2c_client *client, const char reg, const char *buf, int count, int scl_rate);
+  38 int i2c_master_reg8_recv(const struct i2c_client *client, const char reg, char *buf, int count, int scl_rate);
+  39 
+  40 struct dpp2607_data {
+  41         struct i2c_client *client;
+  42         struct mutex update_lock;
+  43 };
+  44 
+  45 int cur_pwm = 0;
+  46 
+  47 #define I2C_SPEED       10 * 1000
+  48 
+  49 int gpio_dlp_pgood = INVALID_GPIO;
+  50 int gpio_pad_rst = INVALID_GPIO;
+  51 int gpio_pad_en = INVALID_GPIO;
+  52 int gpio_dlp_init = INVALID_GPIO;
+  53 int gpio_dlp_ledon = INVALID_GPIO;
+  54 int gpio_mstrst = INVALID_GPIO;
+/vkey
+ 813                 t /= 20;
+ 814 #ifdef PRJCHIPS_MST
+ 815                 if(t!=bak_vol)
+ 816                 {
+ 817                         bak_vol=t;
+                        v29_send(0xA0+t);
+                }    
+#endif     
+        }    
+     
+        return count;
+}
+     
+static DEVICE_ATTR(prj_volinit, S_IRUGO | S_IWUGO, prj_volinit_show, prj_volinit_store);        // 鏉冮檺涓66
+/////////////////////////////////////////angle
+static ssize_t prj_angle_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+        return sprintf(buf, "%d",cur_du);     
+}
+
+static ssize_t prj_angle_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+{     
+        return count;
+}
+     
+static DEVICE_ATTR(prj_angle, S_IRUGO | S_IWUGO, prj_angle_show, prj_angle_store);      // 鏉冮檺涓66
+/////////////////////////////////////////vkey
+static ssize_t prj_vkey_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+        return sprintf(buf, "vkey");     
+}
+
+static ssize_t prj_vkey_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+{     
+        if(count>=4 && buf[0]=='K')
+        {    
+                int c1 = buf[1]&0xF;
+                int c2 = buf[2]&0xF;
+                int c3 = buf[3]&0xF;
+                int k = c1*100+c2*10+c3;
+                prj_irkey(k);
+                //printk("vkey = %d\n",k);
+        }    
+        return count;
+}
+     
+static DEVICE_ATTR(prj_vkey, S_IRUGO | S_IWUGO, prj_vkey_show, prj_vkey_store); // 鏉冮檺涓66
+/////////////////////////////////////////brightness
+static ssize_t prj_brightness_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+        return sprintf(buf, "%d,%d,%d",cur_setr,cur_setg,cur_setb);     
+}
+
+void set_brightness_RGB(void)
+{
+        int r,g,b;
+     
+        //printk("whp2=============%d,%d,%d\n",cur_setr,cur_setg,cur_setb);
+       
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ vi drivers/prj/drv_dpp3435_pad2005.c 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E325: ATTENTION
+Found a swap file by the name "drivers/prj/.drv_dpp3435_pad2005.c.swp"
+          owned by: chqh   dated: Tue Oct 15 15:46:46 2019
+         file name: ~chqh/work/R3128_SP07R/SDK171205/kernel/drivers/prj/drv_dpp3435_pad2005.c
+          modified: no
+         user name: chqh   host name: wanghp
+        process ID: 5237
+While opening file "drivers/prj/drv_dpp3435_pad2005.c"
+             dated: Mon Oct 14 14:29:35 2019
+
+(1) Another program may be editing the same file.
+    If this is the case, be careful not to end up with two
+    different instances of the same file when making changes.
+    Quit, or continue with caution.
+
+(2) An edit session for this file crashed.
+    If this is the case, use ":recover" or "vim -r drivers/prj/drv_dpp3435_pad2005.c"
+    to recover the changes (see ":help recovery").
+    If you did this already, delete the swap file "drivers/prj/.drv_dpp3435_pad2005.c.swp"
+    to avoid this message.
+
+Swap file "drivers/prj/.drv_dpp3435_pad2005.c.swp" already exists!
+
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ vi drivers/prj/drv_dpp3435_pad2005.c 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+E325: ATTENTION
+Found a swap file by the name "drivers/prj/.drv_dpp3435_pad2005.c.swp"
+          owned by: chqh   dated: Tue Oct 15 15:46:46 2019
+         file name: ~chqh/work/R3128_SP07R/SDK171205/kernel/drivers/prj/drv_dpp3435_pad2005.c
+          modified: no
+         user name: chqh   host name: wanghp
+        process ID: 5237
+While opening file "drivers/prj/drv_dpp3435_pad2005.c"
+             dated: Mon Oct 14 14:29:35 2019
+
+(1) Another program may be editing the same file.
+    If this is the case, be careful not to end up with two
+    different instances of the same file when making changes.
+    Quit, or continue with caution.
+
+(2) An edit session for this file crashed.
+    If this is the case, use ":recover" or "vim -r drivers/prj/drv_dpp3435_pad2005.c"
+    to recover the changes (see ":help recovery").
+    If you did this already, delete the swap file "drivers/prj/.drv_dpp3435_pad2005.c.swp"
+    to avoid this message.
+
+Swap file "drivers/prj/.drv_dpp3435_pad2005.c.swp" already exists!
+
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ rm drivers/prj/.drv_dpp
+.drv_dpp2607_ext.o.cmd      .drv_dpp2607_kernel.o.cmd   .drv_dpp3435_pad2005.c.swp  .drv_dpp3438_pad3000.o.cmd  
+.drv_dpp2607_kernel.c.swp   .drv_dpp2607_pad1000.o.cmd  .drv_dpp3435_pad2005.o.cmd  
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ rm drivers/prj/.drv_dpp*.swp
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ vi drivers/prj/drv_dpp3435_pad2005.c 
+
+  1 
+  2 #include <linux/module.h>
+  3 #include <linux/init.h>
+  4 #include <linux/i2c.h>
+  5 #include <linux/slab.h>
+  6 #include <linux/delay.h>
+  7 #include <linux/gpio.h>
+  8 #include <linux/of_gpio.h>
+  9 #include <dt-bindings/pinctrl/rockchip-rk312x.h>                // lee: 20150413 add
+ 10 
+ 11 #include "prj.h"
+ 12 
+ 13 #if (RPJ_DRV==PRJDRV_DPP3435_PAD2005)
+ 14 
+ 15 static struct i2c_client *dpp3435_client;
+ 16 
+ 17 int i2c_master_reg8_send(const struct i2c_client *client, const char reg, const char *buf, int count, int scl_rate);
+ 18 int i2c_master_reg8_recv(const struct i2c_client *client, const char reg, char *buf, int count, int scl_rate);
+ 19 
+ 20 struct dpp3435_data {
+ 21         struct i2c_client *client;
+ 22         struct mutex update_lock;
+ 23 };
+ 24 
+ 25 int cur_pwm = 0;
+ 26 
+ 27 #define I2C_SPEED       10 * 1000
+ 28 #define CURTAIN_CONTROL         0xa6
+ 29 
+ 30 //whp int gpio_prj_on = INVALID_GPIO;
+ 31 
+ 32 /*static int i2c_set_regs(struct i2c_client *client, u8 reg, u8 const buf[], __u16 len)
+ 33 {
+ 34         int ret; 
+ 35         ret = i2c_master_reg8_send(client, reg, buf, (int)len, I2C_SPEED);
+ 36         return ret;
+ 37 }*/
+ 38 
+ 39 /*static void write_3435(unsigned char reg,unsigned int val)
+ 40 {
+ 41         unsigned char d[4];
+ 42         d[3] = val & 0xff;
+ 43         val >>= 8;
+ 44         d[2] = val & 0xff;
+ 45         val >>= 8;
+ 46         d[1] = val & 0xff;
+ 47         val >>= 8;
+ 48         d[0] = val & 0xff;
+ 49         i2c_set_regs(dpp3435_client,reg,d,4);
+ 50 }*/
+ 51 
+ 52 u8 read_3435(u8 reg)
+ 53 {
+ 54         u8 data1[1];
+ 55         u8 read[1];
+ 56 
+ 57         if(dpp3435_client==NULL) return 0;
+ 58 
+ 59         data1[0]=reg;
+ 60 
+ 61         if (i2c_master_send(dpp3435_client, data1, 1) != 1)  //姝ゅ鍙啓涓€浣嶅瘎瀛樺櫒鍦板潃锛屾柟渚夸笅涓€鍙ョ殑璇诲彇銆[54;12H
+ 62                 dev_err(&dpp3435_client->dev, "i2c1 write failed\n");
+ 63 
+ 64         i2c_master_recv(dpp3435_client, read, 1);
+ 65 
+ 66         return read[0];
+ 67 }
+ 68 
+ 69 /* static void DPP_set_curtaincolor(unsigned char color)
+ 70 {
+ 71     unsigned char write[2];
+ 72     int rtvalue;
+ 73    
+ 74     write[0] = 0x16;
+ 75     write[1] = 0;
+ 76     write[1] |= 0x01;
+ 77     write[1] |= (color<<1);
+ 78     rtvalue = i2c_master_send(dpp3435_client, write, 2);
+ 79     printk("2-%d\n",rtvalue);
+ 80 }*/
+ 81 
+/angle
+361 }
+362 static DEVICE_ATTR(prj_pwm, S_IRUGO | S_IWUGO, prj_pwm_show, prj_pwm_store);    // 鏉冮檺涓666
+363 /////////////////////////////////////////vol init
+364 static ssize_t prj_volinit_show(struct device *dev, struct device_attribute *attr, char *buf)
+365 {
+366         return sprintf(buf, "0\n");
+367 }
+368 
+369 static ssize_t prj_volinit_store(struct device *dev,
+370                 struct device_attribute *attr, const char *buf, size_t count)
+371 {
+372         if(count>=1 && buf[0]=='S')
+373         {
+374         }
+375         else if(count>=3 && buf[0]=='V' && buf[1]>='0' && buf[1]<='9' && buf[2]>='0' && buf[2]<='9')
+376         {
+377                 int t = (buf[1]&0xF)*10+(buf[2]&0xF);
+378                 if(t > 20) t=20;
+379                 t *= 15;
+380                 t /= 20;
+381         }
+382 
+383         return count;
+384 }
+385 
+386 static DEVICE_ATTR(prj_volinit, S_IRUGO | S_IWUGO, prj_volinit_show, prj_volinit_store);        // 鏉冮檺涓666
+387 /////////////////////////////////////////angle
+388 static ssize_t prj_angle_show(struct device *dev, struct device_attribute *attr, char *buf)
+389 {
+390         return sprintf(buf, "%d",cur_du);
+391 }
+392 
+393 static ssize_t prj_angle_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+394 {
+395         return count;
+396 }
+397 
+398 static DEVICE_ATTR(prj_angle, S_IRUGO | S_IWUGO, prj_angle_show, prj_angle_store);      // 鏉冮檺涓666
+399 
+400 /////////////////////////////////////////vkey
+401 static ssize_t prj_vkey_show(struct device *dev, struct device_attribute *attr, char *buf)
+402 {
+403         return sprintf(buf, "vkey");     
+404 }
+405 
+406 static ssize_t prj_vkey_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+407 {       
+408         if(count>=4 && buf[0]=='K')
+409         {
+410                 int c1 = buf[1]&0xF;
+411                 int c2 = buf[2]&0xF;
+412                 int c3 = buf[3]&0xF;
+413                 int k = c1*100+c2*10+c3;
+414                 prj_irkey(k);
+415                 //printk("vkey = %d\n",k);
+416         }
+417         return count;
+418 }
+419 
+420 static DEVICE_ATTR(prj_vkey, S_IRUGO | S_IWUGO, prj_vkey_show, prj_vkey_store); // 鏉冮檺盲6
+421 
+/prj_angle
+502                 gpio_set_value(tf_set, 1);
+503         }
+504         printk("tf_set %d\n",tf_set_bak);
+505 }
+506 static ssize_t prj_tfset_show(struct device *dev, struct device_attribute *attr, char *buf)
+507 {
+508         return sprintf(buf, "%d",tf_set_bak);
+509 }
+510 
+511 static ssize_t prj_tfset_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+512 {
+513         if(count>=1)
+514         {
+515                 tf_insert(buf[0]!='0');
+516         }
+517         return count;
+518 }
+519 
+520 static DEVICE_ATTR(prj_tfset, S_IRUGO | S_IWUGO, prj_tfset_show, prj_tfset_store);      // 鏉冮檺涓666
+521 #endif
+522 //////////////////////////////////////////////
+523 static struct attribute *dpp3435_attributes[] = {
+524         &dev_attr_prj_name.attr,
+525         &dev_attr_prj_source.attr,
+526         &dev_attr_prj_pwm.attr,
+527         &dev_attr_prj_volinit.attr,
+528         &dev_attr_prj_angle.attr,
+529         &dev_attr_prj_vkey.attr,
+530         &dev_attr_prj_brightness.attr,
+531         &dev_attr_prj_rotate.attr,
+532 #if defined(CONFIG_PRJ_OP61_V12)
+533         &dev_attr_prj_tfset.attr,
+534 #endif  
+535         NULL
+536 };
+537 
+538 static const struct attribute_group dpp3435_attr_group = {
+539         .attrs = dpp3435_attributes,
+540 };      
+541 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+542 
+543 struct pinctrl_state* lcd_default_state;
+544 struct pinctrl_state* lcd_gpio_state;
+545 struct pinctrl* lcd_pinctrl;
+546 
+547 static struct of_device_id dpp3435_dt_ids[] = {
+548         { .compatible = "prj,dpp3435" },
+549         {},
+550 };
+551 
+552 struct work_struct prjwork_timer_work;
+553 struct timer_list prjwork_timer;
+554 int do_prjir(int k);
+555 static void prjwork_timer_work_func(struct work_struct *work)
+search hit BOTTOM, continuing at TOP
+375         else if(count>=3 && buf[0]=='V' && buf[1]>='0' && buf[1]<='9' && buf[2]>='0' && buf[2]<='9')
+376         {
+377                 int t = (buf[1]&0xF)*10+(buf[2]&0xF);
+378                 if(t > 20) t=20;
+379                 t *= 15;
+380                 t /= 20;
+381         }
+382 
+383         return count;
+384 }
+385 
+386 static DEVICE_ATTR(prj_volinit, S_IRUGO | S_IWUGO, prj_volinit_show, prj_volinit_store);        // 鏉冮檺涓666
+387 /////////////////////////////////////////angle
+388 static ssize_t prj_angle_show(struct device *dev, struct device_attribute *attr, char *buf)
+389 {
+390         return sprintf(buf, "%d",cur_du);
+391 }
+392 
+393 static ssize_t prj_angle_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+394 {
+395         return count;
+396 }
+397 
+398 static DEVICE_ATTR(prj_angle, S_IRUGO | S_IWUGO, prj_angle_show, prj_angle_store);      // 鏉冮檺涓666
+399 
+400 /////////////////////////////////////////vkey
+401 static ssize_t prj_vkey_show(struct device *dev, struct device_attribute *attr, char *buf)
+402 {
+403         return sprintf(buf, "vkey");
+404 }
+405 
+406 static ssize_t prj_vkey_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+407 {
+408         if(count>=4 && buf[0]=='K')
+409         {
+410                 int c1 = buf[1]&0xF;
+411                 int c2 = buf[2]&0xF;
+412                 int c3 = buf[3]&0xF;
+413                 int k = c1*100+c2*10+c3;
+414                 prj_irkey(k);
+415                 //printk("vkey = %d\n",k);
+416         }
+417         return count;
+418 }
+419 
+420 static DEVICE_ATTR(prj_vkey, S_IRUGO | S_IWUGO, prj_vkey_show, prj_vkey_store); // 鏉冮檺盲6/pr
+421 
+422 /////////////////////////////////////////brightness
+423 int cur_brightness = 100;
+424 static ssize_t prj_brightness_show(struct device *dev, struct device_attribute *attr, char *buf)
+425 {
+426         return sprintf(buf, "%d",cur_brightness);
+427 }
+428 
+/prj_vkey
+503         }
+504         printk("tf_set %d\n",tf_set_bak);
+505 }
+506 static ssize_t prj_tfset_show(struct device *dev, struct device_attribute *attr, char *buf)
+507 {
+508         return sprintf(buf, "%d",tf_set_bak);
+509 }
+510 
+511 static ssize_t prj_tfset_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+512 {
+513         if(count>=1)
+514         {
+515                 tf_insert(buf[0]!='0');
+516         }
+517         return count;
+518 }
+519 
+520 static DEVICE_ATTR(prj_tfset, S_IRUGO | S_IWUGO, prj_tfset_show, prj_tfset_store);      // 鏉冮檺涓666
+521 #endif
+522 //////////////////////////////////////////////
+523 static struct attribute *dpp3435_attributes[] = {
+524         &dev_attr_prj_name.attr,
+525         &dev_attr_prj_source.attr,
+526         &dev_attr_prj_pwm.attr,
+527         &dev_attr_prj_volinit.attr,
+528         &dev_attr_prj_angle.attr,
+529         &dev_attr_prj_vkey.attr,
+530         &dev_attr_prj_brightness.attr,
+531         &dev_attr_prj_rotate.attr,
+532 #if defined(CONFIG_PRJ_OP61_V12)
+533         &dev_attr_prj_tfset.attr,
+534 #endif
+535         NULL
+536 };
+537 
+538 static const struct attribute_group dpp3435_attr_group = {
+539         .attrs = dpp3435_attributes,
+540 };
+541 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+542 
+543 struct pinctrl_state* lcd_default_state;
+544 struct pinctrl_state* lcd_gpio_state;
+545 struct pinctrl* lcd_pinctrl;
+546 
+547 static struct of_device_id dpp3435_dt_ids[] = {
+548         { .compatible = "prj,dpp3435" },
+549         {},
+550 };
+551 
+552 struct work_struct prjwork_timer_work;
+553 struct timer_list prjwork_timer;
+554 int do_prjir(int k);
+555 static void prjwork_timer_work_func(struct work_struct *work)
+556 {
+search hit BOTTOM, continuing at TOP
+375         else if(count>=3 && buf[0]=='V' && buf[1]>='0' && buf[1]<='9' && buf[2]>='0' && buf[2]<='9')
+376         {
+375         else if(count>=3 && buf[0]=='V' && buf[1]>='0' && buf[1]<='9' && buf[2]>='0' && buf[2]<='9')
+376         {
+375         else if(count>=3 && buf[0]=='V' && buf[1]>='0' && buf[1]<='9' && buf[2]>='0' && buf[2]<='9')
+376         {
+375         else if(count>=3 && buf[0]=='V' && buf[1]>='0' && buf[1]<='9' && buf[2]>='0' && buf[2]<='9')
+376         {
+377                 int t = (buf[1]&0xF)*10+(buf[2]&0xF);
+378                 if(t > 20) t=20;
+379                 t *= 15;
+380                 t /= 20;
+381         }
+382 
+383         return count;
+384 }
+385 
+386 static DEVICE_ATTR(prj_volinit, S_IRUGO | S_IWUGO, prj_volinit_show, prj_volinit_store);        // 鏉冮檺涓666
+387 /////////////////////////////////////////angle
+388 static ssize_t prj_angle_show(struct device *dev, struct device_attribute *attr, char *buf)
+389 {
+390         return sprintf(buf, "%d",cur_du);
+391 }
+392 
+393 static ssize_t prj_angle_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+394 {
+395         return count;
+396 }
+397 
+398 static DEVICE_ATTR(prj_angle, S_IRUGO | S_IWUGO, prj_angle_show, prj_angle_store);      // 鏉冮檺涓666
+399 
+400 /////////////////////////////////////////vkey
+401 static ssize_t prj_vkey_show(struct device *dev, struct device_attribute *attr, char *buf)
+402 {
+403         return sprintf(buf, "vkey");
+404 }
+405 
+406 static ssize_t prj_vkey_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+407 {
+408         if(count>=4 && buf[0]=='K')
+409         {
+410                 int c1 = buf[1]&0xF;
+411                 int c2 = buf[2]&0xF;
+412                 int c3 = buf[3]&0xF;
+413                 int k = c1*100+c2*10+c3;
+414                 prj_irkey(k);
+415                 //printk("vkey = %d\n",k);
+416         }
+417         return count;
+418 }
+419 
+420 static DEVICE_ATTR(prj_vkey, S_IRUGO | S_IWUGO, prj_vkey_show, prj_vkey_store); // 鏉冮檺盲6/pr
+421 
+422 /////////////////////////////////////////brightness
+423 int cur_brightness = 100;
+424 static ssize_t prj_brightness_show(struct device *dev, struct device_attribute *attr, char *buf)
+425 {
+426         return sprintf(buf, "%d",cur_brightness);
+427 }
+428 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel$ cd drivers/prj/
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel/drivers/prj$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel/drivers/prj$ 
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel/drivers/prj$ ls -al
+total 4168
+drwxr-xr-x   2 chqh chqh    4096 Oct 18 10:20 .
+drwxrwxr-x 130 chqh chqh    4096 Oct 16 19:03 ..
+-rw-rw-r--   1 chqh chqh     389 Jul 11 16:50 built-in.mod.c
+-rw-rw-r--   1 chqh chqh 1535881 Oct 16 19:03 built-in.o
+-rw-rw-r--   1 chqh chqh     668 Oct 16 19:03 .built-in.o.cmd
+-rw-r--r--   1 chqh chqh    4271 Oct 16 15:48 chip_pan1020.c
+-rw-rw-r--   1 chqh chqh   98408 Oct 16 15:48 chip_pan1020.o
+-rw-rw-r--   1 chqh chqh   85995 Oct 16 15:48 .chip_pan1020.o.cmd
+-rwxr--r--   1 chqh chqh    4390 Sep 24 17:58 chip_pan1020_old.c
+-rw-r--r--   1 chqh chqh    9285 Jul 11 10:30 chips_bq25895.c
+-rw-r--r--   1 chqh chqh    9900 Jul 11 10:30 chips_bq25895_chen.c
+-rw-rw-r--   1 chqh chqh   80776 Oct 14 18:43 chips_bq25895.o
+-rw-rw-r--   1 chqh chqh   35462 Oct 14 18:43 .chips_bq25895.o.cmd
+-rw-r--r--   1 chqh chqh    3893 Jul 11 10:30 chips_mini51_2.c
+-rw-rw-r--   1 chqh chqh   80780 Oct 14 18:43 chips_mini51_2.o
+-rw-rw-r--   1 chqh chqh   35474 Oct 14 18:43 .chips_mini51_2.o.cmd
+-rw-r--r--   1 chqh chqh    4116 Jul 11 10:30 chips_mini51.c
+-rw-rw-r--   1 chqh chqh   80772 Oct 14 18:43 chips_mini51.o
+-rw-rw-r--   1 chqh chqh   35450 Oct 14 18:43 .chips_mini51.o.cmd
+-rw-r--r--   1 chqh chqh    1572 Jul 11 10:30 chips_mst.c
+-rw-rw-r--   1 chqh chqh   94952 Oct 14 18:43 chips_mst.o
+-rw-rw-r--   1 chqh chqh   40852 Oct 14 18:43 .chips_mst.o.cmd
+-rw-r--r--   1 chqh chqh   27615 Jul 11 10:30 drv_dpp2607_ext.c
+-rw-rw-r--   1 chqh chqh   80780 Oct 14 18:43 drv_dpp2607_ext.o
+-rw-rw-r--   1 chqh chqh   35486 Oct 14 18:43 .drv_dpp2607_ext.o.cmd
+-rw-r--r--   1 chqh chqh   29277 Jul 11 10:30 drv_dpp2607_kernel.c
+-rw-rw-r--   1 chqh chqh   80788 Oct 14 18:43 drv_dpp2607_kernel.o
+-rw-rw-r--   1 chqh chqh   35522 Oct 14 18:43 .drv_dpp2607_kernel.o.cmd
+-rwxr--r--   1 chqh chqh   39177 Sep 18 17:35 drv_dpp2607_pad1000.c
+-rw-rw-r--   1 chqh chqh   80984 Oct 14 18:43 drv_dpp2607_pad1000.o
+-rw-rw-r--   1 chqh chqh   35910 Oct 14 18:43 .drv_dpp2607_pad1000.o.cmd
+-rw-r--r--   1 chqh chqh   15077 Oct 14 14:29 drv_dpp3435_pad2005.c
+-rw-rw-r--   1 chqh chqh  117084 Oct 14 18:43 drv_dpp3435_pad2005.o
+-rw-rw-r--   1 chqh chqh   35534 Oct 14 18:43 .drv_dpp3435_pad2005.o.cmd
+-rw-r--r--   1 chqh chqh   17506 Jul 11 10:30 drv_dpp3438_pad3000.c
+-rw-rw-r--   1 chqh chqh   80788 Oct 14 18:43 drv_dpp3438_pad3000.o
+-rw-rw-r--   1 chqh chqh   35534 Oct 14 18:43 .drv_dpp3438_pad3000.o.cmd
+-rwxr--r--   1 chqh chqh    7947 Oct 17 19:03 func_keystone.c
+-rw-rw-r--   1 chqh chqh   87572 Oct 16 19:03 func_keystone.o
+-rw-rw-r--   1 chqh chqh   34405 Oct 16 19:03 .func_keystone.o.cmd
+-rw-r--r--   1 chqh chqh     633 Jul 11 10:30 func_moto.c
+-rw-rw-r--   1 chqh chqh   94952 Oct 14 18:43 func_moto.o
+-rw-rw-r--   1 chqh chqh   40526 Oct 14 18:43 .func_moto.o.cmd
+-rw-r--r--   1 chqh chqh   11285 Jul 11 10:30 func_tp_cp01.c
+-rw-rw-r--   1 chqh chqh   80968 Oct 14 18:43 func_tp_cp01.o
+-rw-rw-r--   1 chqh chqh   85995 Oct 14 18:43 .func_tp_cp01.o.cmd
+-rw-r--r--   1 chqh chqh    5487 Jul 11 10:30 leddrv_m08888_2.c
+-rw-rw-r--   1 chqh chqh   80780 Oct 14 18:43 leddrv_m08888_2.o
+-rw-rw-r--   1 chqh chqh   35486 Oct 14 18:43 .leddrv_m08888_2.o.cmd
+-rw-r--r--   1 chqh chqh    5768 Jul 11 10:30 leddrv_m08888.c
+-rw-rw-r--   1 chqh chqh   80776 Oct 14 18:43 leddrv_m08888.o
+-rw-rw-r--   1 chqh chqh   35462 Oct 14 18:43 .leddrv_m08888.o.cmd
+-rw-r--r--   1 chqh chqh     453 Oct 14 14:25 Makefile
+-rw-rw-r--   1 chqh chqh       0 Oct 14 14:06 modules.builtin
+-rw-r--r--   1 chqh chqh    2104 Jul 11 10:30 prj.c
+-rw-r--r--   1 chqh chqh    4367 Oct 14 16:08 prj_def.h
+-rw-r--r--   1 chqh chqh     291 Jul 11 10:30 prjdef_op61_key.inc
+-rw-r--r--   1 chqh chqh    5267 Oct 14 18:39 prj.h
+-rw-rw-r--   1 chqh chqh   92356 Oct 14 18:43 prj.o
+-rw-rw-r--   1 chqh chqh   38854 Oct 14 18:43 .prj.o.cmd
+-rw-r--r--   1 chqh chqh    1346 Jul 11 10:30 prj_op83.c
+-rw-rw-r--   1 chqh chqh   80764 Oct 14 18:43 prj_op83.o
+-rw-rw-r--   1 chqh chqh   35402 Oct 14 18:43 .prj_op83.o.cmd
+-rw-r--r--   1 chqh chqh    1392 Jul 11 10:30 sub.c
+-rw-rw-r--   1 chqh chqh   87196 Oct 14 18:43 sub.o
+-rw-rw-r--   1 chqh chqh   35342 Oct 14 18:43 .sub.o.cmd
+-rw-rw-r--   1 chqh chqh   72100 Sep 27 11:24 tags
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel/drivers/prj$ who
+chqh     pts/0        2019-10-18 09:33 (192.168.1.191)
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel/drivers/prj$ vi drv_dpp3435_pad2005.c 
+
+  1 
+  2 #include <linux/module.h>
+  3 #include <linux/init.h>
+  4 #include <linux/i2c.h>
+  5 #include <linux/slab.h>
+  6 #include <linux/delay.h>
+  7 #include <linux/gpio.h>
+  8 #include <linux/of_gpio.h>
+  9 #include <dt-bindings/pinctrl/rockchip-rk312x.h>                // lee: 20150413 add
+ 10 
+ 11 #include "prj.h"
+ 12 
+ 13 #if (RPJ_DRV==PRJDRV_DPP3435_PAD2005)
+ 14 
+ 15 static struct i2c_client *dpp3435_client;
+ 16 
+ 17 int i2c_master_reg8_send(const struct i2c_client *client, const char reg, const char *buf, int count, int scl_rate);
+ 18 int i2c_master_reg8_recv(const struct i2c_client *client, const char reg, char *buf, int count, int scl_rate);
+ 19 
+ 20 struct dpp3435_data {
+ 21         struct i2c_client *client;
+ 22         struct mutex update_lock;
+ 23 };      
+ 24 
+ 25 int cur_pwm = 0;
+ 26 
+ 27 #define I2C_SPEED       10 * 1000
+ 28 #define CURTAIN_CONTROL         0xa6
+ 29 
+ 30 //whp int gpio_prj_on = INVALID_GPIO;
+ 31 
+ 32 /*static int i2c_set_regs(struct i2c_client *client, u8 reg, u8 const buf[], __u16 len)
+ 33 {
+ 34         int ret; 
+ 35         ret = i2c_master_reg8_send(client, reg, buf, (int)len, I2C_SPEED);
+ 36         return ret;
+ 37 }*/
+ 38 
+ 39 /*static void write_3435(unsigned char reg,unsigned int val)
+ 40 {
+ 41         unsigned char d[4];
+ 42         d[3] = val & 0xff;
+ 43         val >>= 8;
+ 44         d[2] = val & 0xff;
+ 45         val >>= 8;
+ 46         d[1] = val & 0xff;
+ 47         val >>= 8;
+ 48         d[0] = val & 0xff;
+ 49         i2c_set_regs(dpp3435_client,reg,d,4);
+ 50 }*/
+ 51 
+ 52 u8 read_3435(u8 reg)
+ 53 {
+ 54         u8 data1[1];
+"drv_dpp3435_pad2005.c" [converted] 687L, 15122C written
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel/drivers/prj$ vi drv_dpp3435_pad2005.c 
+
+  1 
+  2 #include <linux/module.h>
+  3 #include <linux/init.h>
+  4 #include <linux/i2c.h>
+  5 #include <linux/slab.h>
+  6 #include <linux/delay.h>
+  7 #include <linux/gpio.h>
+  8 #include <linux/of_gpio.h>
+  9 #include <dt-bindings/pinctrl/rockchip-rk312x.h>                // lee: 20150413 add
+ 10 
+ 11 #include "prj.h"
+ 12 
+ 13 #if (RPJ_DRV==PRJDRV_DPP3435_PAD2005)
+ 14 
+ 15 static struct i2c_client *dpp3435_client;
+ 16 
+ 17 int i2c_master_reg8_send(const struct i2c_client *client, const char reg, const char *buf, int count, int scl_rate);
+ 18 int i2c_master_reg8_recv(const struct i2c_client *client, const char reg, char *buf, int count, int scl_rate);
+ 19 
+ 20 struct dpp3435_data {
+ 21         struct i2c_client *client;
+ 22         struct mutex update_lock;
+ 23 };
+ 24 
+ 25 int cur_pwm = 0;
+ 26 
+ 27 #define I2C_SPEED       10 * 1000
+ 28 #define CURTAIN_CONTROL         0xa6
+ 29 
+ 30 //whp int gpio_prj_on = INVALID_GPIO;
+ 31 
+ 32 /*static int i2c_set_regs(struct i2c_client *client, u8 reg, u8 const buf[], __u16 len)
+ 33 {
+ 34         int ret; 
+ 35         ret = i2c_master_reg8_send(client, reg, buf, (int)len, I2C_SPEED);
+ 36         return ret;
+ 37 }*/
+ 38 
+ 39 /*static void write_3435(unsigned char reg,unsigned int val)
+ 40 {
+ 41         unsigned char d[4];
+ 42         d[3] = val & 0xff;
+ 43         val >>= 8;
+ 44         d[2] = val & 0xff;
+ 45         val >>= 8;
+ 46         d[1] = val & 0xff;
+ 47         val >>= 8;
+ 48         d[0] = val & 0xff;
+ 49         i2c_set_regs(dpp3435_client,reg,d,4);
+ 50 }*/
+ 51 
+ 52 u8 read_3435(u8 reg)
+ 53 {
+ 54         u8 data1[1];
+/prj_angle
+362 static DEVICE_ATTR(prj_pwm, S_IRUGO | S_IWUGO, prj_pwm_show, prj_pwm_store);    // 鏉冮檺涓666
+363 /////////////////////////////////////////vol init
+364 static ssize_t prj_volinit_show(struct device *dev, struct device_attribute *attr, char *buf)
+365 {
+366         return sprintf(buf, "0\n");
+367 }
+368 
+369 static ssize_t prj_volinit_store(struct device *dev,
+370                 struct device_attribute *attr, const char *buf, size_t count)
+371 {
+372         if(count>=1 && buf[0]=='S')
+373         {
+374         }
+375         else if(count>=3 && buf[0]=='V' && buf[1]>='0' && buf[1]<='9' && buf[2]>='0' && buf[2]<='9')
+376         {
+377                 int t = (buf[1]&0xF)*10+(buf[2]&0xF);
+378                 if(t > 20) t=20;
+379                 t *= 15;
+380                 t /= 20;
+381         }
+382 
+383         return count;
+384 }
+385 
+386 static DEVICE_ATTR(prj_volinit, S_IRUGO | S_IWUGO, prj_volinit_show, prj_volinit_store);        // 鏉冮檺涓666
+387 /////////////////////////////////////////angle
+388 static ssize_t prj_angle_show(struct device *dev, struct device_attribute *attr, char *buf)
+389 {
+390         return sprintf(buf, "%d",cur_du);
+391 }
+392 
+393 static ssize_t prj_angle_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+394 {
+395         return count;
+396 }
+397 
+398 static DEVICE_ATTR(prj_angle, S_IRUGO | S_IWUGO, prj_angle_show, prj_angle_store);      // 鏉冮檺涓666
+399 
+400 /////////////////////////////////////////vkey
+401 401 static ssize_t prj_vkey_show(struct device *dev, struct device_attribute *attr, char *buf)
+402 402 {
+403 403         return sprintf(buf, "vkey");
+404 404 }
+405 405 
+406 406 static ssize_t prj_vkey_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+407 407 {   
+408 408         if(count>=4 && buf[0]=='K')
+409 409         {
+410 410                 int c1 = buf[1]&0xF;
+411 411                 int c2 = buf[2]&0xF;
+412 412                 int c3 = buf[3]&0xF;
+413 413                 int k = c1*100+c2*10+c3;
+414 414                 prj_irkey(k);
+415 415                 //printk("vkey = %d\n",k);
+416 416         }
+417 417         return count;
+418 418 }
+419 419
+420 420 static DEVICE_ATTR(prj_vkey, S_IRUGO | S_IWUGO, prj_vkey_show, prj_vkey_store); // 鏉冮檺盲6/pr
+421 /////////////////////////////////////////brightness
+422 int cur_brightness = 100;
+423 static ssize_t prj_brightness_show(struct device *dev, struct device_attribute *attr, char *buf)
+424 {
+/prj_angle
+501                 gpio_set_value(tf_set, 1);
+502         }
+501                 gpio_set_value(tf_set, 1);
+502         }
+503         printk("tf_set %d\n",tf_set_bak);
+504 }
+505 static ssize_t prj_tfset_show(struct device *dev, struct device_attribute *attr, char *buf)
+506 {
+507         return sprintf(buf, "%d",tf_set_bak);
+508 }
+509 
+510 static ssize_t prj_tfset_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+511 {
+512         if(count>=1)
+513         {
+514                 tf_insert(buf[0]!='0');
+515         }
+516         return count;
+517 }
+518 
+519 static DEVICE_ATTR(prj_tfset, S_IRUGO | S_IWUGO, prj_tfset_show, prj_tfset_store);      // 鏉冮檺涓666
+520 #endif
+521 //////////////////////////////////////////////
+522 static struct attribute *dpp3435_attributes[] = {
+523         &dev_attr_prj_name.attr,
+524         &dev_attr_prj_source.attr,
+525         &dev_attr_prj_pwm.attr,
+526         &dev_attr_prj_volinit.attr,
+527         &dev_attr_prj_angle.attr,
+528         &dev_attr_prj_vkey.attr,
+529         &dev_attr_prj_brightness.attr,
+530         &dev_attr_prj_rotate.attr,
+531 #if defined(CONFIG_PRJ_OP61_V12)
+532         &dev_attr_prj_tfset.attr,
+533 #endif  
+534         NULL
+535 };
+536 
+537 static const struct attribute_group dpp3435_attr_group = {
+538         .attrs = dpp3435_attributes,
+539 };      
+540 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+541 
+542 struct pinctrl_state* lcd_default_state;
+543 struct pinctrl_state* lcd_gpio_state;
+544 struct pinctrl* lcd_pinctrl;
+545 
+546 static struct of_device_id dpp3435_dt_ids[] = {
+547         { .compatible = "prj,dpp3435" },
+548         {},
+549 };
+550 
+551 struct work_struct prjwork_timer_work;
+552 struct timer_list prjwork_timer;
+553 int do_prjir(int k);
+554 static void prjwork_timer_work_func(struct work_struct *work)
+?prj_angle
+372         if(count>=1 && buf[0]=='S')
+373         {
+374         }
+375         else if(count>=3 && buf[0]=='V' && buf[1]>='0' && buf[1]<='9' && buf[2]>='0' && buf[2]<='9')
+376         {
+377                 int t = (buf[1]&0xF)*10+(buf[2]&0xF);
+378                 if(t > 20) t=20;
+379                 t *= 15;
+380                 t /= 20;
+381         }
+382 
+383         return count;
+384 }
+385 
+386 static DEVICE_ATTR(prj_volinit, S_IRUGO | S_IWUGO, prj_volinit_show, prj_volinit_store);        // 鏉冮檺涓666
+387 /////////////////////////////////////////angle
+388 static ssize_t prj_angle_show(struct device *dev, struct device_attribute *attr, char *buf)
+389 {
+390         return sprintf(buf, "%d",cur_du);
+391 }
+392 
+393 static ssize_t prj_angle_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+394 {
+395         return count;
+396 }
+397 
+398 static DEVICE_ATTR(prj_angle, S_IRUGO | S_IWUGO, prj_angle_show, prj_angle_store);      // 鏉冮檺涓666
+399 
+400 /////////////////////////////////////////vkey
+401 401 static ssize_t prj_vkey_show(struct device *dev, struct device_attribute *attr, char *buf)
+402 402 {
+403 403         return sprintf(buf, "vkey");
+404 404 }
+405 405
+406 406 static ssize_t prj_vkey_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+407 407 {
+408 408         if(count>=4 && buf[0]=='K')
+409 409         {
+410 410                 int c1 = buf[1]&0xF;
+411 411                 int c2 = buf[2]&0xF;
+412 412                 int c3 = buf[3]&0xF;
+413 413                 int k = c1*100+c2*10+c3;
+414 414                 prj_irkey(k);
+415 415                 //printk("vkey = %d\n",k);
+416 416         }        
+417         return count;
+418 }
+419 
+420 static DEVICE_ATTR(prj_vkey, S_IRUGO | S_IWUGO, prj_vkey_show, prj_vkey_store);
+421 /////////////////////////////////////////brightness
+422 int cur_brightness = 100;
+423 static ssize_t prj_brightness_show(struct device *dev, struct device_attribute *attr, char *buf)
+424 {       
+425         return sprintf(buf, "%d",cur_brightness);
+426 }
+427 
+428 static ssize_t prj_brightness_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+429 {       
+430         int cc;
+"drv_dpp3435_pad2005.c" [converted] 710L, 15892C written
+chqh@wanghp:~/work/R3128_SP07R/SDK171205/kernel/drivers/prj$ vi drv_dpp3435_pad2005.c 
+
+  1 
+  2 #include <linux/module.h>
+  3 #include <linux/init.h>
+  4 #include <linux/i2c.h>
+  5 #include <linux/slab.h>
+  6 #include <linux/delay.h>
+  7 #include <linux/gpio.h>
+  8 #include <linux/of_gpio.h>
+  9 #include <dt-bindings/pinctrl/rockchip-rk312x.h>                // lee: 20150413 add
+ 10 
+ 11 #include "prj.h"
+ 12 
+ 13 #if (RPJ_DRV==PRJDRV_DPP3435_PAD2005)
+ 14 
+ 15 static struct i2c_client *dpp3435_client;
+ 16 
+ 17 int i2c_master_reg8_send(const struct i2c_client *client, const char reg, const char *buf, int count, int scl_rate);
+ 18 int i2c_master_reg8_recv(const struct i2c_client *client, const char reg, char *buf, int count, int scl_rate);
+ 19 
+ 20 struct dpp3435_data {
+ 21         struct i2c_client *client;
+ 22         struct mutex update_lock;
+ 23 };
+ 24 
+ 25 int cur_pwm = 0;
+ 26 
+ 27 #define I2C_SPEED       10 * 1000
+ 28 #define CURTAIN_CONTROL         0xa6
+ 29 
+ 30 //whp int gpio_prj_on = INVALID_GPIO;
+ 31 
+ 32 /*static int i2c_set_regs(struct i2c_client *client, u8 reg, u8 const buf[], __u16 len)
+ 33 {
+ 34         int ret; 
+ 35         ret = i2c_master_reg8_send(client, reg, buf, (int)len, I2C_SPEED);
+ 36         return ret;
+ 37 }*/
+ 38 
+ 39 /*static void write_3435(unsigned char reg,unsigned int val)
+ 40 {
+ 41         unsigned char d[4];
+ 42         d[3] = val & 0xff;
+ 43         val >>= 8;
+ 44         d[2] = val & 0xff;
+ 45         val >>= 8;
+ 46         d[1] = val & 0xff;
+ 47         val >>= 8;
+ 48         d[0] = val & 0xff;
+ 49         i2c_set_regs(dpp3435_client,reg,d,4);
+ 50 }*/
+ 51 
+ 52 u8 read_3435(u8 reg)
+ 53 {
+ 54         u8 data1[1];
+"drv_dpp3435_pad2005.c" [converted] 710L, 15892C
+376         {
+377                 int t = (buf[1]&0xF)*10+(buf[2]&0xF);
+378                 if(t > 20) t=20;
+379                 t *= 15;
+380                 t /= 20;
+381         }
+382 
+383         return count;
+384 }
+385 
+386 static DEVICE_ATTR(prj_volinit, S_IRUGO | S_IWUGO, prj_volinit_show, prj_volinit_store);        // 鏉冮檺涓666
+387 /////////////////////////////////////////angle
+388 static ssize_t prj_angle_show(struct device *dev, struct device_attribute *attr, char *buf)
+389 {
+390         return sprintf(buf, "%d",cur_du);
+391 }
+392 
+393 static ssize_t prj_angle_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+394 {
+395         return count;
+396 }
+397 
+398 static DEVICE_ATTR(prj_angle, S_IRUGO | S_IWUGO, prj_angle_show, prj_angle_store);      // 鏉冮檺涓666
+399 
+400 /////////////////////////////////////////vkey
+401 static ssize_t prj_vkey_show(struct device *dev, struct device_attribute *attr, char *buf)
+402 402 {
+403 403         return sprintf(buf, "vkey");
+404 404 }
+405 405
+406 406 static ssize_t prj_vkey_store(struct device *dev, struct device_attribute *attr, const char *buf, size_t count)
+407 407 {
+408 408         if(count>=4 && buf[0]=='K')
+409 409         {
+410 410                 int c1 = buf[1]&0xF;
+411 411                 int c2 = buf[2]&0xF;
+412 412                 int c3 = buf[3]&0xF;
+413 413                 int k = c1*100+c2*10+c3;
+414 414                 

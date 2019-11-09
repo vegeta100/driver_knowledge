@@ -1,0 +1,33 @@
+commit e7ac32ca6fc06f391a75181230752a5e9ecdda0a
+Author: wmc <chqh@wanghp.(none)>
+Date:   Thu Sep 5 16:21:57 2019 +0800
+
+    update bootanimation and recovery batter_line
+
+diff --git a/arch/arm/boot/dts/zjsc_op98.dts b/arch/arm/boot/dts/zjsc_op98.dts
+index 316927c..dc54d4f 100755
+--- a/arch/arm/boot/dts/zjsc_op98.dts
++++ b/arch/arm/boot/dts/zjsc_op98.dts
+@@ -436,12 +436,12 @@
+ //			3400 3578 3619 3642 3664 3701 3751 3814 3888 3988 4126
+ //			3650 3710 3770 3830 3850 3880 3910 3980 4060 4240 4300
+ 
+-			//3353 3416 3494 3575 3626 3659 3691 3743 3811 3899 3998		///for yanghu
+-			//3530 3678 3781 3851 3916 3956 3986 4020 4059 4103 4156
+-
+-			3444 3516 3563 3599 3630 3663 3698 3733 3766 3798 3971//for ou rui mai
++			3353 3416 3494 3575 3626 3659 3691 3743 3811 3899 3998		///for yanghu
+ 			3530 3678 3781 3851 3916 3956 3986 4020 4059 4103 4156
+ 
++			//3444 3516 3563 3599 3630 3663 3698 3733 3766 3798 3971//for ou rui mai
++			//3530 3678 3781 3851 3916 3956 3986 4020 4059 4103 4156
++
+ 			>;
+ 		is_dc_charge = <1>;
+ 		is_usb_charge = <0>;
+diff --git a/logo.bmp b/logo.bmp
+index 96930fd..3217933 100755
+Binary files a/logo.bmp and b/logo.bmp differ
+diff --git a/logo_kernel.bmp b/logo_kernel.bmp
+index 65570ca..3217933 100755
+Binary files a/logo_kernel.bmp and b/logo_kernel.bmp differ

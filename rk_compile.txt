@@ -1,0 +1,111 @@
+只改了kernel或system，只升级一部分，会升得更快
+以下是升级的所有情况
+Upgrade [[mboot? (y/N)y		可以理解为一开始初始化会有的
+Upgrade [[recovery? (y/N)n	恢复出厂的东西。我在想，改了这里的话，应该不叫恢复出厂，而是改了出厂设置
+Upgrade [[boot? (y/N)n		/根目录 kernel目录
+Upgrade [[optee? (y/N)n		---以下4个目录不动---
+Upgrade [[armfw? (y/N)n
+Upgrade [[RT_PM? (y/N)n
+Upgrade [[dtb? (y/N)n
+Upgrade [[system? (y/N)n	Android的桌面
+Upgrade [[userdata? (y/N)n 	留给用户的分区，可以算是个虚拟磁盘，/data
+Upgrade [[cache? (y/N)n		可以看做缓存，1G的缓存空间
+Upgrade [[tvservice? (y/N)n	屏参和开机等等在 tv**** 这里修改
+Upgrade [[tvconfig? (y/N)n
+Upgrade [[tvdatabase? (y/N)n
+Upgrade [[tvcustomer? (y/N)n
+Upgrade [[tvcertificate? (y/N)n
+
+
+编译平台选择
+rk3128_box-userdebug 
+aosp_bennet_dvb-userdebug
+
+pri-app
+这下面的apk,直接通过adb install，不止是这个，生成的其他apk,应该也可以这样。只是pri-app相当于网吧模式。
+
+
+make zjsc_op95r.img  这句用来编译内核
+或编译的配置项没搞好或清掉了配置项(make clean可能会清掉)，需要make menuconfig
+--------------
+make -j4是编译命令，./mkimage.sh则是把编译好的文件合成
+make -j4如果发现有内核方面的错误，那就编译下内核吧
+另外，修改了某目录下的东西，需要对该目录mmm
+mmma
+一般编译不通过，才用mmma。mmma会编译更多但并未必有用的东西
+
+
+
+. ***.sh	用于环境变量
+./***.sh	用于执行一次脚本
+
+
+kernel.img resource.img一般是一起升级的。这两个合在一起才是完整的linux，一个是linux的程序，一个是资源。这个资源是指串口等硬件资源？对，没错
+改了串口打印，只需要升级resouce.img。说明kernel.img和resource.img也是可以分开的
+parameter.txt，如果某个地方的文件太大了，导致更改了地址起始位置，就需要勾上parameter.txt
+misc img 刷机，相当于恢复出厂设置
+
+
+
+
+rc，可能是run conifg，运行配置的意思。如init.rc 
+
+
+
+电量信息看healthd，健康，听起来和电量应该有关
+
+
+ 
+1998  . javaenv.sh 
+1999  . build.sh
+别人更改了环境变量，就要用javaenv.sh
+
+
+
+2063  vim build/core/Makefile
+2064  vi vendor/op95r_z_ch/cp.sh 
+2065  ls
+2066  vi vendor/op95r_z_ch/cp.sh 
+2067  ./mkimage.sh 
+2068  find ./ -name "build.prop"
+2069  vim ./out/target/product/rk3128_box/system/build.prop
+2070  make -j4
+2071  ls
+2072  vi vendor/op95r_z_ch/cp.sh 
+/home/chqh/work/R3128_OP95R/SDK171205/vendor/zjsc/cp.sh
+修改这些地方，就能改好UI和设备信息了。
+vendor/zjsc/cp.sh，可以看做管理不同平台cp.sh的脚本。不，这个说法可能是错的。
+英文版本的，不带_ch，不带_ch，就是默认英文吗？这起名起的
+zjsc/cp.sh，可以理解为统一管理cp.sh的一个cp.sh，或许吧，至少有统一的作用，需要查查看
+
+
+
+差分包升级就是只升级一个模块
+
+---------------------------------------
+u盘升级包制作
+rm ***/kernel需要你在kernel下面修改了东西，才需要这么做。而可以编译kernel后，删了out下的，在make -j4
+rm out/target/product/rk3128_box/kernel 
+
+最后生成的zip里面，boot.img里包含了个kernel。
+
+./mkimage.sh ota	这似乎要先make -j4重新生成kernel文件
+
+make otapackage
+编译到99%生成zip的时候，会很慢的。即便到100%，也得等等。
+生成的zip包，再更名为upgrade.zip包。这个名字有所谓吗？改成update.zip说不定也行
+
+make otapackage命令报错的时候，可能需要以下语句
+export OUT=""
+
+sudo和不加sudo的环境变量不一样，用sudo make otapackage，配的OUT就不起作用了。
+SDK171205/out$ sudo chown -R chqh .		当发现权限拒绝的时候，可以用这个命令
+在out下没某些文件权限，需要执行以上语句。不能随便用sudo，用了之后，以后得常常用sudo
+我之前拷贝op98的工程用了sudo 命令，导致现在98下面很多东西都需要sudo权限。sudo和cp合着用，有坑
+---------------------------------------
+
+makefile用来编译的，shell脚本不是用来编译的。而是一些linux的命令操作，文件的拷贝、合成、查找、打印等等等。
+取消adc检测，还没改成电池
+
+
+P8 jgrep搜索

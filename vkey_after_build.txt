@@ -1,0 +1,311 @@
+30|rk3128_box:/sys/bus/i2c/devices/0-001b $ cat prj_vkey && echo "\n"         
+vkey
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  335.451109] healthd: battery l=100 v=3640 t=0.0 h=2 st=5 chg=
+[  394.550012] healthd: battery l=100 v=3640 t=0.0 h=2 st=5 chg=
+[  453.650036] healthd: battery l=100 v=3640 t=0.0 h=2 st=5 chg=
+[  476.183675] vkey:63
+[  476.219480] type=1400 audit(1571366704.864:180): avc: denied { read } for pid=933 comm=".myapplication1" name="prj_source" dev="sysfs" ino=11969 scontext=u:r:untrusted_app:s0:c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[  476.231630] type=1400 audit(1571366704.864:181): avc: denied { open } for pid=933 comm=".myapplication1" path="/sys/devices/20072000.i2c/i2c-0/0-001b/prj_source" dev="sysfs" ino=11969 scontext=u:r:untrusted_app:s0:c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[  476.231821] type=1400 audit(1571366704.864:182): avc: denied { getattr } for pid=933 comm=".myapplication1" path="/sys/devices/20072000.i2c/i2c-0/0-001b/prj_source" dev="sysfs" ino=11969 scontext=u:r:untrusted_app:s0:c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+[  476.231996] type=1400 audit(1571366704.864:183): avc: denied { connectto } for pid=933 comm=".myapplication1" path="/dev/socket/property_service" scontext=u:r:untrusted_app:s0:c512,c768 tcontext=u:r:init:s0 tclass=unix_stream_socket permissive=1
+[  477.216607] vkey:63
+[  477.856225] vkey:63
+[  478.495794] vkey:63
+[  479.145393] vkey:63
+[  479.784907] vkey:63
+[  480.571222] vkey:63
+[  481.467550] vkey:63
+[  482.107258] vkey:63
+[  482.746824] vkey:63
+[  483.386472] vkey:63
+[  484.026011] vkey:63
+[  485.069121] vkey:63
+[  485.708647] vkey:63
+[  486.348399] vkey:63
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  508.685253] vkey:63
+[  509.324466] vkey:63
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  509.964319] vkey:63
+[  510.613698] vkey:63
+[  512.138947] vkey:63
+[  512.748260] healthd: battery l=100 v=3640 t=0.0 h=2 st=5 chg=
+[  512.778284] vkey:63
+[  513.418115] vkey:63
+[  514.057584] vkey:63
+[  514.697390] vkey:63
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  515.336830] vkey:63
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  515.986347] vkey:63
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  516.626076] vkey:63
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ getprop | grep keystone
+wtx:getprop
+e  524.483225] type=1400 audit(1571366753.914:184): avc: denied { open } for pid=3488 comm="[gcur.prej.tpkreoyps"t opnath="e_ac/tdiveve/]_:_ p[rowoprekr]ti
+vs_[_p/eur:objectsi_rs:ts.epcrj.urekbooet_prysotpo:ne]: s[0o"n ]de
+b=["ptmpfs" ineor=s2i2s1t9. ssycso.nkteeyxst=tuo:ner:.sdhieslpll:asy0. ht]c:on tex[t7=2u0:]o
+=j[epcetr_sri:stse.csuyrse.bokeoyt_prosp:ts0o ntec.ldasissp=lfaiyl.we ]:pe rm[i1s2s8i0v]e
+[1
+up[ersist.sy s .5k2e4yst.4840o1n0e]. ltby]p:e =[104,000] a
+d[dpietr(s1i57st1.3s6y6s7.k53e.y91s4:t1o8n5e).l: ta]v:c :[ d5e,0]nie
+=[persi {s tg.estyats.tkre y} fsotro npei.dr=b3]4:8 8[ 0c,o0m]m
+_"getpro[pp"e rpsaitsht=."s/ydse.vk/e_ys_protpoenret.ierst]__:/ u[:-o5bj,0e]ct
+m[perr:ssiesctu.resybso.okte_ysptroonpe.updat:es0]:"  [d0ev]="t
+ect[ssy"s. ino=k2e2y1s9t osnceo.nvteresioxnt]=:u :[rv:2s.h0e.l1l_:as0l tpcohnat_e2x0t=18u0:1o0b2j]
+0  _r:secureboot_prrokp:s0 1t2c8l_absosx=:f/islyes /pebus/i2rc/mdiesvsiiceves=/10-
+ 0[  512b4 .$484215 ] type=1400 audit(1571366753.914:186): avc: denied { open } for pid=3488 comm="getprop" path="/dev/__properties__/u:object_r:pppoe_prop:s0" dev="tmpfs" ino=2220 scontext=u:r:shell:s0 tcontext=u:object_r:pppoe_prop:s0 tclass=file permissive=1
+[  524.484414] type=1400 audit(1571366753.914:187): avc: denied { getattr } for pid=3488 comm="getprop" path="/dev/__properties__/u:object_r:pppoe_prop:s0" dev="tmpfs" ino=2220 scontext=u:r:shell:s0 tcontext=u:object_r:pppoe_prop:s0 tclass=file permissive=1
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ getprop | grep keystone               
+[cur.prj.keystone_active]: [work]
+[persist.prj.keystone]: [on]
+[persist.sys.keystone.display.h]: [720]
+[persist.sys.keystone.display.w]: [1280]
+[persist.sys.keystone.lb]: [0,0]
+[persist.sys.keystone.lt]: [5,0]
+[persist.sys.keystone.rb]: [0,0]
+[persist.sys.keystone.rt]: [-5,0]
+[persist.sys.keystone.update]: [0]
+[sys.keystone.version]: [v2.0.1_alpha_20180102]
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  537.978693] vkey:63
+[  538.628179] vkey:63
+[  539.267732] vkey:63
+rk3128_box:/sys/bus/i2c/devices/0-001b $ getprop | grep keystone[  539.907291] vkey:63
+
+[cur.prj.keystone_active]: [work]
+[persist.prj.keystone]: [on]
+[persist.sys.keystone.display.h]: [720]
+[persist.sys.keystone.display.w]: [1280]
+[persist.sys.keystone.lb]: [0,0]
+[persist.sys.keystone.lt]: [50,0]
+[persist.sys.keystone.rb]: [0,0]
+[persist.sys.keystone.rt]: [-50,0]
+[persist.sys.keystone.update]: [1]
+[sys.keystone.version]: [v2.0.1_alpha_20180102]
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  540.546974] vkey:63
+[  541.186482] vkey:63
+rk3128_box:/sys/bus/i2c/devices/0-001b $ getprop | grep keystone               
+[cur.prj.keystone_active]: [work]
+[persist.prj.keystone]: [on]
+[persist.sys.keystone.display.h]: [720]
+[persist.sys.keystone.display.w]: [1280]
+[persist.sys.keystone.lb]: [0,0]
+[persist.sys.keystone.lt]: [45,0]
+[persist.sys.keystone.rb]: [0,0]
+[persist.sys.keystone.rt]: [-45,0]
+[persist.sys.keystone.update]: [1]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+rild.libpath=/system/lib/libril-rk29-dataonly.so          
+rild.libargs=-d /dev/ttyACM0                
+persist.tegra.nvmmlite = 1                                   
+ro.audio.monitorOrientation=true                                                         
+                                                                                                
+#NFC                                                 
+debug.nfc.fw_download=false                               
+debug.nfc.se=false                                        
+                                                             
+#add Rockchip properties here                                                            
+ro.rk.screenshot_enable=true                                                                    
+ro.rk.def_brightness=200                                                                        
+ro.rk.homepage_base=http://www.google.com/webhp?client={CID}&amp;source=android-home
+ro.rk.install_non_market_apps=false                                                      
+sys.hwc.compose_policy=0                                                                        
+sys.hwc.enable=0                                    
+sys.wallpaper.rgb565=0                                                              
+sf.power.control=8847360                             
+sys.rkadb.root=0                                             
+ro.sf.fakerotation=false                                                                 
+ro.sf.hwrotation=0                                                                              
+ro.rk.MassStorage=false                                                                         
+ro.rk.systembar.voiceicon=true                                                                  
+ro.rk.systembar.tabletUI=false                                                                  
+ro.rk.LowBatteryBrightness=true                                                     
+ro.tether.denied=false                                    
+sys.resolution.changed=false                        
+ro.default.size=100                                 
+persist.sys.timezone=                                     
+ro.product.usbfactory=rockchip_usb                        
+wifi.supplicant_scan_interval=15                
+ro.factory.tool=0                              
+#set default lcd density to Rockchip RK3128                                         
+ro.sf.lcd_density=160                                     
+ro.adb.secure =0                                          
+media.stagefright.audio.sink=150                     
+                                                
+#                                                            
+# ADDITIONAL_BUILD_PROPERTIES                                                            
+#                                                                                               
+dalvik.vm.heapstartsize=8m           
+dalvik.vm.heapgrowthlimit=80m                             
+dalvik.vm.heapsize=384m                    ery l=100 v=3640 t=0.0 h=2 st=5 chg=     
+dalvik.vm.heaptargetutilization=0.75                
+dalvik.vm.heapminfree=512k                 
+dalvik.vm.heapmaxfree=8m                       
+ro.com.widevine.cachesize=16777216                        
+ro.rksdk.version=RK30_ANDROID7.1.2-SDK-v1.00.00           
+camera2.portability.force_api=1                                                     
+persist.sys.strictmode.visual=false                                                 
+ro.rk.bt_enable=true                                                                
+ro.rk.flash_enable=false                                                            
+ro.rk.hdmi_enable=true                            
+ro.factory.hasUMS=false                                   
+
+[sys.keystone.version]: [v2.0.1_alpha_20180102]
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  543.311855] vkey:63
+[  544.345199] vkey:63
+[  544.984820] vkey:63
+[  545.624392] vkey:63
+rk3128_box:/sys/bus/i2c/devices/0-001b $ getprop | grep keystone               
+[cur.prj.keystone_active]: [work]
+[persist.prj.keystone]: [on]
+[persist.sys.keystone.display.h]: [720]
+[persist.sys.keystone.display.w]: [1280]
+[persist.sys.keystone.lb]: [15,0]
+[persist.sys.keystone.lt]: [0,0]
+[persist.sys.keystone.rb]: [-15,0]
+[persist.sys.keystone.rt]: [0,0]
+[persist.sys.keystone.update]: [1]
+[sys.keystone.version]: [v2.0.1_alpha_20180102]
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  546.264044] vkey:63
+rk3128_box:/sys/bus/i2c/devices/0-001b $ getprop | grep keystone[  546.913985] vkey:63
+
+[cur.prj.keystone_active]: [work]
+[persist.prj.keystone]: [on]
+[persist.sys.keystone.display.h]: [720]
+[persist.sys.keystone.display.w]: [1280]
+[persist.sys.keystone.lb]: [25,0]
+[persist.sys.keystone.lt]: [0,0]
+[persist.sys.keystone.rb]: [-25,0]
+[persist.sys.keystone.rt]: [0,0]
+[persist.sys.keystone.update]: [0]
+[sys.keystone.version]: [v2.0.1_alpha_20180102]
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  547.553118] vkey:63
+[  548.192673] vkey:63
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ [  549.875431] vkey:63
+cd[  550.514915] vkey:63
+[  551.154505] vkey:63
+
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ 
+rk3128_box:/sys/bus/i2c/devices/0-001b $ cd  /system
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ vi build.prop                                             
+/system/bin/sh: vi: not found
+127|rk3128_box:/system $ busybox [  571.848115] healthd: battery l=100 v=3640 t=0.0 h=2 st=5 chg=
+
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ 
+rk3128_box:/system $ [  665.969633] healthd: battery l=100 v=3640 t=0.0 h=2 st=5 chg=
