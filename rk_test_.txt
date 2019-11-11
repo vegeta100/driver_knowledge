@@ -1122,3 +1122,5 @@ linux command:jgrep 'Settings.Secure' | grep LOCATION
 		    不是很冬的是，现在可以测试什么？左右是怎恶魔测的？
 ~/work/M358_OP102S/SDK1102$ mmm device/mstar/common/executables/zjscbatt/
 电池这个，编译这个就可以了
+
+
