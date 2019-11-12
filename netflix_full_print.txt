@@ -1,0 +1,813 @@
+130|P2-A:/ $ logcat -c
+P2-A:/ $ logcat
+--------- beginning of main
+11-12 02:12:43.133  1019  1033 W art     : Suspending all threads took: 6.245ms
+11-12 02:12:46.118  1818  1830 W art     : Suspending all threads took: 7.293ms
+--------- beginning of system
+11-12 02:12:48.266   948   948 W ViewRootImpl[MainActivity]: Cancelling event due to no window focus: MotionEvent { action=ACTION_CANCEL, actionButton=0, id[0]=0, x[0]=409.53232, y[0]=331.68637, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=170951, downTime=87693, deviceId=1, source=0x2002 }
+11-12 02:12:48.266   948   948 W ViewRootImpl[MainActivity]: Cancelling event due to no window focus: MotionEvent { action=ACTION_CANCEL, actionButton=0, id[0]=0, x[0]=409.53232, y[0]=331.68637, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=170951, downTime=87693, deviceId=1, source=0x2002 }
+11-12 02:12:48.266   948   948 W ViewRootImpl[MainActivity]: Cancelling event due to no window focus: MotionEvent { action=ACTION_CANCEL, actionButton=0, id[0]=0, x[0]=409.53232, y[0]=331.68637, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=170951, downTime=87693, deviceId=1, source=0x2002 }
+11-12 02:12:48.267   948   948 W ViewRootImpl[MainActivity]: Cancelling event due to no window focus: MotionEvent { action=ACTION_CANCEL, actionButton=0, id[0]=0, x[0]=409.53232, y[0]=331.68637, toolType[0]=TOOL_TYPE_MOUSE, buttonState=0, metaState=0, flags=0x0, edgeFlags=0x0, pointerCount=1, historySize=0, eventTime=170951, downTime=87693, deviceId=1, source=0x2002 }
+[  168.743157] rk312x-lcdc lcdc0: win0:new_addr:0x10195000 cur_addr:0x1032a000--1
+[  169.044199] rk312x-lcdc lcdc0: win0:new_addr:0x10195000 cur_addr:0x1032a000--1
+11-12 02:12:49.354   948   948 E TAG     : set_devval:/sys/bus/i2c/devices/0-00[  169.519b2/4,p13] =============rj====_=s=o=u====prrjc_he,dSmb
+
+[  111-69.12 5025:11724:]4 9t.y3pe4=134 0 0 9 a4u8d i t (14587 3I5 42769.ple.3l4aunche3r:_5959: ): avc: denityepe=d1 4{0 0w raiutdei t}( 0for pid.=9480 :c5o5m)m:=" plaev.lc:a udennciheer_d99 "{  nwamritee }" pfrojr_ sounarce" dmeev=="p"rjy_ssfsu ricneo="12917 scont edxet=u:vr=:"usnytrusted_asfpps:"s 0i:nc5o=1212917,c scont7e6x8t =tuc:ontrex:tu=nut:roubljeed_acptp_:rs0::scy512,scf7s68 tco:ns0t textc=las:sobj=efcilte_ r:sysfpse:rsm0i stclsaisvse==f1i
+od  169.596066e ] whpp=e=r=====mi===s=rvk3e=112x_c
+2 e11c-_p1o2w e0_u:p1
+ :[49. 34169.359 9195482]   t 94yp8 eI= 1pl400 aeu.dliatu(n1c5h7e3r_5949:2 769.ty3p43:5e6=)1: 0a0vacu:d idte(n0.0:56): avic: denieedd  { {o opepne n}  f} ofro rp ipad=948h=co"m/msys=/d"epvicee.lsauncher_99" path="/sys//2d0e0v7i2ces/20007002.00i2c.i2/ic2/ic2c--00//0-0010b-/prj_0so0ur1b/pcrej_"s oduerce" devv="=sy"ssfyss" fisn"o =ino=1122991177  scontexscontext=u:r:untrusted_atp=u:r:pun:trs0u:sct5e1d2_,acp768 ptc:osn0t:ecx5t1=2u,:co7b68je ctt_r:syscfs:so0n ttecxlta=sus=fi:loeb jpecetrm_issive=1
+{  169.599435] try:sysfs:sp0e tc=l1a4s0s0 audit=f(1573i5l4e 2p7e69.34r3m:i5s7s)i:v ea=vc:1 denied 
+  ge1t1a-t12 02:12:4t9.r 3} for p4id3= 9 48 com 948   948m= I "ple.launcher_99" papthle=."l/asuys/devicnecsh/e2r007200_0.9i92:c/ ity2pec-=01/000-0 a0u1dit(0/prj_source. 0dev:=5"-s):y savc: "de innio=e12917 scontext=u:r:untrusted_app:sd0 :{ cg5e1t2a,tct7r 6}8f otrc opnatext=u:objh="c/t_ry:ss/ydsefvis:sc0 etclass/s2=0f0i7l2e0 0p0e.rimi2cssi/i2c-v0e/=01
+ 001b/prj_source" dev="sysfs" ino=12917 scontext=u:r:untrusted_app:s0:c512,c768 tcontext=u:object_r:sysfs:s0 tclass=file permissive=1
+11-12 02:12:49.357   190   222 D AudioHardwareTiny: out_set_parameters: kvpairs = routing=525312
+11-12 02:12:49.358   190   222 D AudioHardwareTiny: start_output_stream
+11-12 02:12:49.358   948   948 E hdmi    : ==================================start
+11-12 02:12:49.361   190   222 D AudioHardwareTiny: read_snd_card_info buf0 = RKRK312X
+11-12 02:12:49.361   190   222 D AudioHardwareTiny: read_snd_card_info buf1 = RKSPDIFCARD
+11-12 02:12:49.361   190   222 D AudioHardwareTiny: read_snd_card_info buf2 = 
+11-12 02:12:49.361   190   222 D AudioHardwareTiny: Device     : 0x80400
+11-12 02:12:49.361   190   222 D AudioHardwareTiny: SampleRate : 44100
+11-12 02:12:49.361   190   222 D AudioHardwareTiny: Channels   : 2
+11-12 02:12:49.361   190   222 D AudioHardwareTiny: Formate    : 0
+11-12 02:12:49.361   190   222 D AudioHardwareTiny: PreiodSize : 512
+11-12 02:12:49.361   190   222 D alsa_route: route_info->sound_card 0, route_info->devices 0  
+11-12 02:12:49.362   472   484 I ActivityManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 pkg=com.android.camera2 cmp=com.android.camera2/com.android.camera.CameraLauncher} from uid 10045 on display 0
+11-12 02:12:49.362   190   222 D alsa_route: route_set_controls() set route 24
+11-12 02:12:49.404   472  1608 I ActivityManager: Start proc 2348:com.android.camera2/u0a28 for activity com.android.camera2/com.android.camera.CameraLauncher
+11-12 02:12:49.645  2348  2348 V CAM_Profiler: [  0.000ms][ui] GUARD: CameraApp onCreate() - START
+11-12 02:12:49.647  2348  2348 V CAM_Profiler: [  0.000ms][ui] GUARD: FirstRunDetector getTimeOfFirstRun - START
+11-12 02:12:49.648  2348  2348 V CAM_Profiler: [  1.425ms][ui] GUARD: FirstRunDetector getTimeOfFirstRun - [ 1.425ms] PreferenceManager.getDefaultSharedPreferences
+11-12 02:12:49.652  2348  2348 V CAM_Profiler: [  5.656ms][ui] GUARD: FirstRunDetector getTimeOfFirstRun - [ 4.232ms] preferences.getLong
+11-12 02:12:49.653  2348  2348 V CAM_Profiler: [  6.462ms][ui] GUARD: FirstRunDetector getTimeOfFirstRun - STOP
+11-12 02:12:49.654  2348  2348 V CAM_Profiler: [ 11.078ms][ui] GUARD: CameraApp onCreate() - [11.078ms] initializeTimeOfFirstRun
+11-12 02:12:49.655  2348  2348 V CAM_Profiler: [ 12.302ms][ui] GUARD: CameraApp onCreate() - [ 1.224ms] UsageStatistics.initialize
+11-12 02:12:49.658  2348  2348 V CAM_Profiler: [ 15.258ms][ui] GUARD: CameraApp onCreate() - [ 2.956ms] clearNotifications
+11-12 02:12:49.659  2348  2348 I CAM_Profiler: [ 15.258ms][ui] GUARD: CameraApp onCreate() - STOP
+11-12 02:12:49.695  2348  2348 V CAM_QuickActivity: START onCreate: Activity = com.android.camera.CameraActivity@ea6ccaf
+11-12 02:12:49.696  2348  2348 V CAM_Profiler: [  0.000ms][ui] GUARD: CameraActivity.onCreateTasks - START
+11-12 02:12:49.697  2348  2348 D CAM_LocationManager: Using legacy location provider.
+11-12 02:12:49.733  2348  2348 D CAM_MemoryManagerImpl: Max native memory: 268 MB
+11-12 02:12:49.753  2348  2348 I CAM_OneCamFtrCnfgCrtr: CaptureModule? false
+11-12 02:12:49.796  2348  2348 I CAM_Profiler: [100.309ms][ui] GUARD: CameraActivity.onCreateTasks - [39.486ms] Glide.setup
+11-12 02:12:49.800  2348  2348 V CAM_Profiler: [103.952ms][ui] GUARD: CameraActivity.onCreateTasks - [ 3.643ms] OneCameraManager.get
+11-12 02:12:49.806   191   191 D CameraHal: camera_get_camera_info(1441): camera_get_camera_info(1441): camera_0 facing(0), orientation(0)
+11-12 02:12:49.811   191   191 D CameraHal: camera_get_camera_info(1441): camera_get_camera_info(1441): camera_0 facing(0), orientation(0)
+11-12 02:12:49.816  2348  2348 D CAM_SettingsUtil: whp:3
+11-12 02:12:49.817  2348  2348 V CAM_Profiler: [121.281ms][ui] GUARD: CameraActivity.onCreateTasks - [ 6.613ms] computePictureSizes
+11-12 02:12:49.873  2348  2348 W CAM_Log : Tag RoundedThumbnailView is 1 chars longer than limit.
+11-12 02:12:49.981  2348  2348 W CAM_Log : Tag ModeOptionsScreenEffects is 5 chars longer than limit.
+11-12 02:12:50.004  2348  2348 W art     : Before Android 4.1, method void com.android.camera.widget.VerticalSeekBar.onStartTrackingTouch() would have incorrectly overridden the package-private method in android.widget.SeekBar
+11-12 02:12:50.004  2348  2348 W art     : Before Android 4.1, method void com.android.camera.widget.VerticalSeekBar.onStopTrackingTouch() would have incorrectly overridden the package-private method in android.widget.SeekBar
+11-12 02:12:50.049  2348  2348 I CAM_BottomBar: isHorizontal = false, isPortrait = false
+11-12 02:12:50.159  2348  2348 I CAM_Profiler: [462.960ms][ui] GUARD: CameraActivity.onCreateTasks - [337.491ms] setContentView()
+11-12 02:12:50.172  2348  2348 D CAM_CameraActivity: *********hideSystemUI************
+11-12 02:12:50.184  2348  2348 I CAM_Profiler: [488.192ms][ui] GUARD: CameraActivity.onCreateTasks - [25.232ms] Configure Camera UI
+11-12 02:12:50.196  2348  2348 I CAM_CameraActivity: onFilmstripHidden()
+11-12 02:12:50.196  2348  2348 W CAM_CameraActivity: whp:22222
+11-12 02:12:50.201  2348  2348 V CAM_ModulesInfo: EnableCaptureModule = false
+11-12 02:12:50.205  2348  2348 V CAM_SettingsManager: listeners: [com.android.camera.app.CameraAppUI@5271baf]
+11-12 02:12:50.207  2348  2348 E CAM_CameraAppUI: =============showBottomBar==================
+11-12 02:12:50.214  2348  2348 V CAM_SettingsManager: listeners: [com.android.camera.app.CameraAppUI@5271baf, com.android.camera.ButtonManager@6a5aa66]
+11-12 02:12:50.215  2348  2348 V CAM_SettingsManager: listeners: [com.android.camera.app.CameraAppUI@5271baf, com.android.camera.ButtonManager@6a5aa66, com.android.camera.widget.IndicatorIconController@6dc5654]
+11-12 02:12:50.216  2348  2348 V CAM_Profiler: [519.546ms][ui] GUARD: CameraActivity.onCreateTasks - [10.192ms] Init Current Module UI
+11-12 02:12:50.234  2348  2348 I CAM_Profiler: [538.322ms][ui] GUARD: CameraActivity.onCreateTasks - [18.776ms] Init CurrentModule
+11-12 02:12:50.239  2348  2348 V NFC     : this device does not have NFC support
+11-12 02:12:50.246  2348  2348 I CAM_Profiler: [550.312ms][ui] GUARD: CameraActivity.onCreateTasks - STOP
+11-12 02:12:50.246  2348  2348 V CAM_QuickActivity: END onCreate: Activity = com.android.camera.CameraActivity@ea6ccaf
+11-12 02:12:50.249  2348  2348 V CAM_QuickActivity: START onStar[t :  170.536120] tActivity = com.android.camera.CameraActivity@ea6ccafype
+r1114-0102 02: 1a2u:50.2dit(157368  2348  234854 I 2CAM_C7a7m0.2eraAct9ivi3t:58): avc: denied y: onFilmstripHidden({ )sea
+ c1h } for 1p-i1d2= 10929: 1c2o:m5m0=."2Binder6:8199_1 " 23 4n8a m e23=4"81 9W CAM_CameraActivity: whp:22222
+te-12 02:12:50.268  2348  2372 V CAM_CameraDataAdapt1er: retrieved photo " dev=m"etadatap,r numocb"e ri noof= 3i3t8e1m ss:c o0n
+msx11-12 02t:12:50.268  2348= u 2372 V: rC:mediaserAMv_eCra:mse0r tacDoantext=u:tra:Acdaapterme:r arseetrreiever:s0 tcldas vs=dir pdeo metadearta, nummisber of isive=t1e
+7 [:   01
+ 011-12 02:12:50.268  2348  2372 V CAM_Cam.e5r585aDataA5d2ap]t etr:y pse=1orting video/photo met400 aadata
+d1-12 0u2d:12:50.269  2348  23i7t2(1 5V7 3C5AM_CameraDataAdapter:4 sorted v2id7eo/p7h0o.293:t5o9 )me:t aadvact: a
+ e11-12nie 02:12:5d0. 27{0  r e2348  2348 aVd  C} AfMorQ upickActivity: ENiD o=n1S9t9 art: Amctmi="Bindveri:t199_1"y  =n acmom.ea=ndr"oicdmdli.ncea"m edreav.=C"apmreroac" ino=77A9 sccotnitveixtty=@uea6c:craf
+11-12 02:12:50.272  2348  2348 V CAM_QuickActivity: START onResume: Activity = com.android.camera.CameraActivity@ea6ccaf
+11-12 0:2m:ed12:50.274i  23as48 e 2348 V rver:s0CAM _tQuiccoknActtivity: onResume(): isKeyguardLocked() = false
+tc1l1a-s12 02:12:50.2s76  2348  2348 V CAM_Profile=rf:ile p er[m i ss0i.v0e0=1r-v>er onResumeTasks(:)s0 
+[  170ms][ui] GUARD: CameraActivity.resume - START
+11-12 02:12:50.277  2348  2348 V CAM_CameraActivit0.564812] y: Build info: rk3128_box-userdebug 7.1.2 NHG47K eng.wanghp.20180125.221416 test-keys
+11-12 02:1t2y:p50.282  2e3=4184 0 02 34a8u dIi t(15735CAM_Came4r2aActiv7i7ty0.293::6 0g)e:t  amvecd:i adpeantihe d { opven } for alue = flash
+11-12 02:12:50.290  2348  2374 D CAM_Storage: External storage state=mounted
+11-12 02:12:50pid.298  2348  2374 =199 cEom m="BiCAM_Storander:g1e: 9g9e_t1" pathO="the/rpAroc/191/cvmadillianbele"S pdaecv="e DIRECTORY:/DCIM/Camera UNAVAIpLrAoc" ino=7719 scontexLt=Eu
+ar:mediaserver:s0 tconte11-12 0t=u2::r1:2c:a5m0e.r299  2348  2348 W aOrientatsierovnEevre:nst0L tclaisstsener: =Cfainnot dlee permtecit ssensors.s Notive =e1n
+8[b  1l7ed0.65
+ 037] type=11400 1a-1u2d i0t(21:517235:4207.370.403:02  2348 6 12)3:7 1a E WVMExtractor: Failed to open libwvm.so: dlopen failvc: denieedd: l ibr{ sarey "alribchwvm.s o} for"  nooitd =f1o9un1d c
+ m11m-=1"2 02:12:B5i0n.d3e0r2:  23481 9 2348 1_1" nVam CeAM_PhotoModule: requestCameraOpen
+11-12 02:1=2:50."33043  283"4 8d  2348e vV= "pCAroc"M_Came riCnoontrol=21117 scontext=u:r:calmeerra:s rerevqeure:sst0C atmcoenrtext=u:r:plaa
+11-12t 02:12:50.3fo0rm3_  a2p348  2348 V CAM_ActvCamDevTrckr: Tracking active camera: npull:s0
+:11-12 02:12:50.303  2348  2348 V CAM_CameraController: checkAndOpenCamera
+8 -12 02:12:50.306  2348  2367 I CAM2PORT_AndCamAgntImp: Opce5n1ing2c,ac7mera 0 with camera1 API6
+  tc1l1a-s1s2= d0i2r: 1p2e:rm50i.s2s9i3v   199e = 1
+ 199[  I  Binder:199_1: type=1400 audit(0.0:58): avc: denied { search } for na1m7e0=."7191" dev="proc"2 7ino=33815 s83context=u:r:media]serve rtyp:s0e tcont=e1x4t00 aud=iut(:15735r:4c2a7m7e0.403:r62a)s:e arver:s0 tclass=dir permissive=1
+11-12 02:12:50.306   191   191 D CameraHal: camera_getvc: d_encaimeedr a{_ nrfo(a1441): camera_get_cadm e}r afor pid=_1i9n1fo c(o14m4m1)=:" Bciamnedrea_r0 f:a1c9i1n_g(0), orientation(0)
+11-12 02:12:50.308   191 1 "  505 nIa mCeameraServi=ce"c:m dClaine" devm="preracS"e rivice::connect ncall o(=P2I1D1 2-61  "sccoomn.antdroid.camerexat2", came=ur:ar I:Dcamer a0) for HAL version default and Camera API version 1ser
+11v-e12 0r2::s102:50.30 9   191 t c 505 D CameraHal: cameontext=ra_uge:tr_:npulmabter_offo_rcma_ampepr:as(1s0:c52122,8c)7:6 8c atmera_get_cnumber_of_cameras(1228): Current board have 1 cameras alastst=aficlhee dp.
+2 missi11ve=-11
+  0[ 2:1 21:750.797103.83] zjh0p01_9b   ac19k1_ 3 ( r5k0_5c aDm _CameraHal: casmeernaso_r:637ge)t: wh_pnumber_of_cameras(1231): meida_profiles_xml_co:thintrol tis resomleu t(i9o2(12)us80x7
+ 01)1 -i1s2 02:12n't s:50.30upport!
+9 [  1 9 11 70  .570957 2D 6] CzjamehrpaHal: ca0m1e_raba_ck_3g(etr_kc_acmera_info(1441): camera_get_camera_info(1441): camera_0 facing(0)am_,s eonrsioern:t6a37ti)o:n( 0w)
+4p11-12 02:12:50.3:10this r e s2ol34u8t i o2348 V CnAM(_8P0r0oxf6il0e0r): [ i n3't3 .279msupport!s][ui] GUARD: CameraActivity.resume - [ 9.76
+ [  170.798982] zjhpms] mCurrentModule.resume
+11-12 02:12:50.293   199   199 I Binder:199_1: type=1400 audit(0.0:59): avc: denied { read } for name="cmdline" dev="proc" ino=7719 scontext=u:r:mediaserver:s0 t0context=u:r:c1a era_sbearcvekr:s0 tclass=file p_e3(rk_rcmam_seinsssoivr:e1=1115):
+1v4l121_-ex2t 0_2c:o1n2t:r5o0.l29 3 i d 19(9 0x9a093 3 19)9  iIs iBnivnaliddaetre:
+ 9[  170.79991_718:]  ztjhypp0e1=_bac1k4_03(0 rakud_icta(m0_s.e0n:s60): avco:r :d1enied 06{ open } fo3)r :path=" /procv/41l92_1/ccomndtlrinol id(0ex"98d0e9v1=1"p)r oics" ino =inv7al7i1d9 scontexat=tue
+:r:mediaserver:s0 tcontext=u:r:cameraserver:s0 tclass=file permissive=1
+11-12 02:12:50.311   199   244 I MediaPlayerService: processName cmdline:/proc/191/cmdline
+11-12 02:12:50.311  2348  2348 V CAM_Profiler: [ 34.579ms][ui] GUARD: CameraActivity.resume - [ 0.069ms] mPanoramaViewHelper.onResume()
+11-12 02:12:50.311  2348  2348 I CAM_BottomBar: isHorizontal = false, isPortrait = false
+11-12 02:12:50.312  2348  2348 I CAM_Profiler: [ 35.750ms][ui] GUARD: CameraActivity.resume - STOP
+11-12 02:12:50.313  2348  2348 V CAM_QuickActivity: END onResume: Activity = com.android.camera.CameraActivity@ea6ccaf
+11-12 02:12:50.330  2348  2371 I MediaCodec: callingProcessName:com.android.camera2
+11-12 02:12:50.341   199  2377 D NuPlayerDriver: notifyListener_l(0xabda0a80), (1, 0, 0), loop setting(0, 0)
+11-12 02:12:50.343   199   199 I MediaPlayerService: MediaPlayerService::getOMX
+11-12 02:12:50.344   199   651 I MediaPlayerService: processName cmdline:/proc/191/cmdline
+11-12 02:12:50.348  2348  2380 I OMXClient: MuxOMX ctor
+11-12 02:12:50.348  2348  2380 I ACodec  : onAllocateComponent:6703 mSoftCodecPref:0 componentName:
+11-12 02:12:50.350  2348  2380 I ACodec  : onAllocateComponent:6734 mSoftCodecPref:0 componentName:OMX.google.vorbis.decoder
+11-12 02:12:50.356   195   787 I OMXMaster: makeComponentInstance(OMX.google.vorbis.decoder) in mediacodec process
+11-12 02:12:50.365  2348  2359 I art     : Background partial concurrent mark sweep GC freed 4879(543KB) AllocSpace objects, 2(40KB) LOS objects, 39% free, 3MB/5MB, paused 8.193ms total 56.677ms
+11-12 02:12:50.367  2348  2348 I [Gralloc]:  ion device open success! fd = 46
+11-12 02:12:50.403   191   191 I Binder:191_1: type=1400 audit(0.0:61): avc: denied { search } for name="2348" dev="proc" ino=21117 scontext=u:r:cameraserver:s0 tcontext=u:r:platform_app:s0:c512,c768 tclass=dir permissive=1
+11-12 02:12:50.403   191   191 I Binder:191_1: type=1400 audit(0.0:62): avc: denied { read } for name="cmdline" dev="proc" i[n o =127111.216 4s2c5o51] ntrext=ukr_c:caammeerraa_spstrseeram:stvreera:ms0  etncable ontext=u:r:platCfoIrm_app:s0:c5F1_CIF_2,c768C TtRcL la0sxfs=fil001e 
+ ermissive=1
+11-12 02:12:50.377   199  2381 D NuPlayerDriver: notifyListener_l(0xabda0ba0), (1, 0, 0), loop setting(0, 0)
+11-12 02:12:50.379   199   244 I MediaPlayerService: processName cmdline:/proc/191/cmdline
+11-12 02:12:50.395  2348  2348 V CAM_CameraActivity: ignoring storage callback after activity pause
+11-12 02:12:50.403  2348  2348 E CAM_ModeListView: ===========================onVisibilityChanged
+11-12 02:12:50.403  2348  2348 E CAM_CameraAppUI: onModeListClosed========================================
+11-12 02:12:50.408   199  2383 D NuPlayerDriver: notifyListener_l(0xabda0c60), (1, 0, 0), loop setting(0, 0)
+11-12 02:12:50.412   191   505 I CameraFlashlight: Opening camera 0
+11-12 02:12:50.412   191   505 D CameraHal: camera_get_camera_info(1441): camera_get_camera_info(1441): camera_0 facing(0), orientation(0)
+11-12 02:12:50.412   191   505 I CameraHal: camera_device_open(567): whp:camera_device open
+11-12 02:12:50.412   191   505 D CameraHal: gCameraHalLogLevel: 0
+11-12 02:12:50.412   191   505 D CameraHal: CameraHal(140): it is a soc camera!
+11-12 02:12:50.412   191   505 D CameraHal: CameraSOCAdapter(24): CameraSOCAdapter(24):IN
+11-12 02:12:50.413   191   505 D CameraHal: Calling process is: com.android.camera2
+11-12 02:12:50.414   191   505 I vpu_mem_pool: pid 191, open_vpu_memory_pool:473: success
+11-12 02:12:50.415   191   505 D CameraHal: Calling process is: com.android.camera2
+11-12 02:12:50.431   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (80000)
+11-12 02:12:50.431   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 29
+11-12 02:12:50.431   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (160000)
+11-12 02:12:50.431   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 31
+11-12 02:12:50.431   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (240000)
+11-12 02:12:50.431   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 35
+11-12 02:12:50.432   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (320000)
+11-12 02:12:50.432   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 36
+11-12 02:12:50.432   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (400000)
+11-12 02:12:50.432   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 37
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (480000)
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 38
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (560000)
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 39
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (640000)
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 40
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (720000)
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 41
+11-12 02:12:50.433   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:717: vpu memory pool size (800000)
+11-12 02:12:50.434   191  2386 I vpu_mem_pool: pid 191, vpu_mem_allocator:720: ion_alloc_fd success, memory fd 42
+11-12 02:12:50.455  2348  2379 I mali_so : [File] : hardware/rockchip/driver/./src/base/arch/arch_011_udd/base_arch_main.c; [Line] : 565; [Func] : deal_with_version_affairs_rk_ext;
+11-12 02:12:50.455  2348  2379 I mali_so : arm_release_ver of this mali_so is 'r7p0-00rel1', rk_so_ver is '3@0' for 312x_android_7.1, built at '17:58:49', on 'Apr 11 2017'.
+11-12 02:12:50.455  2348  2379 I mali_so : [File] : hardware/rockchip/driver/./src/base/arch/arch_011_udd/base_arch_main.c; [Line] : 578; [Func] : deal_with_version_affairs_rk_ext;
+11-12 02:12:50.455  2348  2379 I mali_so : mali_ver_property has been set to 'r7p0-00rel1-5-3@0', to return.
+11-12 02:12:50.457  2348  2379 I OpenGLRenderer: Initialized EGL, version 1.4
+11-12 02:12:50.458  2348  2379 D OpenGLRenderer: Swap behavior 1
+11-12 02:12:50.462  2348  2348 V CAM_TexViewHelper: onLayoutChange
+11-12 02:12:50.463  2348  2348 V CAM_TexViewHelper: updateTransform
+11-12 02:12:50.465  2348  2348 I CAM_CameraActivity: onFilmstripHidden()
+11-12 02:12:50.466  2348  2348 W CAM_CameraActivity: whp:22222
+11-12 02:12:50.468  2348  2348 V CAM_CameraDataAdapter: new photos query return num items: 0
+11-12 02:12:50.491  2348  2348 I CAM_CameraActivity: mOrignalScreenBrightMode = 0,mOrignalScreenBrightness = 229
+11-12 02:12:50.501  2348  2348 V CAM_TexViewHelper: updateTransform
+11-12 02:12:50.501  2348  2348 V CAM_CameraAppUI: onSurfaceTextureAvailable===========mSurfaceWidth锟斤拷864     mSurfaceHeight:480
+11-12 02:12:50.501  2348  2348 V CAM_CameraAppUI: SurfaceTexture is available
+11-12 02:12:50.501  2348  2348 I CAM_PhotoModule: onPreviewUIReady
+11-12 02:12:50.501  2348  2348 I CAM_PhotoModule: attempted to start preview before camera device
+11-12 02:12:50.502  2348  2348 I CAM_FocusRingView: Computing center via view bounds.
+11-12 02:12:50.544  2348  2348 D CAM_CameraActivity: **********onSystemUiVisibilityChange**********
+11-12 02:12:50.545  2348  2348 W CAM_CameraActivity: www:nnnnnnnnnnnnn
+11-12 02:12:50.561   472   493 I ActivityManager: Displayed com.android.camera2/com.android.camera.CameraLauncher: +1s177ms
+11-12 02:12:50.562  2348  2373 D CAM_MemoryQuery: timestamp=172936, availMem=633, totalMem=997, totalPSS=10, lastTrimLevel=5, largeMemoryClass=384, nativePSS=1, dalvikPSS=2, otherPSS=6,threshold=144, lowMemory=false
+11-12 02:12:50.580  2348  2372 D CAM_Storage: External storage state=mounted
+11-12 02:12:50.581   191   505 D CameraHal: cameraCreate(392): Camera driver: rk312x-camera  Card Name:zjhp01_back_3-0_100_100  Driver version: 0.4.0  CameraHal version: 1.80.1 
+11-12 02:12:50.581   191   505 D CameraHal: cameraCreate(399): mCamDriverSupportFmt: fmt = 842094158(YUV420 NV12),index = 0
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(399): mCamDriverSupportFmt: fmt = 909203022(YUV422 NV16),index = 1
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(399): mCamDriverSupportFmt: fmt = 825382478(YUV420 NV21),index = 2
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(399): mCamDriverSupportFmt: fmt = 825644622(YUV422 NV61),index = 3
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(399): mCamDriverSupportFmt: fmt = 842094158(YUV420 NV12),index = 4
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(399): mCamDriverSupportFmt: fmt = 909203022(YUV422 NV16),index = 5
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(399): mCamDriverSupportFmt: fmt = 825382478(YUV420 NV21),index = 6
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(399): mCamDriverSupportFmt: fmt = 825644622(YUV422 NV61),index = 7
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(437): cameraCreate(437): mCamDriverPreviewFmt(NV12) is cameraHal and camera driver is also supported!!
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(439): mCamDriverPreviewFmt  = 842094158
+11-12 02:12:50.582   191   505 D CameraHal: cameraCreate(448): cameraCreate(448): Current driver is rk312x-camera, v4l2 memory is V4L2_MEMORY_OVERLAY
+11-12 02:12:50.582   191   505 D CameraHal: initDefaultParameters(216): initDefaultParameters,mCamDriverPreviewFmt  = 842094158
+11-12 02:12:50.582   191   505 E CameraHal: initDefaultParameters(258): whpMax:::864
+11-12 02:12:50.582   191   505 E CameraHal: initDefaultParameters(267): whpMax:::800
+11-12 02:12:50.582   191   505 E CameraHal: cameraFramerateQuery(105): cameraFramerateQuery(105): Query framerate error(1280x720@NV12 index:0)
+11-12 02:12:50.583   191   505 E CameraHal: cameraFramerateQuery(105): cameraFramerateQuery(105): Query framerate error(800x600@NV12 index:0)
+11-12 02:12:50.583   191   505 D CameraHal: cameraFpsInfoSet(180): KEY_PREVIEW_FPS_RANGE : 3000,40000
+11-12 02:12:50.583   191   505 D CameraHal: cameraFpsInfoSet(192): KEY_SUPPORTED_PREVIEW_FPS_RANGE : (3000,40000)
+11-12 02:12:50.583   191   505 D CameraHal: cameraFpsInfoSet(193): KEY_SUPPORTED_PREVIEW_FRAME_RATES : 3,40,30,7
+11-12 02:12:50.583   191   505 D CameraHal: initDefaultParameters(656): Support Preview format: yuv420sp,yuv420p .. yuv420sp
+11-12 02:12:50.583   191   505 D CameraHal: initDefaultParameters(657): Support Preview sizes: 1280x720,864x480,800x600,720x480,640x480,352x288,320x240,176x144 
+11-12 02:12:50.583   191   505 D CameraHal: initDefaultParameters(658): Support Preview FPS range: (3000,40000)
+11-12 02:12:50.583   191   505 D CameraHal: initDefaultParameters(659): Support Preview framerate: 3,40,30,7
+11-12 02:12:50.583   191   505 D CameraHal: initDefaultParameters(660): Support Picture sizes: 1024x768,800x600,640x480,352x288,320x240,176x144 
+11-12 02:12:50.583   191   505 D CameraHal: initDefaultParameters(662): Support white balance: auto,incandescent,fluorescent,daylight,cloudy-daylight
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(664): Support color effect: none,mono,negative,sepia,posterize,aqua
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(666): Support scene: auto,night
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(670): Support focus: fixed  focus zone: 0
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(672): Support zoom: true(ratios: 100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200,205,210,215,220,225,230,235,240,245,250,255,260,265,270,275,280,285,290,295,300,)
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(676): Support exposure: (-2 -> 2)
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(678): Support hardware faces detecte: (null)
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(679): Support software faces detecte: (null)
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(680): Support video stabilization: false
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(681): Support recording hint: false
+11-12 02:12:50.584   191   505 D CameraHal: initDefaultParameters(682): Support video snapshot: true
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(800): cameraConfig(800): Set white balance(auto) success
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(838): cameraConfig(838): Set effect none
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(863): cameraConfig(863): Set scene auto 
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.584   191   505 E CameraHal: cameraConfig(888): cameraConfig(888): Set antibanding(off) failed
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(940): cameraConfig(940): Set ExposureLock false 
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.584   191   505 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.585   191   505 E CameraHal: cameraConfig(1012): cameraConfig(1012): Set exposure(0) failed
+11-12 02:12:50.585   191   505 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.585   191   505 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.585   191   505 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.585   191   505 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.591   191   191 D CameraHal: camera_get_camera_info(1441): camera_get_camera_info(1441): camera_0 facing(0), orientation(0)
+11-12 02:12:50.592  2348  2372 E CAM_Storage: getOtherAvailableSpace DIRECTORY:/DCIM/Camera UNAVAILABLE
+11-12 02:12:50.592  2348  2348 V CAM_CameraActivity: ignoring storage callback after activity pause
+11-12 02:12:50.593   191   191 D CameraHal: camera_get_camera_info(1441): camera_get_camera_info(1441): camera_0 facing(0), orientation(0)
+11-12 02:12:50.602  2348  2367 E Camera  : Invalid size parameter string=
+11-12 02:12:50.606  2348  2348 V CAM_CameraController: onCameraOpened
+11-12 02:12:50.606  2348  2348 V CAM_CameraActivity: onCameraOpened
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.616   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.616   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.616   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.616   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.626   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.626   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.626   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.626   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.635   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.635   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.635   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.635   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.635   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.635   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.635   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.635   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.636   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.636   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.636   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.636   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.636   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.645   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.645   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.645   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.645   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.654   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.654   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.654   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.654   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.654   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.654   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.654   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.65[4  172. 69 0 11999]1   w2h3p9=8= =D =CameraHal: cameraConfig(967): set= =flash 
+3====11r-k1321 202:12:5x0_.654c o d ec_191p ower_dow n2
+ 98 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.654   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.654   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.654   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.654   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.663   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.663   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.663   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.663   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.672   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.672   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.672   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.672   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.681   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.681   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.681   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.681   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.686  2348  2348 I CAM_PhotoModule: onCameraAvailable
+11-12 02:12:50.690   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.690   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.690   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.690   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.691   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.691   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.691   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.691   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.691   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.691   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.691   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.691   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.691   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.696  2348  2348 I CAM_PhotoModule: CameraCapabilities--->,mFocusAreaSupported = false,mMeteringAreaSupported = false,mAeLockSupported = true,mAwbLockSupported = false,mContinuousFocusSupported = false,mManualFocusSupported = false,manualFocusRange = null
+11-12 02:12:50.698  2348  2348 W CAM_FocusOverlayMgr: The coordinate transformer could not be built because the preview rectdid not have a width and height
+11-12 02:12:50.699  2348  2348 I CAM_FocusRingView: Computing center via preview size.
+11-12 02:12:50.702  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.703  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.703  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.703  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.704  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.704  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.704  2348  2348 I CAM_PhotoModule: setExposureCompensation = 0
+11-12 02:12:50.705  2348  2348 I CAM_PhotoModule: default WhiteBalance
+11-12 02:12:50.705  2348  2348 I CAM_PhotoModule: setWhiteBalance = auto
+11-12 02:12:50.707  2348  2348 I CAM_PhotoModule: default saturation
+11-12 02:12:50.707  2348  2348 I CAM_PhotoModule: setSaturation = normal
+11-12 02:12:50.707  2348  2348 W CAM_PhotoModule: invalid saturation: normal
+11-12 02:12:50.708  2348  2348 I CAM_PhotoModule: default contrast
+11-12 02:12:50.708  2348  2348 I CAM_PhotoModule: setContrast = normal
+11-12 02:12:50.708  2348  2348 W CAM_PhotoModule: invalid contrast: normal
+11-12 02:12:50.708  2348  2348 I CAM_PhotoModule: default sharpness
+11-12 02:12:50.708  2348  2348 I CAM_PhotoModule: setSharpness = normal
+11-12 02:12:50.708  2348  2348 W CAM_PhotoModule: invalid sharpness: normal
+11-12 02:12:50.709  2348  2348 I CAM_PhotoModule: default brightness
+11-12 02:12:50.709  2348  2348 I CAM_PhotoModule: setBrightness = normal
+11-12 02:12:50.709  2348  2348 W CAM_PhotoModule: invalid brightness: normal
+11-12 02:12:50.710  2348  2348 I CAM_PhotoModule: default hue
+11-12 02:12:50.710  2348  2348 I CAM_PhotoModule: setHue = normal
+11-12 02:12:50.710  2348  2348 W CAM_PhotoModule: invalid hue: normal
+11-12 02:12:50.710  2348  2348 I CAM_PhotoModule: update3dnrState
+11-12 02:12:50.711  2348  2348 I CAM_PhotoModule: updateParametersSceneMode mSceneMode = AUTO,flashmode = NO_FLASH
+11-12 02:12:50.712  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.713  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.713  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.714  2348  2348 V CAM_SettingsManager: listeners: [com.android.camera.app.CameraAppUI@5271baf, com.android.camera.ButtonManager@6a5aa66, com.android.camera.widget.IndicatorIconController@6dc5654, com.android.camera.PhotoModule@9fb7895]
+11-12 02:12:50.716  2348  2348 V CAM_PhotoModule: setDisplayOrientation (screen:preview) 0:0
+11-12 02:12:50.716  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.717  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.717  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.718  2348  2348 I CAM_PhotoModule: setBurstParameters off
+11-12 02:12:50.719  2348  2348 D CAM_ResolutionSettings: camera CameraId{Api2='0',Api1:0} getPictureSize
+11-12 02:12:50.721  2348  2348 V CAM_PhotoModule: whpwhp:::[176x144, 320x240, 352x288, 640x480, 720x480, 800x600, 864x480, 1280x720],1024,768,,,864x480
+11-12 02:12:50.721  2348  2348 V CAM_PhotoModule: updating aspect ratio
+11-12 02:12:50.721  2348  2348 E CAM_PhotoUI: cjb:::aspect ratio: 1.8
+11-12 02:12:50.721  2348  2348 I CAM_CameraAppUI: ====updatePreviewAspectRatio==================================aspectRatio:1.8
+11-12 02:12:50.722  2348  2348 V CAM_TexViewHelper: updateAspectRatio 1.8
+11-12 02:12:50.722  2348  2348 V CAM_TexViewHelper: whp:setAspectRatio: 1.8
+11-12 02:12:50.722  2348  2348 V CAM_TexViewHelper: whp:setAspectRatio: 1.8
+11-12 02:12:50.722  2348  2348 V CAM_TexViewHelper: aspect ratio changed from: 0.0
+11-12 02:12:50.722  2348  2348 V CAM_TexViewHelper: updateTransform
+11-12 02:12:50.723  2348  2348 D CAM_PhotoModule: Preview size is 864x480
+11-12 02:12:50.723  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.724  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.724  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.725  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.725  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.725  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.725  2348  2348 I CAM_PhotoModule: setExposureCompensation = 0
+11-12 02:12:50.727  2348  2348 I CAM_PhotoModule: default WhiteBalance
+11-12 02:12:50.727  2348  2348 I CAM_PhotoModule: setWhiteBalance = auto
+11-12 02:12:50.729  2348  2348 I CAM_PhotoModule: default saturation
+11-12 02:12:50.729  2348  2348 I CAM_PhotoModule: setSaturation = normal
+11-12 02:12:50.729  2348  2348 W CAM_PhotoModule: invalid saturation: normal
+11-12 02:12:50.730  2348  2348 I CAM_PhotoModule: default contrast
+11-12 02:12:50.730  2348  2348 I CAM_PhotoModule: setContrast = normal
+11-12 02:12:50.730  2348  2348 W CAM_PhotoModule: invalid contrast: normal
+11-12 02:12:50.730  2348  2348 I CAM_PhotoModule: default sharpness
+11-12 02:12:50.730  2348  2348 I CAM_PhotoModule: setSharpness = normal
+11-12 02:12:50.730  2348  2348 W CAM_PhotoModule: invalid sharpness: normal
+11-12 02:12:50.731  2348  2348 I CAM_PhotoModule: default brightness
+11-12 02:12:50.731  2348  2348 I CAM_PhotoModule: setBrightness = normal
+11-12 02:12:50.731  2348  2348 W CAM_PhotoModule: invalid brightness: normal
+11-12 02:12:50.732  2348  2348 I CAM_PhotoModule: default hue
+11-12 02:12:50.732  2348  2348 I CAM_PhotoModule: setHue = normal
+11-12 02:12:50.732  2348  2348 W CAM_PhotoModule: invalid hue: normal
+11-12 02:12:50.732  2348  2348 I CAM_PhotoModule: update3dnrState
+11-12 02:12:50.733  2348  2348 I CAM_PhotoModule: updateParametersSceneMode mSceneMode = AUTO,flashmode = NO_FLASH
+11-12 02:12:50.734  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.734  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.735  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.736  2348  2348 I CAM_PhotoModule: startPreview
+11-12 02:12:50.737  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.737  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.737  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.738  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.738  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.738  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.738  2348  2348 I CAM_PhotoModule: setExposureCompensation = 0
+11-12 02:12:50.739  2348  2348 I CAM_PhotoModule: default WhiteBalance
+11-12 02:12:50.739  2348  2348 I CAM_PhotoModule: setWhiteBalance = auto
+11-12 02:12:50.742  2348  2348 I CAM_PhotoModule: default saturation
+11-12 02:12:50.742  2348  2348 I CAM_PhotoModule: setSaturation = normal
+11-12 02:12:50.742  2348  2348 W CAM_PhotoModule: invalid saturation: normal
+11-12 02:12:50.742  2348  2348 I CAM_PhotoModule: default contrast
+11-12 02:12:50.742  2348  2348 I CAM_PhotoModule: setContrast = normal
+11-12 02:12:50.742  2348  2348 W CAM_PhotoModule: invalid contrast: normal
+11-12 02:12:50.743  2348  2348 I CAM_PhotoModule: default sharpness
+11-12 02:12:50.743  2348  2348 I CAM_PhotoModule: setSharpness = normal
+11-12 02:12:50.743  2348  2348 W CAM_PhotoModule: invalid sharpness: normal
+11-12 02:12:50.743  2348  2348 I CAM_PhotoModule: default brightness
+11-12 02:12:50.743  2348  2348 I CAM_PhotoModule: setBrightness = normal
+11-12 02:12:50.743  2348  2348 W CAM_PhotoModule: invalid brightness: normal
+11-12 02:12:50.744  2348  2348 I CAM_PhotoModule: default hue
+11-12 02:12:50.744  2348  2348 I CAM_PhotoModule: setHue = normal
+11-12 02:12:50.744  2348  2348 W CAM_PhotoModule: invalid hue: normal
+11-12 02:12:50.744  2348  2348 I CAM_PhotoModule: update3dnrState
+11-12 02:12:50.744  2348  2348 I CAM_PhotoModule: updateParametersSceneMode mSceneMode = AUTO,flashmode = NO_FLASH
+11-12 02:12:50.745  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.746  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.746  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.747  2348  2348 V CAM_CameraAppUI: onPreviewStarted
+11-12 02:12:50.747  2348  2348 I CAM_IndicatorIconCtrlr: smileShutterAnimator on = false
+11-12 02:12:50.748  2348  2348 V CAM_CameraActivity: invoking onChangeCamera
+11-12 02:12:50.750  2348  2348 I CAM_PhotoModule: minExposureCompensation = -2,maxExposureCompensation = 2,exposureCompensationStep = 1.0
+11-12 02:12:50.750  2348  2348 D CAM_PhotoModule: scenemode = auto
+11-12 02:12:50.751  2348  2348 I CAM_PhotoModule: supportedWhiteBalances size = 5
+11-12 02:12:50.751  2348  2348 I CAM_PhotoModule: supported wb = FLUORESCENT
+11-12 02:12:50.751  2348  2348 I CAM_PhotoModule: supported wb = CLOUDY_DAYLIGHT
+11-12 02:12:50.751  2348  2348 I CAM_PhotoModule: supported wb = INCANDESCENT
+11-12 02:12:50.751  2348  2348 I CAM_PhotoModule: supported wb = AUTO
+11-12 02:12:50.751  2348  2348 I CAM_PhotoModule: supported wb = DAYLIGHT
+11-12 02:12:50.752  2348  2348 I CAM_PhotoModule: supportedScenModes size = 2
+11-12 02:12:50.752  2348  2348 I CAM_PhotoModule: supported scene = AUTO
+11-12 02:12:50.752  2348  2348 I CAM_PhotoModule: supported scene = NIGHT
+11-12 02:12:50.752  2348  2348 I CAM_PhotoModule: support coloreffect = none
+11-12 02:12:50.752  2348  2348 I CAM_PhotoModule: support coloreffect = mono
+11-12 02:12:50.753  2348  2348 I CAM_PhotoModule: support coloreffect = negative
+11-12 02:12:50.753  2348  2348 I CAM_PhotoModule: support coloreffect = sepia
+11-12 02:12:50.753  2348  2348 I CAM_PhotoModule: support coloreffect = posterize
+11-12 02:12:50.753  2348  2348 I CAM_PhotoModule: support coloreffect = aqua
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.760   191  2398 E CameraHal: cameraConfig(888): cameraConfig(888): Set antibanding(auto) failed
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.760   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.760   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.760   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.760   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.765  2348  2348 I CAM_PhotoModule: sceneSetCallback
+11-12 02:12:50.765  2348  2348 I CAM_PhotoModule: setSceneMode = auto
+11-12 02:12:50.767  2348  2348 I CAM_PhotoModule: updateParametersSceneMode mSceneMode = AUTO,flashmode = NO_FLASH
+11-12 02:12:50.768  2348  2348 V CAM_FocusOverlayMgr: stored focus setting for camera: continuous-picture
+11-12 02:12:50.768  2348  2348 V CAM_FocusOverlayMgr: focus mode resolved from setting: CONTINUOUS_PICTURE
+11-12 02:12:50.768  2348  2348 V CAM_FocusOverlayMgr: no supported focus mode, falling back to current: FIXED
+11-12 02:12:50.771  2348  2348 W CAM_IndicatorIconCtrlr: Trying to sync a pano indicator that is not initialized.
+11-12 02:12:50.773  2348  2348 I CAM_CameraActivity: camera sound = true
+11-12 02:12:50.780  2348  2371 I MediaCodec: callingProcessName:com.android.camera2
+11-12 02:12:50.786   199   199 I MediaPlayerService: MediaPlayerService::getOMX
+11-12 02:12:50.787  2348  2400 I OMXClient: MuxOMX ctor
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.787  2348  2400 I ACodec  : onAllocateComponent:6703 mSoftCodecPref:0 componentName:
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.787   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.787   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.787   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.787   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.790  2348  2400 I ACodec  : onAllocateComponent:6734 mSoftCodecPref:0 componentName:OMX.google.vorbis.decoder
+11-12 02:12:50.796   195   778 I OMXMaster: makeComponentInstance(OMX.google.vorbis.decoder) in mediacodec process
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.797   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.797   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.797   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (0x0)
+11-12 02:12:50.797   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.808   191  2398 D CameraHal: commandThread(1011): commandThread(1011):receive CMD_SET_PREVIEW_WINDOW
+11-12 02:12:50.808   191  2398 D CameraHal: commandThread(1027): commandThread(1027): CMD_SET_PREVIEW_WINDOW out
+11-12 02:12:50.809   191  2398 D CameraHal: commandThread(904): commandThread(904):receive CMD_PREVIEW_START
+11-12 02:12:50.809   191  2398 D CameraHal: selectPreferedDrvSize(74): selectPreferedDrvSize:prefer res (864x480)
+11-12 02:12:50.812   191  2398 E CameraHal: commandThread(956): whp3:::864,480,864,480
+11-12 02:12:50.812   191  2398 D CameraHal: startPreview(195): startPreview195:preview_w = 864,preview_h = 480,drv_w = 864,drv_h = 480
+11-12 02:12:50.832   191  2398 D CameraHal: cameraSetSize(497): cameraSetSize(497):IN, w = 864,h = 480
+11-12 02:12:50.933   191  2398 D CameraHal: cameraStream(519): cameraStream(519):on = 1
+11-12 02:12:50.934   191  2398 D CameraHal: startPreview(241): startPreview(241):OUT
+11-12 02:12:50.934   191  2385 D CameraHal: displayThread(624): displayThread(624): receive CMD_DISPLAY_START
+11-12 02:12:50.934   191  2385 D CameraHal: cameraDisplayBufferDestory(417): cameraDisplayBufferDestory(417): mANativeWindow is NULL, destory is ignore
+11-12 02:12:50.953   191  2398 D CameraHal: commandThread(979): commandThread(979): CMD_PREVIEW_START out
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.953   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.953   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.953   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (864x480)
+11-12 02:12:50.953   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(781): set whitebalance
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(816): set color effect
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(843): set scene
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(868): set anti banding
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(895): set white balance lock
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(920): set exposurelock 
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(945): set focus 
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(967): set flash 
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(1000): set exposure 
+11-12 02:12:50.959   191  2398 D CameraHal: cameraConfig(1019): config out 
+11-12 02:12:50.959   191  2398 D CameraHal: isNeedToRestartPreview(161): mPreviewFrame2AppW (864x480)
+11-12 02:12:50.959   191  2398 D CameraHal: isNeedToRestartPreview(162): mCamPreviewW (864x480)
+11-12 02:12:50.959   191  2398 D CameraHal: isNeedToRestartPreview(163): video width (864x480)
+11-12 02:12:51.029  2348  2348 V CAM_CameraAppUI: hiding cover via onSurfaceTextureUpdated
+11-12 02:12:51.029  2348  2348 D CameraPerformanceTracker: First preview frame received
+11-12 02:12:51.029  2348  2348 E CAM_CameraAppUI: ============hideModeCover============
+11-12 02:12:51.034  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:51.034  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:51.557  2348  2348 W CAM_CameraActivity: www:hide
+11-12 02:12:51.557  2348  2348 D CAM_CameraActivity: *********hideSystemUI************
+11-12 02:12:51.585  2348  2348 D CAM_CameraActivity: **********onSystemUiVisibilityChange**********
+11-12 02:12:51.586  2348  2348 W CAM_CameraActivity: www:nnnnnnnnnnnnn
+11-12 02:12:51.667   191  2403 D CameraHal: debugShowFPS(642): Camera 32 Frames, 0.184 FPS
+11-12 02:12:52.134  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.152  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.168  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.186  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.203  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.220  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.237  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.241  1019  1033 W art     : Suspending all threads took: 6.518ms
+11-12 02:12:52.246  1818  1830 W art     : Suspending all threads took: 9.599ms
+11-12 02:12:52.254  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.271  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.288  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.300   191  2403 D CameraHal: debugShowFPS(642): Camera 64 Frames, 50.523 FPS
+11-12 02:12:52.305  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.322  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.338  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.355  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.373  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.389  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.406  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.423  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.440  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.457  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.474  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.491  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.510  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.510   190   222 D alsa_route: route_set_controls() set route 24
+11-12 02:12:52.510   190   222 D AudioHardwareTiny: close device
+11-12 02:12:52.525  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.542  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.559  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.576  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.586  2348  2348 W CAM_CameraActivity: www:hide
+11-12 02:12:52.586  2348  2348 D CAM_CameraActivity: *********hideSystemUI************
+11-12 02:12:52.611  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.627  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.644  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.678  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.714  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.763  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.899  2348  2348 E CAM_CameraAppUI: onModeListOpenProgress========================================
+11-12 02:12:52.936   191  2403 D CameraHal: debugShowFPS(642): Camera 96 Frames, 50.380 FPS
+11-12 02:12:52.954   472   565 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-12 02:12:53.467   191  2403 D CameraHal: debugShowFPS(642): Camera 128 Frames, 60.201 FPS
+11-12 02:12:55.185  1818  1830 W art     : Suspending all threads took: 32.343ms
+[  175.570599] rk_cam_cif(2730):Camera host haven't recevie data from sensor,last fps = 151,pcdev->fps = 151,cif_irq: 155,dma_irq: 152!
+[  175.578171] rk_cam_cif(2639):CIF_CIF_CTRL = 0xf000
+[  175.578190] rk_cam_cif(2640):CIF_CIF_INTEN = 0x201
+[  175.578205] rk_cam_cif(2641):CIF_CIF_INTSTAT = 0xa
+[  175.578230] rk_cam_cif(2642):CIF_CIF_FOR = 0x10000
+[  175.578254] rk_cam_cif(2643):CIF_CIF_CROP = 0x0
+[  175.578273] rk_cam_cif(2644):CIF_CIF_SET_SIZE = 0x1e00360
+[  175.578288] rk_cam_cif(2645):CIF_CIF_SCL_CTRL = 0x10
+[  175.578303] rk_cam_cif(2651):CRU_PCLK_REG30 = 0X8100
+[  175.578318] rk_cam_cif(2652):CIF_CIF_LAST_LINE = 0X1e
+[  175.578332] rk_cam_cif(2654):CIF_CIF_LAST_PIX = 0X6c0
+[  175.578347] rk_cam_cif(2655):CIF_CIF_VIR_LINE_WIDTH = 0X360
+[  175.578362] rk_cam_cif(2656):CIF_CIF_LINE_NUM_ADDR = 0X0
+[  175.578377] rk_cam_cif(2657):CIF_CIF_FRM0_ADDR_Y = 0X9d700000
+[  175.578392] rk_cam_cif(2658):CIF_CIF_FRM0_ADDR_UV = 0X9d765400
+[  175.578407] rk_cam_cif(2659):CIF_CIF_FRAME_STATUS = 0X0
+[  175.578422] rk_cam_cif(2660):CIF_CIF_SCL_VALID_NUM = 0Xa0a
+[  175.578437] rk_cam_cif(2661):CIF_CIF_CUR_DST = 0X9d765320
+[  175.578452] rk_cam_cif(2662):CIF_CIF_LINE_NUM_ADDR = 0X0
+[  175.578467] rk_cam_cif(2686):CIF may be error, so reset cif for resume
+11-12 02:12:55.701   191  2403 D CameraHal: debugShowFPS(642): Camera 160 Frames, 14.327 FPS
+[  177.538598] rk_cam_cif(2730):Camera host haven't recevie data from sensor,last fps = 186,pcdev->fps = 186,cif_irq: 190,dma_irq: 188!
+[  177.546185] rk_cam_cif(2639):CIF_CIF_CTRL = 0xf000
+[  177.546217] rk_cam_cif(2640):CIF_CIF_INTEN = 0x201
+[  177.546236] rk_cam_cif(2641):CIF_CIF_INTSTAT = 0xa
+[  177.546250] rk_cam_cif(2642):CIF_CIF_FOR = 0x10000
+[  177.546265] rk_cam_cif(2643):CIF_CIF_CROP = 0x0
+[  177.546279] rk_cam_cif(2644):CIF_CIF_SET_SIZE = 0x1e00360
+[  177.546294] rk_cam_cif(2645):CIF_CIF_SCL_CTRL = 0x10
+[  177.546309] rk_cam_cif(2651):CRU_PCLK_REG30 = 0X8100
+[  177.546324] rk_cam_cif(2652):CIF_CIF_LAST_LINE = 0X100
+[  177.546338] rk_cam_cif(2654):CIF_CIF_LAST_PIX = 0X6c0
+[  177.546354] rk_cam_cif(2655):CIF_CIF_VIR_LINE_WIDTH = 0X360
+[  177.546368] rk_cam_cif(2656):CIF_CIF_LINE_NUM_ADDR = 0X0
+[  177.546383] rk_cam_cif(2657):CIF_CIF_FRM0_ADDR_Y = 0X9d600000
+[  177.546399] rk_cam_cif(2658):CIF_CIF_FRM0_ADDR_UV = 0X9d665400
+[  177.546413] rk_cam_cif(2659):CIF_CIF_FRAME_STATUS = 0X0
+[  177.546428] rk_cam_cif(2660):CIF_CIF_SCL_VALID_NUM = 0X807
+[  177.546443] rk_cam_cif(2661):CIF_CIF_CUR_DST = 0X9d665320
+[  177.546458] rk_cam_cif(2662):CIF_CIF_LINE_NUM_ADDR = 0X0
+[  177.546472] rk_cam_cif(2686):CIF may be error, so reset cif for resume
+11-12 02:12:57.651   191  2403 D CameraHal: debugShowFPS(642): Camera 192 Frames, 16.409 FPS
+11-12 02:12:58.351   191  2403 D CameraHal: debugShowFPS(642): Camera 224 Frames, 45.712 FPS
+11-12 02:12:59.034   191  2403 D CameraHal: debugShowFPS(642): Camera 256 Frames, 46.827 FPS
+11-12 02:12:59.734   191  2403 D CameraHal: debugShowFPS(642): Camera 288 Frames, 45.708 FPS
+11-12 02:13:00.334   191  2403 D CameraHal: debugShowFPS(642): Camera 320 Frames, 53.332 FPS
+11-12 02:13:01.004   191  2403 D CameraHal: debugShowFPS(642): Camera 352 Frames, 47.776 FPS
+11-12 02:13:01.751   191  2403 D CameraHal: debugShowFPS(642): Camera 384 Frames, 42.837 FPS
+11-12 02:13:02.434   191  2403 D CameraHal: debugShowFPS(642): Camera 416 Frames, 46.829 FPS
+[  182.744430] rk312x-lcdc lcdc0: win0:new_addr:0x1032a000 cur_addr:0x10195000--1
+11-12 02:13:03.085   191  2403 D CameraHal: debugShowFPS(642): Camera 448 Frames, 49.204 FPS
+11-12 02:13:03.651   191  2403 D CameraHal: debugShowFPS(642): Camera 480 Frames, 56.500 FPS
+11-12 02:13:04.190  1818  1830 W art     : Suspending all threads took: 7.109ms
+11-12 02:13:04.351   191  2403 D CameraHal: debugShowFPS(642): Camera 512 Frames, 45.713 FPS
+11-12 02:13:05.018   191  2403 D CameraHal: debugShowFPS(642): Camera 544 Frames, 47.995 FPS
+11-12 02:13:05.651   191  2403 D CameraHal: debugShowFPS(642): Camera 576 Frames, 50.521 FPS
+11-12 02:13:06.335   191  2403 D CameraHal: debugShowFPS(642): Camera 608 Frames, 46.828 FPS
+11-12 02:13:07.004   191  2403 D CameraHal: debugShowFPS(642): Camera 640 Frames, 47.809 FPS
+11-12 02:13:07.192  1818  1830 W art     : Suspending all threads took: 11.951ms
+11-12 02:13:07.668   191  2403 D CameraHal: debugShowFPS(642): Camera 672 Frames, 48.188 FPS
+[  188.247947] rk312x-lcdc lcdc0: win0:new_addr:0x1032a000 cur_addr:0x10195000--1
+11-12 02:13:08.318   191  2403 D CameraHal: debugShowFPS(642): Camera 704 Frames, 49.229 FPS
+11-12 02:13:08.951   191  2403 D CameraHal: debugShowFPS(642): Camera 736 Frames, 50.521 FPS
+11-12 02:13:09.535   191  2403 D CameraHal: debugShowFPS(642): Camera 768 Frames, 54.856 FPS
+[  189.736688] rk312x-lcdc lcdc0: win0:new_addr:0x1032a000 cur_addr:0x10195000--1
+11-12 02:13:10.159  1818  1830 W art     : Suspending all threads took: 5.963ms
+11-12 02:13:10.185   191  2403 D CameraHal: debugShowFPS(642): Camera 800 Frames, 49.228 FPS
+11-12 02:13:10.902   191  2403 D CameraHal: debugShowFPS(642): Camera 832 Frames, 44.647 FPS
+11-12 02:13:11.518   191  2403 D CameraHal: debugShowFPS(642): Camera 864 Frames, 51.890 FPS
+11-12 02:13:12.118   191  2403 D CameraHal: debugShowFPS(642): Camera 896 Frames, 53.329 FPS
+11-12 02:13:12.768   191  2403 D CameraHal: debugShowFPS(642): Camera 928 Frames, 49.227 FPS
+11-12 02:13:13.468   191  2403 D CameraHal: debugShowFPS(642): Camera 960 Frames, 45.713 FPS
+11-12 02:13:14.068   191  2403 D CameraHal: debugShowFPS(642): Camera 992 Frames, 53.327 FPS
+11-12 02:13:14.685   191  2403 D CameraHal: debugShowFPS(642): Camera 1024 Frames, 51.890 FPS
+11-12 02:13:15.369   191  2403 D CameraHal: debugShowFPS(642): Camera 1056 Frames, 46.826 FPS
+11-12 02:13:16.035   191  2403 D CameraHal: debugShowFPS(642): Camera 1088 Frames, 47.999 FPS
+11-12 02:13:16.685   191  2403 D CameraHal: debugShowFPS(642): Camera 1120 Frames, 49.224 FPS
+11-12 02:13:17.252   191  2403 D CameraHal: debugShowFPS(642): Camera 1152 Frames, 56.471 FPS
+11-12 02:13:17.902   191  2403 D CameraHal: debugShowFPS(642): Camera 1184 Frames, 49.225 FPS
+11-12 02:13:18.569   191  2403 D CameraHal: debugShowFPS(642): Camera 1216 Frames, 48.000 FPS
+11-12 02:13:19.169   191  2403 D CameraHal: debugShowFPS(642): Camera 1248 Frames, 53.327 FPS
+11-12 02:13:19.802   191  2403 D CameraHal: debugShowFPS(642): Camera 1280 Frames, 50.514 FPS
+11-12 02:13:20.469   191  2403 D CameraHal: debugShowFPS(642): Camera 1312 Frames, 48.006 FPS
+11-12 02:13:21.152   191  2403 D CameraHal: debugShowFPS(642): Camera 1344 Frames, 46.828 FPS
+11-12 02:13:21.736   191  2403 D CameraHal: debugShowFPS(642): Camera 1376 Frames, 54.852 FPS
+11-12 02:13:22.402   191  2403 D CameraHal: debugShowFPS(642): Camera 1408 Frames, 47.997 FPS
+11-12 02:13:22.966   472  1020 I ActivityManager: Killing 1587:com.android.vending/u0a14 (adj 906): empty #4
+11-12 02:13:23.055   472   768 D ActivityManager: cleanUpApplicationRecord -- 1587
+11-12 02:13:23.102   191  2403 D CameraHal: debugShowFPS(642): Camera 1440 Frames, 45.710 FPS
+11-12 02:13:23.719   191  2403 D CameraHal: debugShowFPS(642): Camera 1472 Frames, 51.883 FPS
+11-12 02:13:24.319   191  2403 D CameraHal: debugShowFPS(642): Camera 1504 Frames, 53.336 FPS
+11-12 02:13:24.952   191  2403 D CameraHal: debugShowFPS(642): Camera 1536 Frames, 50.523 FPS
+11-12 02:13:25.653   191  2403 D CameraHal: debugShowFPS(642): Camera 1568 Frames, 45.712 FPS
+11-12 02:13:26.286   191  2403 D CameraHal: debugShowFPS(642): Camera 1600 Frames, 50.494 FPS
+11-12 02:13:26.340   841  1579 E NetworkScheduler: Trying to release unacquired lock: ALARM_MANAGER
+11-12 02:13:26.343  1199  2414 I GCM-GMS : Registering GMS 745476177629
+11-12 02:13:26.381   841  1159 E GCM     : Missing checkin config file
+11-12 02:13:26.382   841  1159 W GCM     : GCM FAILED TO INITIALIZE - missing checkin
+11-12 02:13:26.384  1199  2414 W GCM-GMS : Failed to get registration: java.io.IOException: AUTHENTICATION_FAILED
+11-12 02:13:26.385   841  1180 E NetworkScheduler.ATC: Trying to release unacquired lock: com.google.android.gms/.gcm.gmsproc.GcmInGmsTaskService
+11-12 02:13:26.398   841  1579 E NetworkScheduler: Trying to release unacquired lock: EXECUTION_CALLBACK
+11-12 02:13:26.490   841  2417 E NetworkScheduler.ATC: Trying to release unacquired lock: com.google.android.gms/.clearcut.uploader.QosUploaderService
+11-12 02:13:26.534   841  1579 E NetworkScheduler: Trying to release unacquired lock: EXECUTION_CALLBACK
+11-12 02:13:26.604   841  1579 E NetworkScheduler: Trying to release unacquired lock: EXECUTION_CALLBACK
+11-12 02:13:26.692   841  1579 E NetworkScheduler: Trying to release unacquired lock: EXECUTION_CALLBACK
+11-12 02:13:26.715   841  1579 E NetworkScheduler: Trying to release unacquired lock: CLIENT_LIB
+11-12 02:13:26.952   841  2418 I GoogleURLConnFactory: Using platform SSLCertificateSocketFactory
+11-12 02:13:27.012   841  1159 E GCM     : Missing checkin config file
+11-12 02:13:27.012   841  1159 W GCM     : GCM FAILED TO INITIALIZE - missing checkin
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation: Failed to subscribe to GCM: com.google.android.gms.playlog.uploader
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation: java.io.IOException: AUTHENTICATION_FAILED
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at uzz.b(:com.google.android.gms@11518430:41)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at uzz.a(:com.google.android.gms@11518430:47)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at uzw.b(:com.google.android.gms@11518430:11)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at uzw.a(:com.google.android.gms@11518430:29)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at com.google.android.gms.phenotype.gcmpush.GcmPushIntentOperation.a(:com.google.android.gms@11518430:16)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at com.google.android.gms.phenotype.gcmpush.GcmPushIntentOperation.onHandleIntent(:com.google.android.gms@11518430:6)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@11518430:2)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at bwh.run(:com.google.android.gms@11518430:10)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at bwe.run(:com.google.android.gms@11518430:14)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+11-12 02:13:27.014   841  2421 E GcmPushIntentOperation:        at java.lang.Thread.run(Thread.java:761)
+11-12 02:13:27.103   191  2403 D CameraHal: debugShowFPS(642): Camera 1632 Frames, 39.199 FPS
+11-12 02:13:27.114   841  2418 I GoogleURLConnFactory: Using platform SSLCertificateSocketFactory
+11-12 02:13:27.819   191  2403 D CameraHal: debugShowFPS(642): Camera 1664 Frames, 44.646 FPS
+[  207.450610] healthd: battery l=99 v=4036 t=0.0 h=2 st=4 chg=
+11-12 02:13:28.503   191  2403 D CameraHal: debugShowFPS(642): Camera 1696 Frames, 46.828 FPS
+11-12 02:13:29.153   191  2403 D CameraHal: debugShowFPS(642): Camera 1728 Frames, 49.228 FPS
+11-12 02:13:29.836   191  2403 D CameraHal: debugShowFPS(642): Camera 1760 Frames, 46.826 FPS
+11-12 02:13:30.489   191  2403 D CameraHal: debugShowFPS(642): Camera 1792 Frames, 49.039 FPS
+11-12 02:13:31.070   191  2403 D CameraHal: debugShowFPS(642): Camera 1824 Frames, 55.086 FPS
+11-12 02:13:31.720   191  2403 D CameraHal: debugShowFPS(642): Camera 1856 Frames, 49.230 FPS
+11-12 02:13:32.386   191  2403 D CameraHal: debugShowFPS(642): Camera 1888 Frames, 47.997 FPS
+11-12 02:13:32.453   841  2427 E GCM     : Missing checkin config file
+11-12 02:13:32.454   841  2427 W GCM     : GCM FAILED TO INITIALIZE - missing checkin
+11-12 02:13:32.467   841  2427 E GCM     : Missing checkin config file
+11-12 02:13:32.467   841  2427 W GCM     : GCM FAILED TO INITIALIZE - missing checkin
+11-12 02:13:33.053   191  2403 D CameraHal: debugShowFPS(642): Camera 1920 Frames, 47.998 FPS
+11-12 02:13:33.653   191  2403 D CameraHal: debugShowFPS(642): Camera 1952 Frames, 53.327 FPS
+11-12 02:13:33.799   841  2432 E GCM     : Missing checkin config file
+11-12 02:13:33.800   841  2432 W GCM     : GCM FAILED TO INITIALIZE - missing checkin
+11-12 02:13:33.805   841  2432 E GCM     : Missing checkin config file
+11-12 02:13:33.806   841  2432 W GCM     : GCM FAILED TO INITIALIZE - missing checkin
+11-12 02:13:33.827   472   768 D ConnectivityService: reportNetworkConnectivity(100, false) by 10009
+11-12 02:13:33.828   472  1195 D NetworkMonitor/NetworkAgentInfo [WIFI () - 100]: Forcing reevaluation for UID 10009
+11-12 02:13:33.828   472  1195 D NetworkMonitor/NetworkAgentInfo [WIFI () - 100]: Validation disabled.
+11-12 02:13:33.831   472   531 D ConnectivityService: NetworkAgentInfo [WIFI () - 100] validation passed
+11-12 02:13:33.833   472  2439 D WifiNetworkHistory: saving network history: "ZJSC24"WPA_PSK gw: null Network Selection-status: NETWORK_SELECTION_ENABLED ephemeral=false choice:null link:0 status:0 nid:0 hasEverConnected: true
+11-12 02:13:33.834   472  2439 V WifiNetworkHistory: writeKnownNetworkHistory write config "ZJSC24"WPA_PSK
+11-12 02:13:34.303   191  2403 D CameraHal: debugShowFPS(642): Camera 1984 Frames, 49.229 FPS
+11-12 02:13:34.970   191  2403 D CameraHal: debugShowFPS(642): Camera 2016 Frames, 47.997 FPS
+11-12 02:13:35.653   191  2403 D CameraHal: debugShowFPS(642): Camera 2048 Frames, 46.815 FPS
+11-12 02:13:36.320   191  2403 D CameraHal: debugShowFPS(642): Camera 2080 Frames, 48.002 FPS
+11-12 02:13:36.953   191  2403 D CameraHal: debugShowFPS(642): Camera 2112 Frames, 50.530 FPS
+[  216.476282] RTL871X: Warning!!! rx_query_phy_status: Confilc mac addr!!
+11-12 02:13:37.620   191  2403 D CameraHal: debugShowFPS(642): Camera 2144 Frames, 47.998 FPS
+11-12 02:13:38.303   191  2403 D CameraHal: debugShowFPS(642): Camera 2176 Frames, 46.827 FPS
+11-12 02:13:38.987   191  2403 D CameraHal: debugShowFPS(642): Camera 2208 Frames, 46.824 FPS
+11-12 02:13:39.554   191  2403 D CameraHal: debugShowFPS(642): Camera 2240 Frames, 56.398 FPS
+[  219.445634] rk312x-lcdc lcdc0: win0:new_addr:0x10195000 cur_addr:0x1032a000--1
+11-12 02:13:40.220   191  2403 D CameraHal: debugShowFPS(642): Camera 2272 Frames, 48.049 FPS
+11-12 02:13:40.903   191  2403 D CameraHal: debugShowFPS(642): Camera 2304 Frames, 46.826 FPS
+^C
+130|P2-A:/ $

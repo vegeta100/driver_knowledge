@@ -1,0 +1,7 @@
+[  251.440086] rk312x-lcdc lcdc0: win0:new_addr:0x1032a000 cur_addr:0x10195000--1
+[  253.129648] rk312x-lcdc lcdc0: win0:new_addr:0x10195000 cur_addr:0x1032a000--1
+[  266.584870] healthd: battery l=99 v=4036 t=0.0 h=2 st=4 chg=
+[  267.448823] rk312x-lcdc lcdc0: win0:new_addr:0x10195000 cur_addr:0x1032a000--1
+
+
+

@@ -2,7 +2,7 @@ make -j4后需要这么执行，少了system.*** 就需要make -j4
 whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102$ . zjsc/cp.sh 
 `vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvconfig.img' -> `out/target/product/bennet/tvconfig.img'
 `vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcustomer.img' -> `out/target/product/bennet/tvcustomer.img'
-`vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvdatabase.img' -> `out/target/product/bennet/tvdatabase.img'
+`vendor/mstar/upernova/target/dvb.mainz/images/ext4/tvdatabase.img' -> `out/target/product/bennet/tvdatabase.img'
 `vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvservice.img' -> `out/target/product/bennet/tvservice.img'
 `vendor/mstar/supernova/target/dvb.mainz/images/ext4/tvcertificate.img' -> `out/target/product/bennet/tvcertificate.img'
 `vendor/mstar/supernova/target/dvb.mainz/images/ext4/tee.aes' -> `out/target/product/bennet/tee.aes'
