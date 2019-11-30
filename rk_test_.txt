@@ -1106,6 +1106,8 @@ make clean at which dir?
 make clean is used at compile Mboot ,and make clean after,you need kill git,after make
 this is compile mboot step. is different with compile supernova
 
+supernova编译 进入到project目录
+. zjsc/zjsc_sn_path.sh
 ./smc_build_358AXG_DTMB_Supernova.sh
 this operation,trim the space in . / middle,is right.
 
@@ -1127,4 +1129,159 @@ linux command:jgrep 'Settings.Secure' | grep LOCATION
 没有关机动画，这个可得改一下。
 一个是关机动画，一个是电池图标。还有一个是开机提示
 
+ 2003  lunch
+ 2004  rm out/target/product/bennet/userdata.img*
+ 2005  make -j4
+ 2006  cd packages/
 
+ whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar/bennet$
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar/bennet$
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar/bennet$ kgrep 'ro.build.display.id'
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/device/mstar/bennet$ cd ../../../build/
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/build$
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/build$
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/build$ kgrep 'ro.build.display.id'
+./core/FotaInfo.sh:16:FotaVersion=$(grep "ro.build.display.id=" "$1"|awk -F "=" '{print $NF}' )`date +_%Y%m%d-%H%M`
+./tools/releasetools/sign_target_files_apks.py:320:      elif key == "ro.build.display.id":
+./tools/buildinfo.sh:7:echo "ro.build.display.id=$BUILD_DISPLAY_ID"
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/build$ kgrep BUILD_DISPLAY_ID
+./core/Makefile:170:    BUILD_DISPLAY_ID := $(BUILD_ID).$(BUILD_NUMBER) $(BUILD_KEYS)
+./core/Makefile:172:    BUILD_DISPLAY_ID := $(BUILD_ID) $(BUILD_KEYS)
+./core/Makefile:176:  #BUILD_DISPLAY_ID := $(build_desc)
+./core/Makefile:177:  #BUILD_DISPLAY_ID := "VMAI_M200_V02.0000.0007"
+./core/Makefile:178:  #BUILD_DISPLAY_ID := "XIAOYOU-C1.0000.0001"
+./core/Makefile:179:  BUILD_DISPLAY_ID := "V01.00.01"
+./core/Makefile:226:                    BUILD_DISPLAY_ID="$(BUILD_DISPLAY_ID)" \
+./tools/buildinfo.sh:7:echo "ro.build.display.id=$BUILD_DISPLAY_ID"
+whp@zjsc-PowerEdge-T110-II:~/work/M358_OP102S/SDK1102/build$
+
+
+BoardCommon.mk指的是 Board*Common.mk
+
+
+root@bennet:/system/bin #
+root@bennet:/system/bin # ls trap* -l
+-rwxr-xr-x root     shell       79920 2019-11-20 04:15 trapezoidServer
+-rwxr-xr-x root     shell       10192 2019-11-20 04:15 trapezoidTest
+如果不起作用，记得查看权限
+
+
+电池图标要去掉，在99里面有一个下拉的框，在里面要吧电池图标去掉
+mount -o remount,rw /system
+这个就是挂在的命令，要学会看英文
+其实我可以touch 创建文件，在删除来测试的，但我没有
+
+从第六不开始一直keystone
+device/mstar 里面，有个systemset，这是关于3d遥控的，要编译
+
+
+mstar编译有问题，是因为我吧make -j4放在lunch这个命令之前了吧
+mstar中文版，开机若超过6分钟还没起来，那就可能有问题了
+
+
+mstar bin文件，有时候给客户的bin文件，需要mboot去掉，其他全省，因为mboot旧机器升不了
+
+root@bennet:/data #
+root@bennet:/data # TVOS *checkPoint*
+[   14.767116] --------->MBX DRIVER OPEN
+[   14.778865] _MDrv_MBXIO_FASYNC is invoked
+[   15.010988] [4294681986][MAD_ALSA][000637]     6Open 'subdevice #0'(0) of MStar ALSA playback device
+[   15.024725] [4294681996][MAD_ALSA][000637]     6Open 'subdevice #0'(0) of MStar ALSA playback device
+[   15.035531] [4294682006][MAD_ALSA][001298]     6Open 'subdevice #0'(0) of MStar ALSA capture device
+[   15.050110] prj_mutexx(1)
+[   15.071148] [4294682046][MAD_ALSA][001367]     6Close 'subdevice #0'(0) of MStar ALSA capture device
+[   15.091105] prj_mutexx(0)
+[   15.102163] [4294682076][MAD_ALSA][001589]     6Exit MStar PCM Capture1 engine
+[   15.111914] [4294682086][MAD_ALSA][001298]     6Open 'subdevice #0'(0) of MStar ALSA capture device
+[   15.121354] prj_mutexx(1)
+[   15.125386] [4294682096][MAD_ALSA][001367]     6Close 'subdevice #0'(0) of MStar ALSA capture device
+[   15.135024] prj_mutexx(0)
+[   15.139687] [4294682106][MAD_ALSA][001904]     6Exit MStar PCM Capture2 engine
+[   15.149746] [4294682116][MAD_ALSA][001298]     6Open 'subdevice #0'(0) of MStar ALSA capture device
+[   15.159227] prj_mutexx(1)
+[   15.163436] [4294682136][MAD_ALSA][001367]     6Close 'subdevice #0'(0) of MStar ALSA capture device
+[   15.173034] prj_mutexx(0)
+[   15.177690] [4294682146][MAD_ALSA][001904]     6Exit MStar PCM Capture2 engine
+[   15.187596] [4294682156][MAD_ALSA][001298]     6Open 'subdevice #0'(0) of MStar ALSA capture device
+[   15.197066] prj_mutexx(1)
+[   15.205947] [4294682176][MAD_ALSA][001367]     6Close 'subdevice #0'(0) of MStar ALSA capture device
+[   15.215786] prj_mutexx(0)
+[   15.220824] [4294682196][MAD_ALSA][001904]     6Exit MStar PCM Capture2 engine
+[   15.231451] [4294682206][MAD_ALSA][001298]     6Open 'subdevice #0'(0) of MStar ALSA capture device
+[   15.240992] prj_mutexx(1)
+[   15.245094] [4294682216][MAD_ALSA][001367]     6Close 'subdevice #0'(0) of MStar ALSA capture device
+[   15.254903] prj_mutexx(0)
+[   15.259882] [4294682226][MAD_ALSA][001589]     6Exit MStar PCM Capture1 engine
+cd data
+root@bennet:/data/data #
+root@bennet:/data/data #
+root@bennet:/data/data #
+root@bennet:/data/data # ls -al
+root@bennet:/data/data # cd ..
+root@bennet:/data #
+root@bennet:/data #
+root@bennet:/data # df
+Filesystem               Size     Used     Free   Blksize
+/dev                   447.4M     2.8M   444.6M   4096
+/sys/fs/cgroup         447.4M    12.0K   447.4M   4096
+/mnt                   447.4M     0.0K   447.4M   4096
+/var                   447.4M     0.0K   447.4M   4096
+/system                  1.9G   802.4M     1.2G   4096
+/cache                 991.9M   236.0K   991.7M   4096
+/data                    9.7G   100.1M     9.6G   4096
+/tvservice              63.9M    59.7M     4.2M   4096
+/tvconfig                5.8M     5.3M   512.0K   4096
+/tvdatabase              3.9M   880.0K     3.0M   4096
+/tvcustomer             11.7M     1.3M    10.5M   4096
+/tvcertificate           3.9M    52.0K     3.8M   4096
+/storage               447.4M     0.0K   447.4M   4096
+root@bennet:/data # ls
+adb
+app
+app-asec
+app-lib
+app-private
+backup
+bootchart
+bugreports
+dalvik-cache
+data
+drm
+local
+lost+found
+media
+mediadrm
+misc
+nativetest
+nativetest64
+property
+resource-cache
+security
+ss
+system
+tee
+tombstones
+user
+root@bennet:/data # [   65.943705] healthd: battery l=100 v=3 t=8.7 h=2 st=2 chg=a
+df
+Filesystem               Size     Used     Free   Blksize
+/dev                   447.4M     2.8M   444.6M   4096
+/sys/fs/cgroup         447.4M    12.0K   447.4M   4096
+/mnt                   447.4M     0.0K   447.4M   4096
+/var                   447.4M     0.0K   447.4M   4096
+/system                  1.9G   802.4M     1.2G   4096
+/cache                 991.9M   236.0K   991.7M   4096
+/data                    9.7G   246.9M     9.5G   4096
+/tvservice              63.9M    59.7M     4.2M   4096
+/tvconfig                5.8M     5.3M   512.0K   4096
+/tvdatabase              3.9M   880.0K     3.0M   4096
+/tvcustomer             11.7M     1.3M    10.5M   4096
+/tvcertificate           3.9M    52.0K     3.8M   4096
+/storage               447.4M     0.0K   447.4M   4096
+root@bennet:/data # [   67.068549] warning: `main' uses 32-bit capabilities (legacy support in use)
+
+M358_OP102S\images\marshmallow\bennet\scripts 这里课看到每个分区的脚本
+
+
+106重力记忆，打包进去 问王总
+打包成bin文件，全升级吧：
